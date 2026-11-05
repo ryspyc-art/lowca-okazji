@@ -7,3 +7,6 @@
 .favorites-toggle.active{background:#101827;color:#fff;border-color:#101827}
 .favorites-toggle span{display:inline-grid;place-items:center;min-width:18px;height:18px;margin-left:5px;padding:0 4px;border-radius:9px;background:#c7f36b;color:#101827;font-size:10px;font-weight:800}
 @media(max-width:800px){.favorites-toggle{align-self:flex-start}}
+
+.faq{max-width:1180px;margin:0 auto;padding:0 max(8vw,28px) 95px}.faq h2{font-size:34px;letter-spacing:-1.5px;margin:8px 0 25px}.faq-list{border-top:1px solid #e2e7df}.faq details{border-bottom:1px solid #e2e7df;padding:18px 2px}.faq summary{font-size:14px;font-weight:750;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}.faq summary::-webkit-details-marker{display:none}.faq summary::after{content:"+";font-size:20px;color:#729c2e;line-height:1}.faq details[open] summary::after{content:"−"}.faq details p{font-size:12px;line-height:1.75;color:#727d8a;max-width:760px;margin:13px 0 0}.faq{padding-left:max(8vw,28px);padding-right:max(8vw,28px)}
+@media(max-width:800px){.faq{padding:0 7vw 70px}.faq h2{font-size:29px}}
