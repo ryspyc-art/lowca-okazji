@@ -14,7 +14,6 @@ const grid = document.getElementById("productGrid");
 const search = document.getElementById("searchInput");
 const sort = document.getElementById("sortSelect");
 const favoritesToggle = document.getElementById("favoritesToggle");
-const favoritesCount = document.getElementById("favoritesCount");
 let category = "Wszystkie";
 let favoritesOnly = false;
 
@@ -64,10 +63,9 @@ function render() {
   document.getElementById("resultCount").textContent = `${count} ${count === 1 ? "oferta" : count < 5 ? "oferty" : "ofert"}`;
   document.getElementById("emptyState").hidden = count !== 0;
   grid.hidden = count === 0;
-  favoritesCount.textContent = favorites.length;
   favoritesToggle.setAttribute("aria-pressed", String(favoritesOnly));
   favoritesToggle.classList.toggle("active", favoritesOnly);
-  favoritesToggle.innerHTML = `${favoritesOnly ? "♥" : "♡"} Tylko zapisane <span id="favoritesCount">${favorites.length}</span>`;
+  favoritesToggle.innerHTML = `${favoritesOnly ? "♥" : "♡"} Tylko zapisane <span>${favorites.length}</span>`;
 }
 
 document.getElementById("categoryChips").addEventListener("click", event => {
@@ -104,6 +102,7 @@ grid.addEventListener("click", event => {
   const button = event.target.closest("[data-fav]");
   if (!button) return;
   const id = Number(button.dataset.fav);
+  if (!Number.isInteger(id) || !products.some(product => product.id === id)) return;
   favorites = favorites.includes(id) ? favorites.filter(value => value !== id) : [...favorites, id];
   try { localStorage.setItem("lowcaFavorites", JSON.stringify(favorites)); } catch {}
   render();
