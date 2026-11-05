@@ -3,7 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Łowca Okazji — przejrzysta wyszukiwarka i porównywarka ciekawych promocji.">
+  <meta name="description" content="Łowca Okazji — wyszukuj, filtruj i zapisuj interesujące oferty w jednym miejscu.">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pl_PL">
+  <meta property="og:site_name" content="Łowca Okazji">
+  <meta property="og:title" content="Łowca Okazji — nie przepłacaj, łap okazje">
+  <meta property="og:description" content="Przeglądaj kategorie, wyszukuj produkty i zapisuj interesujące oferty.">
   <meta name="theme-color" content="#101827">
   <title>Łowca Okazji — znajdź dobrą cenę</title>
   <link rel="stylesheet" href="style.css">
@@ -53,7 +59,7 @@
           <select id="sortSelect"><option value="recommended">Polecane</option><option value="price-asc">Cena: rosnąco</option><option value="price-desc">Cena: malejąco</option><option value="discount">Największa obniżka</option></select>
         </label>
       </div>
-      <div class="results-meta"><span id="resultCount">0 ofert</span><span>♡ Kliknij serce, aby zapisać</span></div>
+      <div class="results-meta" aria-live="polite"><span id="resultCount">0 ofert</span><span>♡ Kliknij serce, aby zapisać</span></div>
       <div class="product-grid" id="productGrid"></div>
       <div class="empty-state" id="emptyState" hidden><div>⌕</div><h3>Nie znaleźliśmy takich ofert</h3><p>Zmień hasło lub wybierz inną kategorię.</p><button class="secondary-btn" id="resetFilters">Wyczyść filtry</button></div>
       <p class="disclaimer">Prezentowane pozycje są przykładowymi danymi demonstracyjnymi. Nie są aktualnymi ofertami sklepów ani potwierdzonymi promocjami.</p>
@@ -74,6 +80,7 @@
     <p>Poluj mądrze. Kupuj świadomie.</p>
     <small>© <span id="year"></span> Łowca Okazji. Strona demonstracyjna.</small>
   </footer>
+  <noscript><p class="noscript-note">Aby korzystać z wyszukiwarki i filtrów, włącz JavaScript w przeglądarce.</p></noscript>
   <script src="app.js"></script>
 </body>
 </html>
