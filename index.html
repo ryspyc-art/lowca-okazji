@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Łowca Okazji — przejrzysta wyszukiwarka i porównywarka ciekawych promocji.">
+  <meta name="theme-color" content="#101827">
+  <title>Łowca Okazji — znajdź dobrą cenę</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Łowca Okazji — strona główna">
+      <span class="brand-mark">Ł</span><span>Łowca <b>Okazji</b></span>
+    </a>
+    <nav><a href="#oferty">Oferty</a><a href="#jak-dziala">Jak działa</a><a href="#kontakt">Kontakt</a></nav>
+    <a class="top-cta" href="#oferty">Poluj na okazje <span>↗</span></a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span> DOBRE CENY W JEDNYM MIEJSCU</div>
+        <h1>Nie przepłacaj.<br><em>Łap okazje.</em></h1>
+        <p>Wyszukuj produkty, przeglądaj kategorie i zapisuj interesujące oferty. Prosto, szybko i bez zbędnego klikania.</p>
+        <a class="primary-btn" href="#oferty">Zobacz oferty <span>↓</span></a>
+        <div class="trust-line"><span>✓</span> Przejrzysty wybór &nbsp; <span>✓</span> Wygodne filtrowanie</div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="discount-card"><small>OKAZJA DNIA</small><div class="tag">−30%</div><div class="card-lines"><i></i><i></i><i></i></div><span class="spark">✦</span></div>
+        <div class="floating f-one">⚡ Szybkie wyszukiwanie</div>
+        <div class="floating f-two">♥ Zapisuj ulubione</div>
+      </div>
+    </section>
+
+    <section class="search-panel" id="oferty">
+      <div class="section-heading">
+        <div><div class="eyebrow dark">CENTRUM OKAZJI</div><h2>Znajdź coś dla siebie</h2></div>
+        <span class="demo-note">Katalog demonstracyjny</span>
+      </div>
+      <label class="searchbox"><span>⌕</span><input id="searchInput" type="search" placeholder="Czego szukasz? Np. słuchawki, buty, elektronika..." autocomplete="off"><button id="clearSearch" aria-label="Wyczyść wyszukiwanie">×</button></label>
+      <div class="toolbar">
+        <div class="chips" id="categoryChips">
+          <button class="chip active" data-category="Wszystkie">Wszystkie</button>
+          <button class="chip" data-category="Elektronika">Elektronika</button>
+          <button class="chip" data-category="Dom">Dom</button>
+          <button class="chip" data-category="Sport">Sport</button>
+          <button class="chip" data-category="Moda">Moda</button>
+        </div>
+        <label class="sort-label">Sortuj:
+          <select id="sortSelect"><option value="recommended">Polecane</option><option value="price-asc">Cena: rosnąco</option><option value="price-desc">Cena: malejąco</option><option value="discount">Największa obniżka</option></select>
+        </label>
+      </div>
+      <div class="results-meta"><span id="resultCount">0 ofert</span><span>♡ Kliknij serce, aby zapisać</span></div>
+      <div class="product-grid" id="productGrid"></div>
+      <div class="empty-state" id="emptyState" hidden><div>⌕</div><h3>Nie znaleźliśmy takich ofert</h3><p>Zmień hasło lub wybierz inną kategorię.</p><button class="secondary-btn" id="resetFilters">Wyczyść filtry</button></div>
+      <p class="disclaimer">Prezentowane pozycje są przykładowymi danymi demonstracyjnymi. Nie są aktualnymi ofertami sklepów ani potwierdzonymi promocjami.</p>
+    </section>
+
+    <section class="how" id="jak-dziala">
+      <div class="eyebrow">PROSTO I WYGODNIE</div><h2>Polowanie na okazje<br><em>bez straty czasu.</em></h2>
+      <div class="steps">
+        <article><span>01</span><div class="step-icon">⌕</div><h3>Wyszukaj</h3><p>Wpisz nazwę produktu albo przejdź do wybranej kategorii.</p></article>
+        <article><span>02</span><div class="step-icon">↕</div><h3>Porównaj</h3><p>Sortuj wyniki według ceny lub wysokości obniżki.</p></article>
+        <article><span>03</span><div class="step-icon">♡</div><h3>Zapisz</h3><p>Dodaj interesujące pozycje do ulubionych na swoim urządzeniu.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer id="kontakt">
+    <a class="brand footer-brand" href="#"><span class="brand-mark">Ł</span><span>Łowca <b>Okazji</b></span></a>
+    <p>Poluj mądrze. Kupuj świadomie.</p>
+    <small>© <span id="year"></span> Łowca Okazji. Strona demonstracyjna.</small>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
