@@ -10,3 +10,16 @@
 
 .faq{max-width:1180px;margin:0 auto;padding:0 max(8vw,28px) 95px}.faq h2{font-size:34px;letter-spacing:-1.5px;margin:8px 0 25px}.faq-list{border-top:1px solid #e2e7df}.faq details{border-bottom:1px solid #e2e7df;padding:18px 2px}.faq summary{font-size:14px;font-weight:750;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}.faq summary::-webkit-details-marker{display:none}.faq summary::after{content:"+";font-size:20px;color:#729c2e;line-height:1}.faq details[open] summary::after{content:"−"}.faq details p{font-size:12px;line-height:1.75;color:#727d8a;max-width:760px;margin:13px 0 0}.faq{padding-left:max(8vw,28px);padding-right:max(8vw,28px)}
 @media(max-width:800px){.faq{padding:0 7vw 70px}.faq h2{font-size:29px}}
+
+/* Polecana oferta partnerska */
+.promo-banner{display:flex;align-items:center;justify-content:space-between;gap:24px;margin:0 0 30px;padding:28px 30px;border-radius:14px;background:radial-gradient(circle at 85% 20%,#31425a 0,#172337 42%,#101827 100%);color:#fff;position:relative;overflow:hidden}
+.promo-banner:after{content:"%";position:absolute;right:190px;top:-38px;font-size:190px;line-height:1;font-weight:900;color:#c7f36b;opacity:.08;pointer-events:none}
+.promo-copy{position:relative;z-index:1;max-width:650px}
+.promo-kicker{font-size:9px;font-weight:900;letter-spacing:2px;color:#c7f36b}
+.promo-copy h2{font-size:clamp(23px,3vw,34px);letter-spacing:-1px;margin:8px 0;color:#fff}
+.promo-copy p{font-size:13px;line-height:1.6;color:#d1d8e2;margin:0 0 9px}
+.promo-copy small{display:block;font-size:10px;line-height:1.5;color:#aab5c5}
+.promo-button{position:relative;z-index:1;display:inline-flex;align-items:center;gap:18px;white-space:nowrap;padding:14px 18px;border-radius:8px;background:#c7f36b;color:#101827;font-size:12px;font-weight:900}
+.promo-button span{font-size:17px}
+.promo-button:hover{background:#d8ff8b;transform:translateY(-1px)}
+@media(max-width:600px){.promo-banner{align-items:flex-start;flex-direction:column;padding:22px 19px;gap:16px}.promo-banner:after{right:10px;font-size:140px}.promo-button{width:100%;justify-content:center}}
