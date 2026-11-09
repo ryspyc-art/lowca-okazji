@@ -20,6 +20,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Pobierz produkty z Ceneo (jeśli skonfigurowano dostęp)
+        continue-on-error: true
         env:
           CENEO_API_KEY: ${{ secrets.CENEO_API_KEY }}
           CENEO_PARTNER_ID: ${{ secrets.CENEO_PARTNER_ID }}
