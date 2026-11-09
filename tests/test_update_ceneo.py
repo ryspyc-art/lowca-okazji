@@ -29,6 +29,12 @@ class CeneoImporterTests(unittest.TestCase):
     def test_rejects_external_product_url(self):
         self.assertEqual(ceneo.affiliate_url("https://example.com/product", "987"), "")
 
+    def test_image_url_must_be_https_and_ceneo_hosted(self):
+        self.assertEqual(ceneo.safe_ceneo_image_url("https://img.ceneo.pl/photo.jpg"), "https://img.ceneo.pl/photo.jpg")
+        self.assertEqual(ceneo.safe_ceneo_image_url("http://img.ceneo.pl/photo.jpg"), "")
+        self.assertEqual(ceneo.safe_ceneo_image_url("https://ceneo.pl.evil.test/photo.jpg"), "")
+        self.assertEqual(ceneo.safe_ceneo_image_url("https://img.ceneo.pl@evil.test/photo.jpg"), "")
+
 
 if __name__ == "__main__":
     unittest.main()
