@@ -1,4 +1,4 @@
-# Cenolot
+# Tanievo
 
 Responsywna, statyczna strona publikowana przez GitHub Pages.
 
