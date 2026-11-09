@@ -40,7 +40,7 @@
       <div class="hero-copy">
         <div class="eyebrow"><span class="pulse"></span> DOBRE CENY W JEDNYM MIEJSCU</div>
         <h1>Nie przepłacaj.<br><em>Łap okazje.</em></h1>
-        <p>Przeglądaj kategorie, wyszukuj produkty i zapisuj interesujące pozycje. Katalog prawdziwych ofert uruchomimy po uzyskaniu i zatwierdzeniu źródła danych.</p>
+        <p>Przeglądaj wybrane produkty i przechodź do ofert partnerów. Ceny oraz dostępność sprawdzisz bezpośrednio na stronie sprzedawcy.</p>
         <a class="primary-btn" href="#oferty">Zobacz oferty <span>↓</span></a>
         <div class="trust-line"><span>✓</span> Przejrzysty wybór &nbsp; <span>✓</span> Wygodne filtrowanie</div>
       </div>
@@ -56,13 +56,13 @@
   <section class="search-panel" id="oferty">
       <aside class="catalog-status" aria-label="Status katalogu">
         <span class="promo-kicker">STATUS INTEGRACJI</span>
-        <h2>Rozwijamy treści przed uruchomieniem ofert partnerskich</h2>
-        <p>Obecny katalog zawiera wyłącznie przykładowe karty demonstracyjne. Ceneo poinformowało nas, że obecna wersja serwisu wymaga większej ilości własnych, wartościowych treści. Najpierw rozwijamy poradniki i sekcje zakupowe, a następnie wdrożymy standardowe formy reklamowe dostępne w panelu, zgodnie z zasadami programu. Do rozmowy o API wrócimy, gdy serwis będzie miał odpowiednią jakość i potencjał ruchu.</p>
-        <small>Na tym etapie nie prezentujemy fikcyjnych cen, rabatów ani dostępności produktów.</small>
+        <h2>Wybrane produkty i linki partnerskie</h2>
+        <p>Katalog zawiera wybrane produkty z linkami partnerskimi wygenerowanymi w panelu partnera. Po kliknięciu przejdziesz do karty produktu w Ceneo lub — w przypadku wskazanego partnera — bezpośrednio do sklepu. Nie prezentujemy własnych, niezweryfikowanych cen ani stanów magazynowych.</p>
+        <small>Ceny, koszty dostawy i dostępność mogą się zmieniać — sprawdź je u sprzedawcy przed zakupem.</small>
       </aside>
       <div class="section-heading">
         <div><div class="eyebrow dark">CENTRUM OKAZJI</div><h2>Znajdź coś dla siebie</h2></div>
-        <span class="demo-note">Katalog demonstracyjny</span>
+        <span class="demo-note">10 wybranych produktów</span>
       </div>
       <label class="searchbox"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" aria-label="Szukaj produktów" placeholder="Czego szukasz? Np. słuchawki, buty, elektronika..." autocomplete="off"><button id="clearSearch" aria-label="Wyczyść wyszukiwanie">×</button></label>
       <div class="toolbar">
@@ -71,7 +71,7 @@
           <button class="chip" data-category="Elektronika" aria-pressed="false">Elektronika</button>
           <button class="chip" data-category="Dom" aria-pressed="false">Dom</button>
           <button class="chip" data-category="Sport" aria-pressed="false">Sport</button>
-          <button class="chip" data-category="Moda" aria-pressed="false">Moda</button>
+          <button class="chip" data-category="Moda" aria-pressed="false">Moda</button>\n          <button class="chip" data-category="RTV" aria-pressed="false">RTV</button>\n          <button class="chip" data-category="Gaming" aria-pressed="false">Gaming</button>\n          <button class="chip" data-category="Motoryzacja" aria-pressed="false">Motoryzacja</button>\n          <button class="chip" data-category="Narzędzia" aria-pressed="false">Narzędzia</button>\n          <button class="chip" data-category="Dla zwierząt" aria-pressed="false">Dla zwierząt</button>\n          <button class="chip" data-category="Zdrowie" aria-pressed="false">Zdrowie</button>
         </div>
         <button class="favorites-toggle" id="favoritesToggle" type="button" aria-pressed="false">♡ Tylko zapisane <span id="favoritesCount">0</span></button>
         <label class="sort-label">Sortuj:
@@ -81,7 +81,7 @@
       <div class="results-meta" aria-live="polite"><span id="resultCount">0 ofert</span><span>♡ Kliknij serce, aby zapisać</span></div>
       <div class="product-grid" id="productGrid"></div>
       <div class="empty-state" id="emptyState" hidden><div>⌕</div><h3>Nie znaleźliśmy takich ofert</h3><p>Zmień hasło lub wybierz inną kategorię.</p><button class="secondary-btn" id="resetFilters">Wyczyść filtry</button></div>
-      <p class="disclaimer">Prezentowane pozycje są przykładowymi danymi demonstracyjnymi. Nie są aktualnymi ofertami sklepów ani potwierdzonymi promocjami.</p>
+      <p class="disclaimer">Linki partnerskie mogą przynieść Tanievo.pl prowizję, bez dodatkowego kosztu dla kupującego. Ceny i dostępność sprawdzaj na stronie sprzedawcy.</p>
 
 
 
@@ -112,10 +112,10 @@
       <div class="eyebrow dark">NAJCZĘSTSZE PYTANIA</div>
       <h2 id="faq-title">Warto wiedzieć</h2>
       <div class="faq-list">
-        <details><summary>Czy pokazane ceny i promocje są aktualne?</summary><p>Nie. Obecny katalog zawiera wyłącznie przykładowe dane demonstracyjne. Nie są to aktualne ceny sklepów ani potwierdzone rabaty.</p></details>
-        <details><summary>Czy mogę przejść do sklepu i kupić produkt?</summary><p>Na obecnym etapie nie. Katalog zawiera wyłącznie karty demonstracyjne; aktywne linki zakupowe pojawią się po zatwierdzeniu integracji.</p></details>
+        <details><summary>Czy pokazane ceny i promocje są aktualne?</summary><p>Nie publikujemy własnych cen. Aktualną cenę, koszt dostawy i dostępność sprawdzisz na stronie partnera.</p></details>
+        <details><summary>Czy mogę przejść do sklepu i kupić produkt?</summary><p>Tak. Przyciski prowadzą do kart produktów w Ceneo lub do sklepu partnerskiego.</p></details>
         <details><summary>Jak działają zapisane produkty?</summary><p>Po kliknięciu serca produkt trafia do listy ulubionych zapisanej lokalnie w przeglądarce na tym urządzeniu.</p></details>
-        <details><summary>Skąd będą pochodzić prawdziwe oferty?</summary><p>Docelowo z oficjalnego API Ceneo, po przyznaniu dostępu i pisemnym potwierdzeniu zasad prezentacji danych.</p></details>
+        <details><summary>Skąd będą pochodzić prawdziwe oferty?</summary><p>Obecne linki zostały wygenerowane w panelu partnera. Integracja API pozostaje osobnym, niezależnym etapem.</p></details>
       </div>
     </section>
   <section class="how editorial-hub" id="wiedza"><div class="eyebrow">WIEDZA, KTÓRA POMAGA OSZCZĘDZAĆ</div><h2>Nie każda promocja to <em>okazja.</em></h2><div class="steps"><article><span>PORADNIK 01</span><div class="step-icon">↕</div><h3>Jak porównywać ceny?</h3><p>Sprawdź cenę końcową, dostawę, historię ceny i warunki sprzedawcy. Zobacz praktyczną checklistę przed zakupem.</p><a class="offer-link" href="poradnik-porownywanie-cen.html">Czytaj poradnik ↗</a></article><article><span>PORADNIK 02</span><div class="step-icon">⌕</div><h3>Jak wybrać produkt?</h3><p>Porównuj konkretne parametry, a nie tylko nazwę, zdjęcie czy wysokość rabatu.</p><a class="offer-link" href="poradnik-jak-kupowac.html">Czytaj poradnik ↗</a></article><article><span>NASZE ZASADY</span><div class="step-icon">✓</div><h3>Przejrzyste rekomendacje</h3><p>Wyjaśniamy afiliację, źródła danych i ograniczenia katalogu. Nie udajemy, że przykładowe dane są aktualnymi promocjami.</p><a class="offer-link" href="o-afiliacji.html">Zobacz zasady ↗</a></article></div><div class="steps" aria-label="Więcej poradników"><article><span>PORADNIK 03</span><div class="step-icon">✓</div><h3>Jak sprawdzić sklep?</h3><p>Zweryfikuj sprzedawcę, opinie, płatności i zasady zwrotu przed zamówieniem.</p><a class="offer-link" href="poradnik-weryfikacja-sprzedawcy.html">Czytaj poradnik ↗</a></article><article><span>PORADNIK 04</span><div class="step-icon"> zł </div><h3>Całkowity koszt zakupu</h3><p>Dolicz dostawę i dodatkowe opłaty, zanim porównasz oferty sklepów.</p><a class="offer-link" href="poradnik-koszt-dostawy.html">Czytaj poradnik ↗</a></article><article><span>PORADNIK 05</span><div class="step-icon">↩</div><h3>Zwroty i reklamacje</h3><p>Sprawdź podstawowe zasady i przygotuj się na zakup bez niespodzianek.</p><a class="offer-link" href="poradnik-zwroty-reklamacje.html">Czytaj poradnik ↗</a></article></div><div class="steps"><article><span>PORADNIK 06</span><div class="step-icon">%</div><h3>Prawdziwe promocje</h3><p>Rozpoznaj pozorne obniżki, presję czasu i warunki kodów rabatowych.</p><a class="offer-link" href="poradnik-promocje-pulapki.html">Czytaj poradnik ↗</a></article></div></section><section class="how" id="porownania"><div class="eyebrow">NASZA METODOLOGIA</div><h2>Porównuj więcej niż <em>samą cenę.</em></h2><div class="steps"><article><span>KRYTERIUM 01</span><div class="step-icon"> zł </div><h3>Koszt całkowity</h3><p>Uwzględniamy cenę produktu, dostawę i dodatkowe opłaty, jeśli są dostępne w źródle danych.</p></article><article><span>KRYTERIUM 02</span><div class="step-icon">✓</div><h3>Parametry i wariant</h3><p>Porównanie ma dotyczyć tego samego modelu i istotnych cech, a nie wyłącznie podobnej nazwy.</p></article><article><span>KRYTERIUM 03</span><div class="step-icon">⌂</div><h3>Sprzedawca i warunki</h3><p>Ważne są informacje o sprzedawcy, dostawie, zwrocie i gwarancji. Brak danych oznaczymy zamiast zgadywać.</p></article></div><p class="disclaimer">Metodologia opisuje planowany sposób opracowywania porównań. Do czasu uzyskania zatwierdzonych źródeł danych nie publikujemy rankingów ani ocen produktów.</p></section></main>
@@ -125,7 +125,7 @@
     <a class="brand footer-brand" href="#"><span class="brand-mark">T</span><span>Tanievo.pl</span></a>
     <p>Kupuj świadomie. Nie przepłacaj.</p>
     <nav class="footer-links" aria-label="Informacje"><a href="poradnik-jak-kupowac.html">Poradnik zakupowy</a><a href="poradnik-weryfikacja-sprzedawcy.html">Weryfikacja sklepu</a><a href="poradnik-koszt-dostawy.html">Koszt zakupu</a><a href="poradnik-zwroty-reklamacje.html">Zwroty i reklamacje</a><a href="poradnik-promocje-pulapki.html">Promocje i rabaty</a><a href="o-afiliacji.html">O linkach afiliacyjnych</a><a href="dla-partnerow.html">Dla partnerów</a><a href="polityka-prywatnosci.html">Polityka prywatności</a></nav>
-    <small>© <span id="year"></span> Tanievo.pl. Strona demonstracyjna.</small>
+    <small>© <span id="year"></span> Tanievo.pl. Linki partnerskie mogą być źródłem prowizji.</small>
   </footer>
   <noscript><p class="noscript-note">Aby korzystać z wyszukiwarki i filtrów, włącz JavaScript w przeglądarce.</p></noscript>
   <script src="app.js"></script>
