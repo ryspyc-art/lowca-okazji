@@ -1,101 +1,51 @@
-# Uruchomienie prawdziwych ofert i promocji
+# Łowca Okazji — przygotowanie integracji Ceneo
 
-## 1. Ceneo — wymagany dostęp wydawcy i pisemne potwierdzenie zasad
+## Aktualny status
 
-**Integracja jest obecnie wstrzymana.** Regulamin Programu Partnerskiego Ceneo (art. XIII) wymaga indywidualnego przyznania klucza API, ogranicza wykorzystanie danych do promowania Ceneo i zabrania modyfikowania treści zwracanych przez API. Art. V zawiera też ograniczenia dotyczące odnośników do konkretnych sklepów spoza współpracy z Ceneo. Przed uruchomieniem importera należy uzyskać od Ceneo pisemne potwierdzenie, jaki sposób prezentacji danych, linkowania i aktualizacji jest dozwolony. Sam klucz API nie powinien być traktowany jako zgoda na dowolny model porównywarki.
+- Strona działa jako katalog demonstracyjny.
+- Karty przykładowe nie pokazują cen, rabatów ani dostępności.
+- Aktywne linki zakupowe do sklepów zostały tymczasowo wyłączone z publicznej strony.
+- Wniosek o dostęp do API Ceneo został złożony; klucz API nie został jeszcze przyznany.
+- Importer i workflow pozostają zablokowane do czasu pisemnego potwierdzenia zasad wykorzystania danych przez Ceneo.
 
-Importer ma dodatkową blokadę `CENEO_API_PUBLICATION_APPROVED=YES`. Nie ustawiaj jej bez wyraźnego potwierdzenia Ceneo.
+## Co wynika z regulaminu Ceneo
 
-Ceneo udostępnia API partnerom programu afiliacyjnego. Samo posiadanie strony nie oznacza automatycznego przyznania klucza API.
+1. **Art. XIII ust. 2:** dostęp do API wymaga osobnego wniosku i pozytywnej decyzji Ceneo; dopiero wtedy wydawany jest klucz.
+2. **Art. XIII ust. 4:** dane pobrane przez API można wykorzystywać wyłącznie w celu promowania serwisu Ceneo.pl, zgodnie z regulaminem.
+3. **Art. XIII ust. 7:** partner nie jest uprawniony do modyfikowania treści zwracanych przez metody API.
+4. **Art. V ust. 1 lit. a pkt vi:** regulamin ogranicza publikowanie treści dotyczących ofert w konkretnych sklepach oraz linków do nich, jeżeli nie powstały w ramach współpracy z Ceneo.
+5. **Art. XIII ust. 8:** w razie zablokowania dostępu trzeba niezwłocznie usunąć dane pobrane przez API.
 
-1. Zarejestruj lub zaloguj konto w [Programie Partnerskim Ceneo](https://pp.ceneo.pl/).
-2. W panelu administracyjnym złóż wniosek o dostęp do API i poczekaj na przyznanie klucza.
-3. Odczytaj Partner ID w ustawieniach konta.
-4. W repozytorium GitHub otwórz Settings → Secrets and variables → Actions → New repository secret.
-5. Dodaj:
-   - `CENEO_API_KEY` — przyznany klucz API,
-   - `CENEO_PARTNER_ID` — Partner ID z panelu.
-6. Opcjonalnie w zakładce Variables dodaj `CENEO_SEARCH_TERMS`, np. `smartfon,laptop,karta graficzna,słuchawki,monitor`.
+Dlatego przed uruchomieniem porównywarki trzeba uzyskać od Ceneo pisemną odpowiedź, czy i w jakiej formie dozwolone są: prezentacja ofert na stronie, sortowanie i filtrowanie, przechowywanie kopii danych, aktualizacja katalogu oraz przekierowania do sklepów. Nie zakładamy, że sam klucz API oznacza zgodę na wszystkie te funkcje.
 
-Importer korzysta z OAuth 2.0 client_credentials, pobiera token i wywołuje zalecany przez Ceneo endpoint `PartnerServiceV2.svc/GetProducts`. Klucz API pozostaje po stronie GitHub Actions i nie trafia do publicznego JavaScriptu. Link produktu otrzymuje identyfikator partnera w udokumentowanym fragmencie `#pid=`.
+## Co już przygotowano technicznie
 
-Dokumentacja:
-- https://partnerzyapi.ceneo.pl/
-- https://partnerzyapi.ceneo.pl/Help/Service?name=PartnerService
-- https://partnerzyapi.ceneo.pl/Help/Service?name=PartnerServicePremium
+- Strona główna z wyszukiwaniem, kategoriami i listą ulubionych.
+- Katalog demonstracyjny bez fikcyjnych cen i rabatów.
+- Strona „Dla partnerów” z opisem projektu i statusem integracji.
+- Strona wyjaśniająca zasady linków afiliacyjnych.
+- Podstawowe metadane SEO, robots.txt i sitemap.xml.
+- Prototyp importera Ceneo w repozytorium.
+- Workflow GitHub Actions do ręcznego uruchamiania po zatwierdzeniu zasad.
 
-## 2. Awin — wstrzymane
+## Blokada bezpieczeństwa integracji
 
-Importer Awin pozostaje w repozytorium jako prototyp, ale nie jest uruchamiany ani publikowany na stronie. Regulamin Ceneo może kolidować z linkami do sklepów spoza współpracy Ceneo. Nie włączaj feedu Awin na tej samej powierzchni bez pisemnego uzgodnienia z Ceneo.
+Importer wymaga sekretu GitHub Actions:
 
-<!--
-## 2. Awin — opcjonalny drugi feed
+- `CENEO_API_KEY` — klucz wydany przez Ceneo,
+- `CENEO_PARTNER_ID` — identyfikator partnera,
+- `CENEO_API_PUBLICATION_APPROVED` — wartość `YES` wyłącznie po otrzymaniu pisemnego potwierdzenia Ceneo.
 
-1. Zarejestruj się jako wydawca Awin i uzyskaj akceptację reklamodawców, których produkty chcesz promować.
-2. W panelu Awin otwórz Toolbox → Create-a-Feed.
-3. Wybierz polski feed, reklamodawców i potrzebne pola. Wygeneruj adres pobierania CSV.
-4. W GitHub → Settings → Secrets and variables → Actions dodaj sekret `AWIN_FEED_URL` z pełnym adresem feedu.
-5. Nie publikuj tego adresu w kodzie ani w wiadomościach — zawiera klucz dostępu do feedu.
+**Nie ustawiaj `CENEO_API_PUBLICATION_APPROVED=YES` przed wyjaśnieniem zasad z Ceneo.** Klucza API nie wolno umieszczać w kodzie strony ani w publicznym JavaScript.
 
-Importer Awin przyjmuje rekordy z ceną w PLN, nazwą reklamodawcy i bezpiecznym linkiem HTTPS. Rekordy z inną lub niepodaną walutą są pomijane, aby nie wyświetlać błędnych cen.
+## Kolejne kroki
 
-Dokumentacja Awin:
-- https://success.awin.com/articles/en_US/Knowledge/How-can-I-access-a-Product-Feed
-- https://help.awin.com/developers/docs/awins-apis-overview
+1. Poczekać na odpowiedź Ceneo dotyczącą wniosku o API.
+2. Wysłać pytanie o dozwolony model porównywarki i zakres prezentowania danych.
+3. Uzupełnić dane administratora i opublikować kompletną politykę prywatności oraz dane kontaktowe.
+4. Dopiero po uzyskaniu zgody skonfigurować sekrety GitHub i przetestować integrację.
+5. Sprawdzić poprawność danych, linków, aktualizacji i oznaczeń przed publicznym uruchomieniem katalogu.
 
--->
+## Ważne
 
-## 3. Komputronik
-
-Program partnerski Komputronik (Polecaj-Ka) wymaga rejestracji i weryfikacji konta. Linki afiliacyjne generuje się w panelu programu. Obecne linki partnerskie w serwisie pozostają odnośnikami przekazanymi do projektu.
-
-Nie znaleźliśmy publicznej dokumentacji feedu/API Komputronik dla wydawców. Dlatego nie próbujemy pobierać cen przez nieautoryzowane scrapowanie. Jeśli panel udostępni feed produktowy lub Komputronik przekaże oficjalną specyfikację integracji, można dodać go jako kolejny importer.
-
-Oficjalny program:
-- https://www.komputronik.pl/lp/komputronik-afiliacja/
-- Kontakt: afiliacja@komputronik.pl
-
-## 4. Automatyczne aktualizacje (obecnie wyłączone)
-
-Workflow `.github/workflows/update-ceneo.yml`:
-- uruchamia się co 6 godzin,
-- można go uruchomić ręcznie w GitHub → Actions → Aktualizacja ofert partnerskich → Run workflow,
-- najpierw sprawdza składnię skryptów i uruchamia testy importerów Ceneo oraz Awin,
-- uruchamia importery Ceneo i Awin, jeśli są skonfigurowane sekrety,
-- zapisuje zmieniony `products.json` do repozytorium,
-- nie umieszcza kluczy API w przeglądarce,
-- nie ukrywa błędów połączenia z Ceneo — nieudana autoryzacja lub błąd API będzie widoczny w logu zadania.
-
-Po pojawieniu się `products.json` frontend automatycznie pobiera dane. Jeśli nie ma poprawnego feedu, pozostaje katalog demonstracyjny — nie publikuje fikcyjnych cen.
-
-## 5. Google — indeksowanie
-
-1. Otwórz [Google Search Console](https://search.google.com/search-console/).
-2. Dodaj usługę typu „Prefiks adresu URL”: `https://ryspyc-art.github.io/lowca-okazji/`.
-3. Zweryfikuj własność jedną z metod udostępnionych przez Google. Jeśli wybierzesz znacznik HTML, przekaż jego wartość, aby można było dodać go do strony. Jeśli Google wymaga pliku weryfikacyjnego, pobierz plik i dodaj go do głównego katalogu repozytorium.
-4. Po weryfikacji prześlij mapę witryny: `https://ryspyc-art.github.io/lowca-okazji/sitemap.xml`.
-5. Sprawdzaj raport indeksowania i błędy. Przesłanie mapy nie gwarantuje indeksacji.
-
-## 6. Facebook i grupy zakupowe
-
-Na stronie jest już sekcja udostępniania:
-- przycisk otwierający udostępnianie na Facebooku,
-- przycisk kopiujący gotowy, uczciwy tekst do grup zakupowych.
-
-Nie publikujemy automatycznie postów w grupach ani nie wysyłamy spamu. Przed publikacją należy sprawdzić regulamin konkretnej grupy i jasno oznaczyć linki partnerskie.
-
-## 7. Status
-
-- [x] Prototyp importera Ceneo w repozytorium — nieuruchamiany do czasu pisemnego potwierdzenia zasad.
-- [x] Walidacja domeny linków i identyfikatora partnera Ceneo.
-- [x] Testy jednostkowe importerów Ceneo i Awin.
-- [x] Prototyp importera Awin CSV — wstrzymany.
-- [x] Workflow GitHub Actions — uruchamianie ręczne; automatyczny harmonogram wyłączony do czasu zatwierdzenia.
-- [x] Kontrola składni i testy uruchamiane przed aktualizacją feedów.
-- [x] Frontend pobiera `products.json`, gdy katalog istnieje.
-- [x] Sekcja udostępniania Facebook / tekst do grup.
-- [ ] Otrzymanie klucza API Ceneo i Partner ID.
-- [ ] Pisemne potwierdzenie Ceneo dotyczące zakresu wykorzystania API, prezentacji danych, linkowania i aktualizacji.
-- [ ] Uzyskanie feedu Awin od zaakceptowanych reklamodawców.
-- [ ] Weryfikacja właściciela w Google Search Console.
-- [ ] Oficjalny feed/API Komputronik, jeśli zostanie udostępniony wydawcy.
+Nie pobieramy cen przez scrapowanie stron sklepów. Nie publikujemy danych demonstracyjnych jako rzeczywistych ofert. Nie uruchamiamy feedów innych sieci na powierzchni zgłoszonej do Ceneo bez uprzedniego wyjaśnienia zgodności z regulaminem.
