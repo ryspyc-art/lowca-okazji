@@ -1,16 +1,23 @@
 #!/usr/bin/env python3
-"""Optional Awin CSV product-feed importer. Feed URL must be stored as a GitHub secret."""
+"""Optional Awin CSV importer with explicit HTTPS host allowlists.
+
+All allowlists contain comma-separated exact hostnames, not URL prefixes.
+Feed access is disabled unless AWIN_FEED_ALLOWED_HOSTS is configured.
+Product links and image URLs are independently restricted.
+"""
 import csv
 import hashlib
 import io
 import json
 import os
 import sys
+import urllib.parse
 import urllib.request
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 OUT = Path("products.json")
+MAX_FEED_BYTES = 25 * 1024 * 1024
 
 
 def first(row, *keys):
@@ -33,17 +40,64 @@ def category_for(value):
     return "Dom"
 
 
+def allowed_hosts(variable):
+    return {
+        item.strip().lower().rstrip(".")
+        for item in os.environ.get(variable, "").split(",")
+        if item.strip()
+    }
+
+
+def validated_https_url(value, hosts):
+    """Return a normalized HTTPS URL only for an explicitly allowed exact host."""
+    try:
+        parsed = urllib.parse.urlsplit(str(value).strip())
+        host = (parsed.hostname or "").encode("idna").decode("ascii").lower().rstrip(".")
+        if parsed.scheme.lower() != "https" or not host or host not in hosts:
+            return ""
+        if parsed.username is not None or parsed.password is not None:
+            return ""
+        if parsed.port not in (None, 443):
+            return ""
+        if not parsed.path.startswith("/"):
+            return ""
+        return urllib.parse.urlunsplit(("https", host, parsed.path, parsed.query, ""))
+    except (TypeError, ValueError, UnicodeError):
+        return ""
+
+
+class NoRedirectHandler(urllib.request.HTTPRedirectHandler):
+    """Reject redirects so an approved feed host cannot redirect to an untrusted host."""
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        raise RuntimeError("Feed Awin zwrócił przekierowanie; wymagany jest bezpośredni adres HTTPS.")
+
+
+def fetch_feed(url):
+    opener = urllib.request.build_opener(NoRedirectHandler())
+    req = urllib.request.Request(url, headers={"User-Agent": "LowcaOkazjiFeed/1.0"})
+    with opener.open(req, timeout=90) as response:
+        raw = response.read(MAX_FEED_BYTES + 1)
+    if len(raw) > MAX_FEED_BYTES:
+        raise RuntimeError("Feed Awin przekracza limit 25 MB.")
+    return raw
+
+
 def main():
     feed_url = os.environ.get("AWIN_FEED_URL", "").strip()
     if not feed_url:
         print("Brak AWIN_FEED_URL — pomijam feed Awin.")
         return 0
-    if not feed_url.startswith("https://"):
-        raise RuntimeError("Adres feedu Awin musi zaczynać się od https://")
 
-    req = urllib.request.Request(feed_url, headers={"User-Agent": "LowcaOkazjiFeed/1.0"})
-    with urllib.request.urlopen(req, timeout=90) as response:
-        raw = response.read()
+    feed_url = validated_https_url(feed_url, allowed_hosts("AWIN_FEED_ALLOWED_HOSTS"))
+    if not feed_url:
+        raise RuntimeError("Adres feedu Awin nie przeszedł walidacji. Ustaw AWIN_FEED_ALLOWED_HOSTS z dokładną nazwą hosta feedu.")
+
+    product_hosts = allowed_hosts("AWIN_ALLOWED_PRODUCT_HOSTS")
+    image_hosts = allowed_hosts("AWIN_ALLOWED_IMAGE_HOSTS")
+    if not product_hosts:
+        raise RuntimeError("Brak AWIN_ALLOWED_PRODUCT_HOSTS — import produktów jest zablokowany.")
+
+    raw = fetch_feed(feed_url)
     text = raw.decode("utf-8-sig", errors="replace")
     sample = text[:4096]
     try:
@@ -66,7 +120,7 @@ def main():
                         existing[str(item.get("id"))] = item
                 except (TypeError, ValueError):
                     continue
-        except (ValueError, AttributeError):
+        except (ValueError, AttributeError, OSError):
             pass
 
     added = 0
@@ -75,16 +129,18 @@ def main():
         name = first(row, "product_name", "productname", "name", "title")
         price_raw = first(row, "search_price", "price", "product_price", "rrp_price")
         currency = first(row, "currency", "currency_code").upper()
-        url = first(row, "aw_deep_link", "product_url", "producturl", "url")
+        raw_url = first(row, "aw_deep_link", "product_url", "producturl", "url")
+        url = validated_https_url(raw_url, product_hosts)
         merchant = first(row, "merchant_name", "advertiser_name", "merchant", "advertiser")
-        image = first(row, "merchant_image_url", "image_url", "image", "aw_image_url")
+        raw_image = first(row, "merchant_image_url", "image_url", "image", "aw_image_url")
+        image = validated_https_url(raw_image, image_hosts) if image_hosts else ""
         category_raw = first(row, "merchant_category", "category_name", "category", "category_name_path")
         product_id = first(row, "aw_product_id", "product_id", "id", "ean")
         try:
             price = float(price_raw.replace("PLN", "").replace(" ", "").replace(",", "."))
         except ValueError:
             continue
-        if not name or price <= 0 or currency != "PLN" or not url.startswith("https://") or not merchant:
+        if not name or price <= 0 or currency != "PLN" or not url or not merchant:
             continue
         if not product_id:
             product_id = hashlib.sha256((merchant + "|" + name + "|" + url).encode("utf-8")).hexdigest()[:20]
@@ -95,7 +151,7 @@ def main():
             "category": category_for(category_raw + " " + name),
             "price": round(price, 2),
             "currency": "PLN",
-            "image": image if image.startswith("https://") else "",
+            "image": image,
             "productUrl": url,
             "merchant": merchant,
             "source": "Awin",
@@ -121,5 +177,5 @@ if __name__ == "__main__":
     try:
         raise SystemExit(main())
     except Exception as exc:
-        print("Błąd importu feedu Awin (" + type(exc).__name__ + "). Sprawdź dostęp, format CSV i uprawnienia feedu.", file=sys.stderr)
+        print("Błąd importu feedu Awin (" + type(exc).__name__ + "). Sprawdź dostęp, konfigurację allowlisty, format CSV i uprawnienia feedu.", file=sys.stderr)
         raise SystemExit(1)
