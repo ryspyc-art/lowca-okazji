@@ -89,10 +89,12 @@ def affiliate_url(value, partner_id):
         host = (parsed.hostname or "").lower()
         if parsed.scheme not in ("http", "https") or not (host == "ceneo.pl" or host.endswith(".ceneo.pl")):
             return ""
-        if parsed.username or parsed.password:
+        if parsed.username is not None or parsed.password is not None:
+            return ""
+        if parsed.port not in (None, 80, 443):
             return ""
         return urllib.parse.urlunsplit((
-            "https", parsed.netloc, parsed.path, parsed.query,
+            "https", host, parsed.path, parsed.query,
             "pid=" + urllib.parse.quote(partner_id, safe="")
         ))
     except (TypeError, ValueError):
