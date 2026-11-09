@@ -23,3 +23,5 @@
 .promo-button span{font-size:17px}
 .promo-button:hover{background:#d8ff8b;transform:translateY(-1px)}
 @media(max-width:600px){.promo-banner{align-items:flex-start;flex-direction:column;padding:22px 19px;gap:16px}.promo-banner:after{right:10px;font-size:140px}.promo-button{width:100%;justify-content:center}}
+
+.footer-links{display:flex;gap:16px;flex-wrap:wrap}.footer-links a{font-size:11px;color:#c7f36b;text-decoration:underline;text-underline-offset:3px}.footer-links a:hover{color:#fff}
