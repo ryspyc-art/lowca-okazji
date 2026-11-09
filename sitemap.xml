@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ryspyc-art.github.io/lowca-okazji/</loc>
+    <loc>https://tanievo.pl/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://ryspyc-art.github.io/lowca-okazji/o-afiliacji.html</loc>
+    <loc>https://tanievo.pl/o-afiliacji.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://ryspyc-art.github.io/lowca-okazji/poradnik-jak-kupowac.html</loc>
+    <loc>https://tanievo.pl/poradnik-jak-kupowac.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ryspyc-art.github.io/lowca-okazji/dla-partnerow.html</loc>
+    <loc>https://tanievo.pl/dla-partnerow.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://ryspyc-art.github.io/lowca-okazji/polityka-prywatnosci.html</loc>
+    <loc>https://tanievo.pl/polityka-prywatnosci.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-  <url><loc>https://ryspyc-art.github.io/lowca-okazji/poradnik-porownywanie-cen.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://ryspyc-art.github.io/lowca-okazji/poradnik-weryfikacja-sprzedawcy.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://ryspyc-art.github.io/lowca-okazji/poradnik-koszt-dostawy.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://ryspyc-art.github.io/lowca-okazji/poradnik-zwroty-reklamacje.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://ryspyc-art.github.io/lowca-okazji/poradnik-promocje-pulapki.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tanievo.pl/poradnik-porownywanie-cen.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://tanievo.pl/poradnik-weryfikacja-sprzedawcy.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tanievo.pl/poradnik-koszt-dostawy.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tanievo.pl/poradnik-zwroty-reklamacje.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://tanievo.pl/poradnik-promocje-pulapki.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>
