@@ -117,6 +117,13 @@ def main():
                     if updated.tzinfo is None:
                         updated = updated.replace(tzinfo=timezone.utc)
                     if updated >= cutoff:
+                        if item.get("source") == "Awin":
+                            safe_existing_url = validated_https_url(item.get("productUrl", ""), allowed_hosts("AWIN_ALLOWED_PRODUCT_HOSTS"))
+                            if not safe_existing_url:
+                                continue
+                            item["productUrl"] = safe_existing_url
+                            image_hosts = allowed_hosts("AWIN_ALLOWED_IMAGE_HOSTS")
+                            item["image"] = validated_https_url(item.get("image", ""), image_hosts) if image_hosts else ""
                         existing[str(item.get("id"))] = item
                 except (TypeError, ValueError):
                     continue
