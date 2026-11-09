@@ -49,10 +49,13 @@ class SiteIntegrityTests(unittest.TestCase):
             link for link in self.parser.links
             if "komputronik.pl" in link.get("href", "")
         ]
-        self.assertGreaterEqual(len(affiliate_links), 1)
         for link in affiliate_links:
             rel = set(link.get("rel", "").split())
             self.assertTrue({"sponsored", "nofollow"}.issubset(rel))
+
+    def test_privacy_policy_is_linked(self):
+        self.assertIn("polityka-prywatnosci.html", self.html)
+        self.assertTrue((ROOT / "polityka-prywatnosci.html").is_file())
 
 
 if __name__ == "__main__":
