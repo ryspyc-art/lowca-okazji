@@ -1,4 +1,4 @@
-name: Aktualizacja ofert Ceneo
+name: Aktualizacja ofert partnerskich
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: ceneo-catalog-update
+  group: partner-catalog-update
   cancel-in-progress: false
 
 jobs:
@@ -19,35 +19,30 @@ jobs:
       - name: Pobierz repozytorium
         uses: actions/checkout@v4
 
-      - name: Uruchom pobieranie ofert
-        if: ${{ secrets.CENEO_API_KEY != '' && secrets.CENEO_PARTNER_ID != '' }}
+      - name: Pobierz produkty z Ceneo (jeśli skonfigurowano dostęp)
         env:
           CENEO_API_KEY: ${{ secrets.CENEO_API_KEY }}
           CENEO_PARTNER_ID: ${{ secrets.CENEO_PARTNER_ID }}
           CENEO_SEARCH_TERMS: ${{ vars.CENEO_SEARCH_TERMS }}
         run: python3 scripts/update_ceneo.py
 
-      - name: Importuj opcjonalny feed Awin
-        if: ${{ secrets.AWIN_FEED_URL != '' }}
+      - name: Importuj feed Awin (jeśli skonfigurowano dostęp)
         env:
           AWIN_FEED_URL: ${{ secrets.AWIN_FEED_URL }}
         run: python3 scripts/update_awin.py
 
       - name: Zapisz zaktualizowany katalog
-        if: ${{ (secrets.CENEO_API_KEY != '' && secrets.CENEO_PARTNER_ID != '') || secrets.AWIN_FEED_URL != '' }}
         run: |
           if [ -f products.json ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add products.json
             if ! git diff --cached --quiet; then
-              git commit -m "Aktualizacja katalogu ofert Ceneo"
+              git commit -m "Aktualizacja katalogu ofert partnerskich"
               git push
             else
               echo "Brak zmian w katalogu."
             fi
+          else
+            echo "Brak skonfigurowanych feedów. Katalog demonstracyjny pozostaje bez zmian."
           fi
-
-      - name: Informacja o brakujących danych dostępowych
-        if: ${{ (secrets.CENEO_API_KEY == '' || secrets.CENEO_PARTNER_ID == '') && secrets.AWIN_FEED_URL == '' }}
-        run: echo "Automatyzacja jest gotowa. Dodaj sekrety CENEO_API_KEY i CENEO_PARTNER_ID dla Ceneo lub AWIN_FEED_URL dla Awin."
