@@ -1,6 +1,10 @@
 # Uruchomienie prawdziwych ofert i promocji
 
-## 1. Ceneo — wymagany dostęp wydawcy
+## 1. Ceneo — wymagany dostęp wydawcy i pisemne potwierdzenie zasad
+
+**Integracja jest obecnie wstrzymana.** Regulamin Programu Partnerskiego Ceneo (art. XIII) wymaga indywidualnego przyznania klucza API, ogranicza wykorzystanie danych do promowania Ceneo i zabrania modyfikowania treści zwracanych przez API. Art. V zawiera też ograniczenia dotyczące odnośników do konkretnych sklepów spoza współpracy z Ceneo. Przed uruchomieniem importera należy uzyskać od Ceneo pisemne potwierdzenie, jaki sposób prezentacji danych, linkowania i aktualizacji jest dozwolony. Sam klucz API nie powinien być traktowany jako zgoda na dowolny model porównywarki.
+
+Importer ma dodatkową blokadę `CENEO_API_PUBLICATION_APPROVED=YES`. Nie ustawiaj jej bez wyraźnego potwierdzenia Ceneo.
 
 Ceneo udostępnia API partnerom programu afiliacyjnego. Samo posiadanie strony nie oznacza automatycznego przyznania klucza API.
 
@@ -20,6 +24,11 @@ Dokumentacja:
 - https://partnerzyapi.ceneo.pl/Help/Service?name=PartnerService
 - https://partnerzyapi.ceneo.pl/Help/Service?name=PartnerServicePremium
 
+## 2. Awin — wstrzymane
+
+Importer Awin pozostaje w repozytorium jako prototyp, ale nie jest uruchamiany ani publikowany na stronie. Regulamin Ceneo może kolidować z linkami do sklepów spoza współpracy Ceneo. Nie włączaj feedu Awin na tej samej powierzchni bez pisemnego uzgodnienia z Ceneo.
+
+<!--
 ## 2. Awin — opcjonalny drugi feed
 
 1. Zarejestruj się jako wydawca Awin i uzyskaj akceptację reklamodawców, których produkty chcesz promować.
@@ -34,6 +43,8 @@ Dokumentacja Awin:
 - https://success.awin.com/articles/en_US/Knowledge/How-can-I-access-a-Product-Feed
 - https://help.awin.com/developers/docs/awins-apis-overview
 
+-->
+
 ## 3. Komputronik
 
 Program partnerski Komputronik (Polecaj-Ka) wymaga rejestracji i weryfikacji konta. Linki afiliacyjne generuje się w panelu programu. Obecne linki partnerskie w serwisie pozostają odnośnikami przekazanymi do projektu.
@@ -44,7 +55,7 @@ Oficjalny program:
 - https://www.komputronik.pl/lp/komputronik-afiliacja/
 - Kontakt: afiliacja@komputronik.pl
 
-## 4. Automatyczne aktualizacje
+## 4. Automatyczne aktualizacje (obecnie wyłączone)
 
 Workflow `.github/workflows/update-ceneo.yml`:
 - uruchamia się co 6 godzin,
@@ -75,15 +86,16 @@ Nie publikujemy automatycznie postów w grupach ani nie wysyłamy spamu. Przed p
 
 ## 7. Status
 
-- [x] Importer Ceneo przygotowany i przełączony na zalecany endpoint V2.
+- [x] Prototyp importera Ceneo w repozytorium — nieuruchamiany do czasu pisemnego potwierdzenia zasad.
 - [x] Walidacja domeny linków i identyfikatora partnera Ceneo.
 - [x] Testy jednostkowe importerów Ceneo i Awin.
-- [x] Importer Awin CSV przygotowany.
-- [x] Harmonogram GitHub Actions co 6 godzin.
+- [x] Prototyp importera Awin CSV — wstrzymany.
+- [x] Workflow GitHub Actions — uruchamianie ręczne; automatyczny harmonogram wyłączony do czasu zatwierdzenia.
 - [x] Kontrola składni i testy uruchamiane przed aktualizacją feedów.
 - [x] Frontend pobiera `products.json`, gdy katalog istnieje.
 - [x] Sekcja udostępniania Facebook / tekst do grup.
 - [ ] Otrzymanie klucza API Ceneo i Partner ID.
+- [ ] Pisemne potwierdzenie Ceneo dotyczące zakresu wykorzystania API, prezentacji danych, linkowania i aktualizacji.
 - [ ] Uzyskanie feedu Awin od zaakceptowanych reklamodawców.
 - [ ] Weryfikacja właściciela w Google Search Console.
 - [ ] Oficjalny feed/API Komputronik, jeśli zostanie udostępniony wydawcy.
