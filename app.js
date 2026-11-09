@@ -174,3 +174,17 @@ document.getElementById("year").textContent = new Date().getFullYear();
 render();
 
 loadLiveCatalog();
+
+const copyPromoButton = document.getElementById("copyPromoText");
+if (copyPromoButton) {
+  copyPromoButton.addEventListener("click", async () => {
+    const promoText = "Sprawdź Łowcę Okazji — rozwijany projekt z polecanymi ofertami i porównywaniem cen. Katalog jest stopniowo uzupełniany o aktualne produkty.\nhttps://ryspyc-art.github.io/lowca-okazji/";
+    const feedback = document.getElementById("shareFeedback");
+    try {
+      await navigator.clipboard.writeText(promoText);
+      if (feedback) feedback.textContent = "Tekst skopiowany. Możesz wkleić go w wybranej grupie.";
+    } catch {
+      if (feedback) feedback.textContent = "Nie udało się skopiować automatycznie. Skopiuj adres strony: https://ryspyc-art.github.io/lowca-okazji/";
+    }
+  });
+}
