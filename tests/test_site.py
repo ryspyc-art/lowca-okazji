@@ -57,6 +57,28 @@ class SiteIntegrityTests(unittest.TestCase):
         self.assertIn("polityka-prywatnosci.html", self.html)
         self.assertTrue((ROOT / "polityka-prywatnosci.html").is_file())
 
+    def test_all_public_pages_have_content_security_policy(self):
+        pages = ["index.html", "dla-partnerow.html", "o-afiliacji.html",
+                 "poradnik-jak-kupowac.html", "polityka-prywatnosci.html"]
+        for filename in pages:
+            with self.subTest(page=filename):
+                content = (ROOT / filename).read_text(encoding="utf-8")
+                self.assertIn('http-equiv="Content-Security-Policy"', content)
+                self.assertIn("object-src 'none'", content)
+                self.assertIn('name="referrer"', content)
+
+    def test_external_new_tab_links_use_noopener(self):
+        for filename in ["index.html", "dla-partnerow.html", "o-afiliacji.html",
+                         "poradnik-jak-kupowac.html", "polityka-prywatnosci.html"]:
+            parser = SiteParser()
+            parser.feed((ROOT / filename).read_text(encoding="utf-8"))
+            for link in parser.links:
+                if link.get("target") == "_blank":
+                    with self.subTest(page=filename, href=link.get("href")):
+                        rel = set(link.get("rel", "").split())
+                        self.assertIn("noopener", rel)
+                        self.assertIn("noreferrer", rel) if link.get("href", "").startswith("http") else None
+
 
 if __name__ == "__main__":
     unittest.main()
