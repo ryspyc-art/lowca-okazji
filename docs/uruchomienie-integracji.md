@@ -49,7 +49,7 @@ Oficjalny program:
 Workflow `.github/workflows/update-ceneo.yml`:
 - uruchamia się co 6 godzin,
 - można go uruchomić ręcznie w GitHub → Actions → Aktualizacja ofert partnerskich → Run workflow,
-- najpierw sprawdza składnię skryptów i uruchamia testy importera Ceneo,
+- najpierw sprawdza składnię skryptów i uruchamia testy importerów Ceneo oraz Awin,
 - uruchamia importery Ceneo i Awin, jeśli są skonfigurowane sekrety,
 - zapisuje zmieniony `products.json` do repozytorium,
 - nie umieszcza kluczy API w przeglądarce,
@@ -77,7 +77,7 @@ Nie publikujemy automatycznie postów w grupach ani nie wysyłamy spamu. Przed p
 
 - [x] Importer Ceneo przygotowany i przełączony na zalecany endpoint V2.
 - [x] Walidacja domeny linków i identyfikatora partnera Ceneo.
-- [x] Testy jednostkowe importera Ceneo.
+- [x] Testy jednostkowe importerów Ceneo i Awin.
 - [x] Importer Awin CSV przygotowany.
 - [x] Harmonogram GitHub Actions co 6 godzin.
 - [x] Kontrola składni i testy uruchamiane przed aktualizacją feedów.
