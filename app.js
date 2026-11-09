@@ -27,7 +27,6 @@ function loadFavorites() {
 }
 let favorites = loadFavorites();
 
-
 function escapeHTML(value) {
   return String(value ?? "").replace(/[&<>"']/g, char => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
@@ -127,6 +126,8 @@ function render() {
   favoritesToggle.setAttribute("aria-pressed", String(favoritesOnly));
   favoritesToggle.classList.toggle("active", favoritesOnly);
   favoritesToggle.innerHTML = `${favoritesOnly ? "♥" : "♡"} Tylko zapisane <span>${favorites.length}</span>`;
+  const favoritesCount = document.getElementById("favoritesCount");
+  if (favoritesCount) favoritesCount.textContent = String(favorites.length);
 }
 
 document.getElementById("categoryChips").addEventListener("click", event => {
@@ -179,13 +180,12 @@ grid.addEventListener("click", event => {
 
 document.getElementById("year").textContent = new Date().getFullYear();
 render();
-
 loadLiveCatalog();
 
 const copyPromoButton = document.getElementById("copyPromoText");
 if (copyPromoButton) {
   copyPromoButton.addEventListener("click", async () => {
-    const promoText = "Sprawdź Łowcę Okazji — rozwijany projekt z polecanymi ofertami i porównywaniem cen. Katalog jest stopniowo uzupełniany o aktualne produkty.\nhttps://ryspyc-art.github.io/lowca-okazji/";
+    const promoText = "Sprawdź Łowcę Okazji — niezależny projekt z poradnikiem zakupowym i wybranymi linkami partnerskimi. Główny katalog produktów jest obecnie demonstracyjny.\nhttps://ryspyc-art.github.io/lowca-okazji/";
     const feedback = document.getElementById("shareFeedback");
     try {
       await navigator.clipboard.writeText(promoText);
