@@ -50,7 +50,13 @@ async function loadLiveCatalog() {
     const payload = await response.json();
     const items = Array.isArray(payload) ? payload : payload.items;
     if (!Array.isArray(items) || !items.length) return;
-    const normalized = items.filter(item =>
+    const now = Date.now();
+    const maxAgeMs = 72 * 60 * 60 * 1000;
+    const normalized = items.filter(item => {
+      if (!item || !item.updatedAt) return false;
+      const updated = Date.parse(item.updatedAt);
+      return Number.isFinite(updated) && now - updated >= 0 && now - updated <= maxAgeMs;
+    }).filter(item =>
       item && (typeof item.id === "string" || Number.isInteger(item.id)) &&
       typeof item.name === "string" && Number.isFinite(Number(item.price)) &&
       Number(item.price) > 0 && safeProductUrl(item.productUrl)
@@ -63,13 +69,22 @@ async function loadLiveCatalog() {
       productUrl: item.productUrl,
       image: item.image || "",
       updatedAt: item.updatedAt || payload.fetchedAt || "",
+      availability: typeof item.availability === "string" ? item.availability : "Sprawdź u sprzedawcy",
       icon: "🛍️"
     }));
     if (!normalized.length) return;
     products = normalized;
     liveCatalog = true;
     const note = document.querySelector(".demo-note");
-    if (note) note.textContent = "Oferty partnerskie • katalog aktualizowany";
+    if (note) note.textContent = "Oferty partnerskie • " + normalized.length + " aktualnych produktów";
+    const chipContainer = document.getElementById("categoryChips");
+    if (chipContainer) {
+      const categories = ["Wszystkie", ...new Set(normalized.map(item => item.category).filter(Boolean))];
+      chipContainer.innerHTML = categories.map((name, index) =>
+        '<button class="chip ' + (index === 0 ? 'active' : '') + '" data-category="' + escapeHTML(name) + '" aria-pressed="' + (index === 0 ? 'true' : 'false') + '">' + escapeHTML(name) + '</button>'
+      ).join("");
+      category = "Wszystkie";
+    }
     const discountOption = sort.querySelector('option[value="discount"]');
     if (discountOption) discountOption.hidden = true;
     if (sort.value === "discount") sort.value = "recommended";
@@ -114,7 +129,8 @@ function render() {
       <div class="product-category">${safeCategory}</div>
       <h3>${safeName}</h3>
       <div class="price-row"><span class="price">${money(product.price)}</span>${Number.isFinite(product.old) ? `<span class="old-price">${money(product.old)}</span>` : ""}</div>
-      <div class="store">${safeStore} · ${liveCatalog ? "aktualizacja: " + (product.updatedAt ? formatDate(product.updatedAt) : "czas nieznany") : "dane przykładowe"}</div>\n      ${liveCatalog && product.availability ? `<div class="store">Dostępność: ${escapeHTML(product.availability)}</div>` : ""}
+      <div class="store">${safeStore} · ${liveCatalog ? "aktualizacja: " + (product.updatedAt ? formatDate(product.updatedAt) : "czas nieznany") : "dane przykładowe"}</div>
+      ${liveCatalog && product.availability ? `<div class="store">Dostępność: ${escapeHTML(product.availability)}</div>` : ""}\n      ${liveCatalog && product.availability ? `<div class="store">Dostępność: ${escapeHTML(product.availability)}</div>` : ""}
       ${safeProductUrl(product.productUrl) ? `<a class="offer-link" href="${escapeHTML(product.productUrl)}" target="_blank" rel="sponsored nofollow noopener"><span>Sprawdź cenę w sklepie ↗</span></a>` : `<div class="offer-link"><span>Oferta demonstracyjna — bez linku zakupu</span><span aria-hidden="true">ⓘ</span></div>`}
     </article>`;
   }).join("");
