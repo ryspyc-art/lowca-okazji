@@ -1,7 +1,7 @@
 let products = [
   {id:"tanievo-001",name:"Apple AirPods 5 (MKFW4ZM/A)",category:"Elektronika",store:"Ceneo",icon:"🎧",productUrl:"https://www.ceneo.pl/199946527#crid=818405&pid=31443"},
   {id:"tanievo-002",name:"Telewizor QLED Sharp 65JT8765E 65 cali",category:"RTV",store:"Ceneo",icon:"📺",productUrl:"https://www.ceneo.pl/202179594#crid=818406&pid=31443"},
-  {id:"tanievo-003",name:"Fotel gamingowy Diablo X-Horn 2.0 Normal Size",category:"Gaming",store:"Diablo Chairs",icon:"🪑",productUrl:"https://diablochairs.com/fotel-gamingowy-diablo-x-horn-2-0-normal-size-czarno-czerwony#crid=818407&pid=31443"},
+  {id:"tanievo-003",name:"Fotel gamingowy Diablo X-Horn 2.0 Normal Size",category:"Gaming",store:"Diablo Chairs — link do weryfikacji",icon:"🪑",productUrl:""},
   {id:"tanievo-004",name:"Hulajnoga elektryczna KuKirin G2",category:"Sport",store:"Ceneo",icon:"🛴",productUrl:"https://www.ceneo.pl/176018202#crid=818408&pid=31443"},
   {id:"tanievo-005",name:"Thermos Mountain FFX 0,5 l Matt Black Green",category:"Dom",store:"Ceneo",icon:"☕",productUrl:"https://www.ceneo.pl/117967166#crid=818409&pid=31443"},
   {id:"tanievo-006",name:"Opony zimowe Dębica Frigo 2 205/55 R16 91T",category:"Motoryzacja",store:"Ceneo",icon:"🚗",productUrl:"https://www.ceneo.pl/705846#crid=818410&pid=31443"},
@@ -147,7 +147,7 @@ function render() {
       <div class="product-category">${safeCategory}</div>
       <h3>${safeName}</h3>
       ${liveCatalog ? `<div class="price-row"><span class="price">${money(product.price)}</span></div>` : `<div class="demo-price-note">Sprawdź aktualną cenę u partnera</div>`}
-      <div class="store">${safeStore} · link partnerski</div>
+      <div class="store">${safeStore} · ${product.productUrl ? "link partnerski" : "weryfikacja linku w toku"}</div>
       ${liveCatalog && product.availability ? `<div class="store">Dostępność: ${escapeHTML(product.availability)}</div>` : ""}
       ${safeProductUrl(product.productUrl) ? `<a class="offer-link" href="${escapeHTML(product.productUrl)}" target="_blank" rel="sponsored nofollow noopener"><span>Sprawdź produkt ↗</span></a>` : `<div class="offer-link"><span>Brak aktywnego linku</span><span aria-hidden="true">ⓘ</span></div>`}
     </article>`;
