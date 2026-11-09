@@ -194,6 +194,25 @@ grid.addEventListener("click", event => {
   render();
 });
 
+
+const mobileNavToggle = document.getElementById("mobileNavToggle");
+const mainNav = document.getElementById("main-nav");
+if (mobileNavToggle && mainNav) {
+  mobileNavToggle.addEventListener("click", () => {
+    const expanded = mobileNavToggle.getAttribute("aria-expanded") === "true";
+    mobileNavToggle.setAttribute("aria-expanded", String(!expanded));
+    mainNav.classList.toggle("is-open", !expanded);
+    mobileNavToggle.innerHTML = !expanded ? 'Zamknij <span aria-hidden="true">×</span>' : 'Menu <span aria-hidden="true">☰</span>';
+  });
+  mainNav.addEventListener("click", event => {
+    if (event.target.closest("a")) {
+      mainNav.classList.remove("is-open");
+      mobileNavToggle.setAttribute("aria-expanded", "false");
+      mobileNavToggle.innerHTML = 'Menu <span aria-hidden="true">☰</span>';
+    }
+  });
+}
+
 document.getElementById("year").textContent = new Date().getFullYear();
 render();
 loadLiveCatalog();
