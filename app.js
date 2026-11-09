@@ -43,6 +43,10 @@ function safeProductUrl(value) {
   try { return new URL(value).protocol === "https:"; } catch { return false; }
 }
 let liveCatalog = false;
+["price-asc", "price-desc", "discount"].forEach(value => {
+  const option = sort.querySelector('option[value="' + value + '"]');
+  if (option) option.hidden = true;
+});
 async function loadLiveCatalog() {
   try {
     const response = await fetch("./products.json?cache=" + Date.now(), {cache:"no-store"});
@@ -85,6 +89,10 @@ async function loadLiveCatalog() {
       ).join("");
       category = "Wszystkie";
     }
+    ["price-asc", "price-desc", "discount"].forEach(value => {
+      const option = sort.querySelector('option[value="' + value + '"]');
+      if (option) option.hidden = false;
+    });
     const discountOption = sort.querySelector('option[value="discount"]');
     if (discountOption) discountOption.hidden = true;
     if (sort.value === "discount") sort.value = "recommended";
