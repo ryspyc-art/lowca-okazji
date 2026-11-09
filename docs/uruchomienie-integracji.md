@@ -1,11 +1,12 @@
-# Cenolot — przygotowanie integracji Ceneo
+# Tanievo.pl — przygotowanie integracji Ceneo
 
 ## Aktualny status
 
 - Strona działa jako katalog demonstracyjny.
 - Karty przykładowe nie pokazują cen, rabatów ani dostępności.
 - Aktywne linki zakupowe do sklepów zostały tymczasowo wyłączone z publicznej strony.
-- Wniosek o dostęp do API Ceneo został złożony; klucz API nie został jeszcze przyznany.
+- Ceneo odmówiło obecnie dostępu do niestandardowego API i zaleciło rozwój własnych treści oraz korzystanie ze standardowych kreacji z panelu.
+- Standardowe kreacje (linki tekstowe, banery, rotatory i wyszukiwarka) wymagają kodu wygenerowanego na aktywnym koncie Partnera.
 - Importer i workflow pozostają zablokowane do czasu pisemnego potwierdzenia zasad wykorzystania danych przez Ceneo.
 
 ## Co wynika z regulaminu Ceneo
@@ -50,11 +51,12 @@ Adresy muszą korzystać z HTTPS, nie mogą zawierać danych logowania ani niest
 
 ## Kolejne kroki
 
-1. Poczekać na odpowiedź Ceneo dotyczącą wniosku o API.
-2. Wysłać pytanie o dozwolony model porównywarki i zakres prezentowania danych.
-3. Uzupełnić dane administratora i opublikować kompletną politykę prywatności oraz dane kontaktowe.
-4. Dopiero po uzyskaniu zgody skonfigurować sekrety GitHub i przetestować integrację.
-5. Sprawdzić poprawność danych, linków, aktualizacji i oznaczeń przed publicznym uruchomieniem katalogu.
+1. Rozwinąć własne poradniki i uzyskać stabilny ruch organiczny.
+2. Zalogować się do Panelu Partnera Ceneo, sprawdzić status konta i dodać/zweryfikować powierzchnię Tanievo.
+3. Wygenerować standardowe kreacje w panelu i wkleić otrzymane kody do odpowiednich miejsc na stronie.
+4. Uzupełnić dane administratora i dokumenty wymagane przed uruchomieniem funkcji komercyjnych.
+5. Po zebraniu rzeczywistych statystyk i opisaniu sposobu kierowania ruchu do Ceneo przygotować ponowny, merytoryczny wniosek o API.
+6. Dopiero po pisemnej zgodzie skonfigurować sekrety GitHub i przetestować integrację.
 
 ## Ważne
 
