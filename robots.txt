@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ryspyc-art.github.io/lowca-okazji/sitemap.xml
+Sitemap: https://tanievo.pl/sitemap.xml
