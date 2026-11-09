@@ -37,3 +37,17 @@
 .share-copy{background:#c7f36b;color:#101827}
 .share-feedback{font-size:11px;color:#89919d}
 @media(max-width:800px){.share-section{padding:0 7vw 70px}.share-section h2{font-size:29px}}
+
+
+/* Dostępne menu mobilne */
+.mobile-nav-toggle{display:none;border:1px solid #354258;background:#202c40;color:#fff;border-radius:8px;padding:10px 12px;font:inherit;font-size:12px;font-weight:800;cursor:pointer}
+.mobile-nav-toggle span{color:#c7f36b;margin-left:7px;font-size:16px}
+@media(max-width:800px){
+  .topbar{position:relative;z-index:20}
+  .mobile-nav-toggle{display:inline-flex;align-items:center}
+  .topbar nav#main-nav{display:none;position:absolute;top:65px;left:0;right:0;padding:14px 22px 18px;background:#101827;border-top:1px solid #354258;flex-direction:column;gap:0;box-shadow:0 14px 24px #10182730}
+  .topbar nav#main-nav.is-open{display:flex}
+  .topbar nav#main-nav a{padding:13px 4px;border-bottom:1px solid #263449}
+  .topbar nav#main-nav a:last-child{border-bottom:0}
+}
+@media(max-width:480px){.top-cta{padding:10px 11px;font-size:11px}.mobile-nav-toggle{padding:9px 10px}}
