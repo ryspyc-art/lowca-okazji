@@ -12,7 +12,7 @@ import os
 import sys
 import urllib.parse
 import urllib.request
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, timedelta
 from pathlib import Path
 
 BASE = "https://partnerzyapi.ceneo.pl"
@@ -124,6 +124,23 @@ def main():
     token = get_token(api_key)
     headers = {"Authorization": "Bearer " + token, "Accept": "application/json"}
     products = {}
+    if OUT.exists():
+        try:
+            previous = json.loads(OUT.read_text(encoding="utf-8"))
+            cutoff = datetime.now(timezone.utc) - timedelta(hours=72)
+            for item in previous.get("items", []):
+                if item.get("source") == "Ceneo":
+                    continue
+                try:
+                    updated = datetime.fromisoformat(str(item.get("updatedAt", "")).replace("Z", "+00:00"))
+                    if updated.tzinfo is None:
+                        updated = updated.replace(tzinfo=timezone.utc)
+                    if updated >= cutoff:
+                        products[str(item.get("id"))] = item
+                except (TypeError, ValueError):
+                    continue
+        except (ValueError, AttributeError, OSError):
+            pass
 
     for term in terms:
         query = urllib.parse.urlencode({
@@ -153,7 +170,7 @@ def main():
                 "image": image,
                 "productUrl": product_url,
                 "merchant": "Ceneo — porównanie ofert",
-                "source": "Ceneo",
+                "source": "Ceneo + inne źródła partnerskie",
                 "updatedAt": datetime.now(timezone.utc).isoformat(),
                 "availability": "Sprawdź u sprzedawcy",
             }
