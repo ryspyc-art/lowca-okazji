@@ -19,7 +19,7 @@ let favoritesOnly = false;
 
 function loadFavorites() {
   try {
-    const value = JSON.parse(localStorage.getItem("lowcaFavorites") || "[]");
+    const value = JSON.parse(localStorage.getItem("cenolotFavorites") || "[]");
     return Array.isArray(value) ? value.filter(v => Number.isInteger(v) || typeof v === "string").map(String) : [];
   } catch {
     return [];
@@ -207,7 +207,7 @@ grid.addEventListener("click", event => {
   const id = button.dataset.fav;
   if (!products.some(product => String(product.id) === id)) return;
   favorites = favorites.includes(id) ? favorites.filter(value => value !== id) : [...favorites, id];
-  try { localStorage.setItem("lowcaFavorites", JSON.stringify(favorites)); } catch {}
+  try { localStorage.setItem("cenolotFavorites", JSON.stringify(favorites)); } catch {}
   render();
 });
 
@@ -238,7 +238,7 @@ if (window.LOWCA_ENABLE_LIVE_CATALOG === true) loadLiveCatalog();
 const copyPromoButton = document.getElementById("copyPromoText");
 if (copyPromoButton) {
   copyPromoButton.addEventListener("click", async () => {
-    const promoText = "Sprawdź Łowcę Okazji — niezależny projekt z poradnikiem zakupowym i wybranymi linkami partnerskimi. Główny katalog produktów jest obecnie demonstracyjny.\nhttps://ryspyc-art.github.io/lowca-okazji/";
+    const promoText = "Sprawdź Cenolot — niezależny projekt z poradnikiem zakupowym i wybranymi linkami partnerskimi. Główny katalog produktów jest obecnie demonstracyjny.\nhttps://ryspyc-art.github.io/lowca-okazji/";
     const feedback = document.getElementById("shareFeedback");
     try {
       await navigator.clipboard.writeText(promoText);
