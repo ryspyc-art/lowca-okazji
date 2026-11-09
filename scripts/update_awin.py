@@ -74,7 +74,7 @@ class NoRedirectHandler(urllib.request.HTTPRedirectHandler):
 
 def fetch_feed(url):
     opener = urllib.request.build_opener(NoRedirectHandler())
-    req = urllib.request.Request(url, headers={"User-Agent": "LowcaOkazjiFeed/1.0"})
+    req = urllib.request.Request(url, headers={"User-Agent": "CenolotFeed/1.0"})
     with opener.open(req, timeout=90) as response:
         raw = response.read(MAX_FEED_BYTES + 1)
     if len(raw) > MAX_FEED_BYTES:
