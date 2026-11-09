@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: partner-catalog-update
@@ -13,9 +13,11 @@ concurrency:
 jobs:
   update-catalog:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Pobierz repozytorium
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Sprawdź składnię i testy importera
         run: |
