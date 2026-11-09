@@ -19,8 +19,12 @@ jobs:
       - name: Pobierz repozytorium
         uses: actions/checkout@v4
 
+      - name: Sprawdź składnię i testy importera
+        run: |
+          python3 -m py_compile scripts/update_ceneo.py scripts/update_awin.py
+          python3 -m unittest discover -s tests -v
+
       - name: Pobierz produkty z Ceneo (jeśli skonfigurowano dostęp)
-        continue-on-error: true
         env:
           CENEO_API_KEY: ${{ secrets.CENEO_API_KEY }}
           CENEO_PARTNER_ID: ${{ secrets.CENEO_PARTNER_ID }}
