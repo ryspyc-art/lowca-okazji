@@ -33,6 +33,10 @@ function escapeHTML(value) {
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
   }[char]));
 }
+function formatDate(value) {
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? "czas nieznany" : date.toLocaleString("pl-PL", {dateStyle:"short",timeStyle:"short"});
+}
 function safeImage(value) {
   try { return new URL(value).protocol === "https:"; } catch { return false; }
 }
@@ -67,6 +71,9 @@ async function loadLiveCatalog() {
     liveCatalog = true;
     const note = document.querySelector(".demo-note");
     if (note) note.textContent = "Oferty partnerskie • katalog aktualizowany";
+    const discountOption = sort.querySelector('option[value="discount"]');
+    if (discountOption) discountOption.hidden = true;
+    if (sort.value === "discount") sort.value = "recommended";
     const disclaimer = document.querySelector(".disclaimer");
     if (disclaimer) disclaimer.textContent = "Ceny i dostępność mogą się zmieniać. Przed zakupem sprawdź aktualne warunki u sprzedawcy. Linki partnerskie mogą przynieść stronie prowizję.";
     render();
@@ -98,7 +105,7 @@ function render() {
     const safeName = escapeHTML(product.name);
     const safeCategory = escapeHTML(product.category);
     const safeStore = escapeHTML(product.store || product.merchant || "Sklep partnerski");
-    const saved = favorites.includes(product.id);
+    const saved = favorites.includes(String(product.id));
     return `<article class="product-card">
       <div class="product-visual">
         ${Number.isFinite(product.discount) ? `<span class="discount-pill">−${product.discount}%</span>` : ""}
@@ -108,7 +115,7 @@ function render() {
       <div class="product-category">${safeCategory}</div>
       <h3>${safeName}</h3>
       <div class="price-row"><span class="price">${money(product.price)}</span>${Number.isFinite(product.old) ? `<span class="old-price">${money(product.old)}</span>` : ""}</div>
-      <div class="store">${safeStore} · ${liveCatalog ? "aktualne dane z feedu" : "dane przykładowe"}</div>
+      <div class="store">${safeStore} · ${liveCatalog ? "aktualizacja: " + (product.updatedAt ? formatDate(product.updatedAt) : "czas nieznany") : "dane przykładowe"}</div>
       ${safeProductUrl(product.productUrl) ? `<a class="offer-link" href="${escapeHTML(product.productUrl)}" target="_blank" rel="sponsored nofollow noopener"><span>Sprawdź cenę w sklepie ↗</span></a>` : `<div class="offer-link"><span>Oferta demonstracyjna — bez linku zakupu</span><span aria-hidden="true">ⓘ</span></div>`}
     </article>`;
   }).join("");
