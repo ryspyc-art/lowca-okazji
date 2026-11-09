@@ -16,7 +16,11 @@ Responsywna, statyczna strona publikowana przez GitHub Pages.
 - `app.js` — wyszukiwanie, filtrowanie, sortowanie i ulubione,
 - `robots.txt` i `sitemap.xml` — podstawowa konfiguracja indeksowania,
 - `favicon.svg` — ikona strony,
-- `o-afiliacji.html` — wyjaśnienie działania linków partnerskich.
+- `o-afiliacji.html` — wyjaśnienie działania linków partnerskich,
+- `scripts/update_ceneo.py` — importer ofert Ceneo po uzyskaniu klucza API,
+- `scripts/update_awin.py` — importer feedu CSV Awin,
+- `.github/workflows/update-ceneo.yml` — harmonogram aktualizacji co 6 godzin,
+- `products.json` — plik generowany automatycznie po skonfigurowaniu feedu.
 
 ## Ważne informacje
 Główny katalog produktów zawiera przykładowe dane demonstracyjne. Ceny, sklepy i rabaty w tych kartach nie są aktualnymi ofertami. Wybrane banery i sekcje partnerskie prowadzą natomiast do Komputronika przez linki afiliacyjne.
@@ -30,5 +34,7 @@ Przed zakupem użytkownik powinien sprawdzić aktualną cenę, dostępność i w
 4. Rozbudować oznaczenia reklamowe oraz przygotować politykę prywatności i wymagane informacje o danych/plikach cookies, jeśli zostaną wdrożone narzędzia śledzące.
 5. Testować działanie strony na telefonach i komputerach.
 6. Dodać i zweryfikować stronę w Google Search Console po potwierdzeniu własności witryny.
+
+Szczegółowa instrukcja konfiguracji sekretów, Ceneo, Awin, Google i promocji znajduje się w [docs/uruchomienie-integracji.md](docs/uruchomienie-integracji.md).
 
 Nie należy przedstawiać danych demonstracyjnych jako rzeczywistych promocji.
