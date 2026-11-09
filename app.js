@@ -19,7 +19,7 @@ let favoritesOnly = false;
 
 function loadFavorites() {
   try {
-    const value = JSON.parse(localStorage.getItem("cenolotFavorites") || "[]");
+    const value = JSON.parse(localStorage.getItem("cenolotFavorites") || localStorage.getItem("lowcaFavorites") || "[]");
     return Array.isArray(value) ? value.filter(v => Number.isInteger(v) || typeof v === "string").map(String) : [];
   } catch {
     return [];
@@ -207,7 +207,7 @@ grid.addEventListener("click", event => {
   const id = button.dataset.fav;
   if (!products.some(product => String(product.id) === id)) return;
   favorites = favorites.includes(id) ? favorites.filter(value => value !== id) : [...favorites, id];
-  try { localStorage.setItem("cenolotFavorites", JSON.stringify(favorites)); } catch {}
+  try { localStorage.setItem("cenolotFavorites", JSON.stringify(favorites)); localStorage.removeItem("lowcaFavorites"); } catch {}
   render();
 });
 
