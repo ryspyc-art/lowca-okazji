@@ -17,10 +17,11 @@ Responsywna, statyczna strona publikowana przez GitHub Pages.
 - `robots.txt` i `sitemap.xml` — podstawowa konfiguracja indeksowania,
 - `favicon.svg` — ikona strony,
 - `o-afiliacji.html` — wyjaśnienie działania linków partnerskich,
+- `polityka-prywatnosci.html` — informacja o localStorage, hostingu i aktualnym zakresie przetwarzania danych,
 - `dla-partnerow.html` — opis projektu, standardów prezentacji ofert i planowanych integracji dla partnerów,
 - `poradnik-jak-kupowac.html` — poradnik zakupowy wspierający ruch z wyszukiwarki,
 - `scripts/update_ceneo.py` — importer ofert Ceneo po uzyskaniu klucza API,
-- `scripts/update_awin.py` — importer feedu CSV Awin,
+- `scripts/update_awin.py` — importer feedu CSV Awin z walidacją hostów i blokadą przekierowań,
 - `.github/workflows/update-ceneo.yml` — ręczny workflow aktualizacji (obecnie zablokowany do czasu pisemnego potwierdzenia Ceneo),
 - `products.json` — plik generowany automatycznie po skonfigurowaniu feedu.
 
@@ -34,8 +35,10 @@ Przed zakupem użytkownik powinien sprawdzić aktualną cenę, dostępność i w
 2. Uzyskać pisemne potwierdzenie Ceneo dotyczące wykorzystania API, prezentacji danych i linkowania.
 3. Dopiero po potwierdzeniu zasad skonfigurować klucz API jako sekret GitHub Actions.
 4. Rozbudować oznaczenia reklamowe oraz przygotować politykę prywatności i wymagane informacje o danych/plikach cookies, jeśli zostaną wdrożone narzędzia śledzące.
-5. Testować działanie strony na telefonach i komputerach.
-6. Dodać i zweryfikować stronę w Google Search Console po potwierdzeniu własności witryny.
+5. Uzupełnić zweryfikowane dane administratora i kontakt w polityce prywatności przed uruchomieniem funkcji komercyjnych.
+6. Dla ewentualnego feedu Awin skonfigurować osobne sekrety/zmienne `AWIN_FEED_URL`, `AWIN_FEED_ALLOWED_HOSTS`, `AWIN_ALLOWED_PRODUCT_HOSTS` oraz opcjonalnie `AWIN_ALLOWED_IMAGE_HOSTS`. Listy hostów muszą zawierać dokładne nazwy domen rozdzielone przecinkami; bez nich importer odmawia pobrania lub publikacji ofert.
+7. Testować działanie strony na telefonach i komputerach.
+8. Dodać i zweryfikować stronę w Google Search Console po potwierdzeniu własności witryny.
 
 Szczegółowa instrukcja konfiguracji sekretów, Ceneo, Awin, Google i promocji znajduje się w [docs/uruchomienie-integracji.md](docs/uruchomienie-integracji.md).
 
