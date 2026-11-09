@@ -36,11 +36,23 @@ function formatDate(value) {
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? "czas nieznany" : date.toLocaleString("pl-PL", {dateStyle:"short",timeStyle:"short"});
 }
+function isSafeExternalHttpsUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" &&
+      Boolean(url.hostname) &&
+      !url.username &&
+      !url.password &&
+      (url.port === "" || url.port === "443");
+  } catch {
+    return false;
+  }
+}
 function safeImage(value) {
-  try { return new URL(value).protocol === "https:"; } catch { return false; }
+  return isSafeExternalHttpsUrl(value);
 }
 function safeProductUrl(value) {
-  try { return new URL(value).protocol === "https:"; } catch { return false; }
+  return isSafeExternalHttpsUrl(value);
 }
 let liveCatalog = false;
 ["price-asc", "price-desc", "discount"].forEach(value => {
