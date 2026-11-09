@@ -1,6 +1,6 @@
 # Integracja prawdziwych ofert afiliacyjnych
 
-Ten dokument opisuje docelowy kontrakt danych dla katalogu Łowca Okazji. Obecny katalog w `app.js` pozostaje demonstracyjny i nie wolno prezentować go jako aktualnych promocji.
+Ten dokument opisuje docelowy kontrakt danych dla katalogu Cenolot. Obecny katalog w `app.js` pozostaje demonstracyjny i nie wolno prezentować go jako aktualnych promocji.
 
 ## Rekomendowany przepływ danych
 
