@@ -66,16 +66,17 @@ def main():
     for row in reader:
         name = first(row, "product_name", "productname", "name", "title")
         price_raw = first(row, "search_price", "price", "product_price", "rrp_price")
+        currency = first(row, "currency", "currency_code").upper()
         url = first(row, "aw_deep_link", "product_url", "producturl", "url")
         merchant = first(row, "merchant_name", "advertiser_name", "merchant", "advertiser")
         image = first(row, "merchant_image_url", "image_url", "image", "aw_image_url")
         category_raw = first(row, "merchant_category", "category_name", "category", "category_name_path")
         product_id = first(row, "aw_product_id", "product_id", "id", "ean")
         try:
-            price = float(price_raw.replace(" ", "").replace(",", "."))
+            price = float(price_raw.replace("PLN", "").replace(" ", "").replace(",", "."))
         except ValueError:
             continue
-        if not name or price <= 0 or not url.startswith("https://") or not merchant:
+        if not name or price <= 0 or currency != "PLN" or not url.startswith("https://") or not merchant:
             continue
         if not product_id:
             product_id = hashlib.sha256((merchant + "|" + name + "|" + url).encode("utf-8")).hexdigest()[:20]
@@ -85,7 +86,7 @@ def main():
             "name": name,
             "category": category_for(category_raw + " " + name),
             "price": round(price, 2),
-            "currency": first(row, "currency", "currency_code") or "PLN",
+            "currency": "PLN",
             "image": image if image.startswith("https://") else "",
             "productUrl": url,
             "merchant": merchant,
@@ -112,5 +113,5 @@ if __name__ == "__main__":
     try:
         raise SystemExit(main())
     except Exception as exc:
-        print("Błąd importu feedu Awin: " + str(exc), file=sys.stderr)
+        print("Błąd importu feedu Awin (" + type(exc).__name__ + "). Sprawdź dostęp, format CSV i uprawnienia feedu.", file=sys.stderr)
         raise SystemExit(1)
