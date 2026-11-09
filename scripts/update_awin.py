@@ -7,7 +7,7 @@ import json
 import os
 import sys
 import urllib.request
-from datetime import datetime, timezone, timedelta, timedelta
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 OUT = Path("products.json")
