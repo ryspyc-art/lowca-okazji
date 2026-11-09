@@ -111,6 +111,10 @@ def category_for(name):
 
 
 def main():
+    if os.environ.get("CENEO_API_PUBLICATION_APPROVED", "").strip() != "YES":
+        print("Integracja Ceneo jest wstrzymana do czasu pisemnego potwierdzenia zasad publikacji i wykorzystania danych. Nie pobieram ani nie publikuję danych.")
+        return 0
+
     api_key = os.environ.get("CENEO_API_KEY", "").strip()
     partner_id = os.environ.get("CENEO_PARTNER_ID", "").strip()
     if not api_key or not partner_id:
