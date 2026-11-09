@@ -57,7 +57,9 @@ Dostęp do feedów zależy od uprawnień wydawcy i aktywnych relacji z reklamoda
 - [x] Wyszukiwanie, kategorie, sortowanie i ulubione.
 - [x] Jasne oznaczenie danych demonstracyjnych.
 - [ ] Akceptacja wydawcy w sieci afiliacyjnej.
-- [ ] Dostęp do konkretnego feedu/API.
-- [ ] Bezpieczny proces pobierania i normalizacji danych.
+- [ ] Dostęp do konkretnego feedu/API (wymaga zatwierdzenia konta i sekretów w GitHub).
+- [x] Bezpieczny proces pobierania i normalizacji danych przygotowany w skryptach Ceneo/Awin.
+- [x] Harmonogram GitHub Actions co 6 godzin.
+- [x] Frontend odczytuje wygenerowany katalog JSON.
 - [ ] Weryfikacja linków, cen, aktualizacji i oznaczeń afiliacyjnych.
 - [ ] Uruchomienie prawdziwego katalogu.
