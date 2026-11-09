@@ -21,5 +21,7 @@ jobs:
           python-version: "3.12"
       - name: Sprawdź składnię importerów
         run: python -m py_compile scripts/update_ceneo.py scripts/update_awin.py
+      - name: Sprawdź składnię JavaScript
+        run: node --check app.js
       - name: Uruchom testy
         run: python -m unittest discover -s tests -v
