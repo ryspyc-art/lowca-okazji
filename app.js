@@ -238,7 +238,7 @@ if (window.LOWCA_ENABLE_LIVE_CATALOG === true) loadLiveCatalog();
 const copyPromoButton = document.getElementById("copyPromoText");
 if (copyPromoButton) {
   copyPromoButton.addEventListener("click", async () => {
-    const promoText = "Sprawdź Tanievo — niezależny projekt z poradnikiem zakupowym i wybranymi linkami partnerskimi. Główny katalog produktów jest obecnie demonstracyjny.\nhttps://ryspyc-art.github.io/lowca-okazji/";
+    const promoText = "Sprawdź Tanievo.pl — niezależny projekt z poradnikiem zakupowym i wybranymi linkami partnerskimi. Główny katalog produktów jest obecnie demonstracyjny.\nhttps://ryspyc-art.github.io/lowca-okazji/";
     const feedback = document.getElementById("shareFeedback");
     try {
       await navigator.clipboard.writeText(promoText);
