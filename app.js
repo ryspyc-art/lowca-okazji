@@ -1,7 +1,7 @@
 let products = [
   {id:"tanievo-001",name:"Apple AirPods 5 (MKFW4ZM/A)",category:"Elektronika",store:"Ceneo",icon:"🎧",productUrl:"https://www.ceneo.pl/199946527#crid=818405&pid=31443"},
   {id:"tanievo-002",name:"Telewizor QLED Sharp 65JT8765E 65 cali",category:"RTV",store:"Ceneo",icon:"📺",productUrl:"https://www.ceneo.pl/202179594#crid=818406&pid=31443"},
-  {id:"tanievo-003",name:"Fotel gamingowy Diablo X-Horn 2.0 Normal Size",category:"Gaming",store:"Diablo Chairs — link do weryfikacji",icon:"🪑",productUrl:""},
+  {id:"tanievo-003",name:"Karta graficzna MSI GeForce RTX 5080 Gaming Trio OC 16 GB GDDR7",category:"Elektronika",store:"Ceneo",icon:"🎮",productUrl:"https://www.ceneo.pl/179994603#crid=818417&pid=31443"},
   {id:"tanievo-004",name:"Hulajnoga elektryczna KuKirin G2",category:"Sport",store:"Ceneo",icon:"🛴",productUrl:"https://www.ceneo.pl/176018202#crid=818408&pid=31443"},
   {id:"tanievo-005",name:"Thermos Mountain FFX 0,5 l Matt Black Green",category:"Dom",store:"Ceneo",icon:"☕",productUrl:"https://www.ceneo.pl/117967166#crid=818409&pid=31443"},
   {id:"tanievo-006",name:"Opony zimowe Dębica Frigo 2 205/55 R16 91T",category:"Motoryzacja",store:"Ceneo",icon:"🚗",productUrl:"https://www.ceneo.pl/705846#crid=818410&pid=31443"},
