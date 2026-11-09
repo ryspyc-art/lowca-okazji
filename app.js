@@ -33,7 +33,10 @@ function escapeHTML(value) {
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
   }[char]));
 }
-function safeImage(value) {\n  try { return new URL(value).protocol === "https:"; } catch { return false; }\n}\nfunction safeProductUrl(value) {
+function safeImage(value) {
+  try { return new URL(value).protocol === "https:"; } catch { return false; }
+}
+function safeProductUrl(value) {
   try { return new URL(value).protocol === "https:"; } catch { return false; }
 }
 let liveCatalog = false;
@@ -86,7 +89,10 @@ function render() {
 
   if (sort.value === "price-asc") list.sort((a,b) => a.price - b.price);
   if (sort.value === "price-desc") list.sort((a,b) => b.price - a.price);
-  if (sort.value === "discount") {\n    if (liveCatalog) list.sort((a,b) => a.price - b.price);\n    else list.sort((a,b) => b.discount - a.discount);\n  }
+  if (sort.value === "discount") {
+    if (liveCatalog) list.sort((a,b) => a.price - b.price);
+    else list.sort((a,b) => b.discount - a.discount);
+  }
 
   grid.innerHTML = list.map(product => {
     const safeName = escapeHTML(product.name);
