@@ -1,4 +1,4 @@
-# Łowca Okazji
+# Cenolot
 
 Responsywna, statyczna strona publikowana przez GitHub Pages.
 
