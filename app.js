@@ -238,13 +238,13 @@ render();
 const copyPromoButton = document.getElementById("copyPromoText");
 if (copyPromoButton) {
   copyPromoButton.addEventListener("click", async () => {
-    const promoText = "Sprawdź Tanievo.pl — poradniki zakupowe i wybrane linki partnerskie do produktów.\nhttps://ryspyc-art.github.io/lowca-okazji/";
+    const promoText = "Sprawdź Tanievo.pl — poradniki zakupowe i wybrane linki partnerskie do produktów.\nhttps://tanievo.pl/";
     const feedback = document.getElementById("shareFeedback");
     try {
       await navigator.clipboard.writeText(promoText);
       if (feedback) feedback.textContent = "Tekst skopiowany. Możesz wkleić go w wybranej grupie.";
     } catch {
-      if (feedback) feedback.textContent = "Nie udało się skopiować automatycznie. Skopiuj adres strony: https://ryspyc-art.github.io/lowca-okazji/";
+      if (feedback) feedback.textContent = "Nie udało się skopiować automatycznie. Skopiuj adres strony: https://tanievo.pl/";
     }
   });
 }
