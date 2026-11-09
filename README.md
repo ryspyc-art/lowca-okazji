@@ -15,7 +15,8 @@ Responsywna, statyczna strona publikowana przez GitHub Pages.
 - `style.css` — wygląd i układ responsywny,
 - `app.js` — wyszukiwanie, filtrowanie, sortowanie i ulubione,
 - `robots.txt` i `sitemap.xml` — podstawowa konfiguracja indeksowania,
-- `favicon.svg` — ikona strony.
+- `favicon.svg` — ikona strony,
+- `o-afiliacji.html` — wyjaśnienie działania linków partnerskich.
 
 ## Ważne informacje
 Główny katalog produktów zawiera przykładowe dane demonstracyjne. Ceny, sklepy i rabaty w tych kartach nie są aktualnymi ofertami. Wybrane banery i sekcje partnerskie prowadzą natomiast do Komputronika przez linki afiliacyjne.
