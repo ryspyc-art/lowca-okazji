@@ -1,28 +1,30 @@
 # Łowca Okazji
 
-Responsywna, statyczna aplikacja demonstracyjna publikowana przez GitHub Pages.
+Responsywna, statyczna strona publikowana przez GitHub Pages.
 
-## Funkcje
+## Co działa
 - wyszukiwanie nazw produktów i kategorii,
-- filtrowanie kategorii,
-- sortowanie po cenie i przykładowej obniżce,
+- filtrowanie kategorii i sortowanie katalogu,
 - zapisywanie ulubionych produktów w pamięci lokalnej przeglądarki,
-- filtrowanie wyłącznie zapisanych pozycji,
-- układ dostosowany do telefonów i komputerów.
+- filtrowanie zapisanych pozycji,
+- responsywny układ na telefonach i komputerach,
+- wybrane sekcje z linkami partnerskimi Komputronik.
 
 ## Pliki
-- `index.html` — struktura strony i metadane SEO,
+- `index.html` — struktura strony, treści i metadane SEO,
 - `style.css` — wygląd i układ responsywny,
 - `app.js` — wyszukiwanie, filtrowanie, sortowanie i ulubione.
 
-## Ważne przed uruchomieniem komercyjnym
-Aktualny katalog zawiera wyłącznie dane demonstracyjne. Ceny, sklepy i rabaty nie są aktualnymi ofertami. Strona nie pobiera jeszcze danych produktowych i nie generuje prowizji.
+## Ważne informacje
+Główny katalog produktów zawiera przykładowe dane demonstracyjne. Ceny, sklepy i rabaty w tych kartach nie są aktualnymi ofertami. Wybrane banery i sekcje partnerskie prowadzą natomiast do Komputronika przez linki afiliacyjne.
 
-Aby uruchomić prawdziwy serwis afiliacyjny, potrzebne są:
-1. zaakceptowane konto wydawcy w wybranych sieciach/programach partnerskich,
-2. legalne źródło danych produktowych (API, feed lub dozwolone linki),
-3. identyfikator wydawcy i poprawne linki śledzące,
-4. oznaczenie linków afiliacyjnych i jasna informacja dla użytkowników,
-5. weryfikacja regulaminu, polityki prywatności i obowiązków informacyjnych przed uruchomieniem analityki lub innych narzędzi śledzących.
+Przed zakupem użytkownik powinien sprawdzić aktualną cenę, dostępność i warunki bezpośrednio w sklepie. Linki afiliacyjne są oznaczone, a kliknięcie lub zakup może przynieść wydawcy prowizję.
+
+## Kolejne kroki przed pełnym uruchomieniem serwisu
+1. Uzyskać i utrzymać akceptację wydawcy w programach partnerskich.
+2. Dodać legalne źródło aktualnych danych produktowych (API, feed lub dozwolone linki).
+3. Zweryfikować każdy link afiliacyjny i jego identyfikator śledzący.
+4. Rozbudować oznaczenia reklamowe oraz przygotować politykę prywatności i wymagane informacje o danych/plikach cookies, jeśli zostaną wdrożone narzędzia śledzące.
+5. Testować działanie strony na telefonach i komputerach.
 
 Nie należy przedstawiać danych demonstracyjnych jako rzeczywistych promocji.
