@@ -24,7 +24,7 @@ Responsywna, statyczna strona publikowana przez GitHub Pages.
 - `scripts/update_ceneo.py` — importer ofert Ceneo po uzyskaniu klucza API,
 - `scripts/update_awin.py` — importer feedu CSV Awin z walidacją hostów i blokadą przekierowań,
 - `.github/workflows/update-ceneo.yml` — ręczny workflow aktualizacji (obecnie zablokowany do czasu pisemnego potwierdzenia Ceneo),
-- `products.json` — plik generowany automatycznie po skonfigurowaniu feedu.
+- `products.json` — plik katalogu tworzony przez ręcznie uruchamiany workflow po zatwierdzeniu integracji; obecnie nie jest publikowany.
 
 ## Ważne informacje
 Główny katalog produktów zawiera przykładowe dane demonstracyjne. Ceny, sklepy i rabaty w tych kartach nie są aktualnymi ofertami. Strona nie publikuje obecnie aktywnych linków zakupowych ani cen. Prototyp integracji Ceneo pozostaje wyłączony do czasu otrzymania klucza API i pisemnego potwierdzenia dozwolonego sposobu prezentacji danych.
@@ -35,11 +35,10 @@ Przed zakupem użytkownik powinien sprawdzić aktualną cenę, dostępność i w
 1. Uzyskać i utrzymać akceptację wydawcy w programie partnerskim Ceneo.
 2. Uzyskać pisemne potwierdzenie Ceneo dotyczące wykorzystania API, prezentacji danych i linkowania.
 3. Dopiero po potwierdzeniu zasad skonfigurować klucz API jako sekret GitHub Actions.
-4. Uzupełnić i zweryfikować politykę prywatności oraz wymagane informacje o danych/cookies przed uruchomieniem nowych funkcji.
-5. Uzupełnić zweryfikowane dane administratora i kontakt w polityce prywatności przed uruchomieniem funkcji komercyjnych.
-6. Dla ewentualnego feedu Awin skonfigurować osobne sekrety/zmienne `AWIN_FEED_URL`, `AWIN_FEED_ALLOWED_HOSTS`, `AWIN_ALLOWED_PRODUCT_HOSTS` oraz opcjonalnie `AWIN_ALLOWED_IMAGE_HOSTS`. Listy hostów muszą zawierać dokładne nazwy domen rozdzielone przecinkami; bez nich importer odmawia pobrania lub publikacji ofert.
-7. Testować działanie strony na telefonach i komputerach.
-8. Dodać i zweryfikować stronę w Google Search Console po potwierdzeniu własności witryny.
+4. Uzupełnić zweryfikowane dane administratora i kontakt w polityce prywatności przed uruchomieniem funkcji komercyjnych.
+5. Dla ewentualnego feedu Awin skonfigurować osobne sekrety/zmienne `AWIN_FEED_URL`, `AWIN_FEED_ALLOWED_HOSTS`, `AWIN_ALLOWED_PRODUCT_HOSTS` oraz opcjonalnie `AWIN_ALLOWED_IMAGE_HOSTS`. Listy hostów muszą zawierać dokładne nazwy domen rozdzielone przecinkami; bez nich importer odmawia pobrania lub publikacji ofert.
+6. Testować działanie strony na telefonach i komputerach.
+7. Dodać i zweryfikować stronę w Google Search Console po potwierdzeniu własności witryny.
 
 Szczegółowa instrukcja konfiguracji sekretów, Ceneo, Awin, Google i promocji znajduje się w [docs/uruchomienie-integracji.md](docs/uruchomienie-integracji.md).
 
