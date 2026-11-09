@@ -109,8 +109,12 @@ def main():
         for row in rows_from(payload):
             name = str(get(row, "Name") or "").strip()
             raw_price = get(row, "LowestPrice", "Price")
-            raw_url = str(get(row, "Url", "ProductUrl") or "").strip()\n            if raw_url.startswith("http://www.ceneo.pl/"):\n                raw_url = "https://" + raw_url[len("http://"): ]
-            raw_image = str(get(row, "MediumThumbnailUrl", "ThumbnailUrl", "ImageUrl") or "").strip()\n            if raw_image.startswith("http://") and "ceneo.pl" in raw_image:\n                raw_image = "https://" + raw_image[len("http://"): ]
+            raw_url = str(get(row, "Url", "ProductUrl") or "").strip()
+            if raw_url.startswith("http://www.ceneo.pl/"):
+                raw_url = "https://" + raw_url[len("http://"): ]
+            raw_image = str(get(row, "MediumThumbnailUrl", "ThumbnailUrl", "ImageUrl") or "").strip()
+            if raw_image.startswith("http://") and "ceneo.pl" in raw_image:
+                raw_image = "https://" + raw_image[len("http://"): ]
             try:
                 price = float(str(raw_price).replace(",", "."))
             except (TypeError, ValueError):
