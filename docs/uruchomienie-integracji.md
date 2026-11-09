@@ -4,9 +4,9 @@
 
 - Strona działa jako katalog demonstracyjny.
 - Karty przykładowe nie pokazują cen, rabatów ani dostępności.
-- Aktywne linki zakupowe do sklepów zostały tymczasowo wyłączone z publicznej strony.
+- W katalogu opublikowano 9 linków partnerskich Ceneo wygenerowanych w Panelu Partnera; 1 pozycja Diablo Chairs jest widoczna bez aktywnego odnośnika do czasu weryfikacji śledzenia.
 - Ceneo odmówiło obecnie dostępu do niestandardowego API i zaleciło rozwój własnych treści oraz korzystanie ze standardowych kreacji z panelu.
-- Standardowe kreacje (linki tekstowe, banery, rotatory i wyszukiwarka) wymagają kodu wygenerowanego na aktywnym koncie Partnera.
+- Standardowe kreacje (linki tekstowe, banery, rotatory i wyszukiwarka) wymagają kodu wygenerowanego na aktywnym koncie Partnera. Dla katalogu wykorzystano 9 pełnych adresów produktów z parametrami `crid` i `pid`.
 - Importer i workflow pozostają zablokowane do czasu pisemnego potwierdzenia zasad wykorzystania danych przez Ceneo.
 
 ## Co wynika z regulaminu Ceneo
@@ -53,10 +53,10 @@ Adresy muszą korzystać z HTTPS, nie mogą zawierać danych logowania ani niest
 
 1. Rozwinąć własne poradniki i uzyskać stabilny ruch organiczny.
 2. Zalogować się do Panelu Partnera Ceneo, sprawdzić status konta i dodać/zweryfikować powierzchnię Tanievo.
-3. Wygenerować standardowe kreacje w panelu i wkleić otrzymane kody do odpowiednich miejsc na stronie.
-4. Uzupełnić dane administratora i dokumenty wymagane przed uruchomieniem funkcji komercyjnych.
-5. Po zebraniu rzeczywistych statystyk i opisaniu sposobu kierowania ruchu do Ceneo przygotować ponowny, merytoryczny wniosek o API.
-6. Dopiero po pisemnej zgodzie skonfigurować sekrety GitHub i przetestować integrację.
+3. Utrzymywać w katalogu wyłącznie pełne adresy wygenerowane w Panelu Partnera, bez ręcznej zmiany `crid` i `pid`.\n4. Zweryfikować kliknięcia i raportowanie prowizji w panelu Ceneo; sama obecność parametrów w adresie nie potwierdza jeszcze naliczania prowizji.
+5. Uzupełnić dane administratora i dokumenty wymagane przed uruchomieniem funkcji komercyjnych.
+6. Po zebraniu rzeczywistych statystyk i opisaniu sposobu kierowania ruchu do Ceneo przygotować ponowny, merytoryczny wniosek o API.
+7. Dopiero po pisemnej zgodzie skonfigurować sekrety GitHub i przetestować integrację.
 
 ## Ważne
 
