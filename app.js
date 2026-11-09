@@ -1,13 +1,13 @@
 let products = [
-  {id:1,name:"Słuchawki bezprzewodowe",category:"Elektronika",price:129,old:179,store:"Przykładowy sklep",icon:"🎧",discount:28},
-  {id:2,name:"Smartwatch sportowy",category:"Elektronika",price:189,old:249,store:"Przykładowy sklep",icon:"⌚",discount:24},
-  {id:3,name:"Lampka biurkowa LED",category:"Dom",price:49,old:69,store:"Przykładowy sklep",icon:"💡",discount:29},
-  {id:4,name:"Plecak turystyczny",category:"Sport",price:99,old:139,store:"Przykładowy sklep",icon:"🎒",discount:29},
-  {id:5,name:"Buty trekkingowe",category:"Sport",price:219,old:299,store:"Przykładowy sklep",icon:"🥾",discount:27},
-  {id:6,name:"Bluza klasyczna",category:"Moda",price:79,old:109,store:"Przykładowy sklep",icon:"🧥",discount:28},
-  {id:7,name:"Powerbank 20000 mAh",category:"Elektronika",price:69,old:99,store:"Przykładowy sklep",icon:"🔋",discount:30},
-  {id:8,name:"Kubek termiczny",category:"Dom",price:39,old:55,store:"Przykładowy sklep",icon:"☕",discount:29},
-  {id:9,name:"Czapka zimowa",category:"Moda",price:29,old:45,store:"Przykładowy sklep",icon:"🧢",discount:36}
+  {id:1,name:"Słuchawki bezprzewodowe",category:"Elektronika",store:"Dane demonstracyjne",icon:"🎧"},
+  {id:2,name:"Smartwatch sportowy",category:"Elektronika",store:"Dane demonstracyjne",icon:"⌚"},
+  {id:3,name:"Lampka biurkowa LED",category:"Dom",store:"Dane demonstracyjne",icon:"💡"},
+  {id:4,name:"Plecak turystyczny",category:"Sport",store:"Dane demonstracyjne",icon:"🎒"},
+  {id:5,name:"Buty trekkingowe",category:"Sport",store:"Dane demonstracyjne",icon:"🥾"},
+  {id:6,name:"Bluza klasyczna",category:"Moda",store:"Dane demonstracyjne",icon:"🧥"},
+  {id:7,name:"Powerbank 20000 mAh",category:"Elektronika",store:"Dane demonstracyjne",icon:"🔋"},
+  {id:8,name:"Kubek termiczny",category:"Dom",store:"Dane demonstracyjne",icon:"☕"},
+  {id:9,name:"Czapka zimowa",category:"Moda",store:"Dane demonstracyjne",icon:"🧢"}
 ];
 
 const grid = document.getElementById("productGrid");
@@ -108,12 +108,9 @@ function render() {
     return matchesCategory && matchesSearch && matchesFavorites;
   });
 
-  if (sort.value === "price-asc") list.sort((a,b) => a.price - b.price);
-  if (sort.value === "price-desc") list.sort((a,b) => b.price - a.price);
-  if (sort.value === "discount") {
-    if (liveCatalog) list.sort((a,b) => a.price - b.price);
-    else list.sort((a,b) => b.discount - a.discount);
-  }
+  if (liveCatalog && sort.value === "price-asc") list.sort((a,b) => a.price - b.price);
+  if (liveCatalog && sort.value === "price-desc") list.sort((a,b) => b.price - a.price);
+  if (liveCatalog && sort.value === "discount") list.sort((a,b) => a.price - b.price);
 
   grid.innerHTML = list.map(product => {
     const safeName = escapeHTML(product.name);
@@ -128,7 +125,7 @@ function render() {
       </div>
       <div class="product-category">${safeCategory}</div>
       <h3>${safeName}</h3>
-      <div class="price-row"><span class="price">${money(product.price)}</span>${Number.isFinite(product.old) ? `<span class="old-price">${money(product.old)}</span>` : ""}</div>
+      ${liveCatalog ? `<div class="price-row"><span class="price">${money(product.price)}</span></div>` : `<div class="demo-price-note">Karta demonstracyjna — brak aktualnej ceny</div>`}
       <div class="store">${safeStore} · ${liveCatalog ? "aktualizacja: " + (product.updatedAt ? formatDate(product.updatedAt) : "czas nieznany") : "dane przykładowe"}</div>
       ${liveCatalog && product.availability ? `<div class="store">Dostępność: ${escapeHTML(product.availability)}</div>` : ""}
       ${safeProductUrl(product.productUrl) ? `<a class="offer-link" href="${escapeHTML(product.productUrl)}" target="_blank" rel="sponsored nofollow noopener"><span>Sprawdź cenę w sklepie ↗</span></a>` : `<div class="offer-link"><span>Oferta demonstracyjna — bez linku zakupu</span><span aria-hidden="true">ⓘ</span></div>`}
@@ -215,7 +212,8 @@ if (mobileNavToggle && mainNav) {
 
 document.getElementById("year").textContent = new Date().getFullYear();
 render();
-loadLiveCatalog();
+// Katalog live pozostaje wyłączony do czasu przyznania API i potwierdzenia przez Ceneo zasad prezentacji oraz przetwarzania danych.
+if (window.LOWCA_ENABLE_LIVE_CATALOG === true) loadLiveCatalog();
 
 const copyPromoButton = document.getElementById("copyPromoText");
 if (copyPromoButton) {
