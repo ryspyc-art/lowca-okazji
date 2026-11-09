@@ -1,13 +1,14 @@
 let products = [
-  {id:1,name:"Słuchawki bezprzewodowe",category:"Elektronika",store:"Dane demonstracyjne",icon:"🎧"},
-  {id:2,name:"Smartwatch sportowy",category:"Elektronika",store:"Dane demonstracyjne",icon:"⌚"},
-  {id:3,name:"Lampka biurkowa LED",category:"Dom",store:"Dane demonstracyjne",icon:"💡"},
-  {id:4,name:"Plecak turystyczny",category:"Sport",store:"Dane demonstracyjne",icon:"🎒"},
-  {id:5,name:"Buty trekkingowe",category:"Sport",store:"Dane demonstracyjne",icon:"🥾"},
-  {id:6,name:"Bluza klasyczna",category:"Moda",store:"Dane demonstracyjne",icon:"🧥"},
-  {id:7,name:"Powerbank 20000 mAh",category:"Elektronika",store:"Dane demonstracyjne",icon:"🔋"},
-  {id:8,name:"Kubek termiczny",category:"Dom",store:"Dane demonstracyjne",icon:"☕"},
-  {id:9,name:"Czapka zimowa",category:"Moda",store:"Dane demonstracyjne",icon:"🧢"}
+  {id:"tanievo-001",name:"Apple AirPods 5 (MKFW4ZM/A)",category:"Elektronika",store:"Ceneo",icon:"🎧",productUrl:"https://www.ceneo.pl/199946527#crid=818405&pid=31443"},
+  {id:"tanievo-002",name:"Telewizor QLED Sharp 65JT8765E 65 cali",category:"RTV",store:"Ceneo",icon:"📺",productUrl:"https://www.ceneo.pl/202179594#crid=818406&pid=31443"},
+  {id:"tanievo-003",name:"Fotel gamingowy Diablo X-Horn 2.0 Normal Size",category:"Gaming",store:"Diablo Chairs",icon:"🪑",productUrl:"https://diablochairs.com/fotel-gamingowy-diablo-x-horn-2-0-normal-size-czarno-czerwony#crid=818407&pid=31443"},
+  {id:"tanievo-004",name:"Hulajnoga elektryczna KuKirin G2",category:"Sport",store:"Ceneo",icon:"🛴",productUrl:"https://www.ceneo.pl/176018202#crid=818408&pid=31443"},
+  {id:"tanievo-005",name:"Thermos Mountain FFX 0,5 l Matt Black Green",category:"Dom",store:"Ceneo",icon:"☕",productUrl:"https://www.ceneo.pl/117967166#crid=818409&pid=31443"},
+  {id:"tanievo-006",name:"Opony zimowe Dębica Frigo 2 205/55 R16 91T",category:"Motoryzacja",store:"Ceneo",icon:"🚗",productUrl:"https://www.ceneo.pl/705846#crid=818410&pid=31443"},
+  {id:"tanievo-007",name:"Wobell mata antyszronowa na przednią szybę",category:"Motoryzacja",store:"Ceneo",icon:"🚘",productUrl:"https://www.ceneo.pl/196019290#crid=818412&pid=31443"},
+  {id:"tanievo-008",name:"Wkrętarka akumulatorowa DeWALT DCD800N 18 V",category:"Narzędzia",store:"Ceneo",icon:"🛠️",productUrl:"https://www.ceneo.pl/175282068#crid=818413&pid=31443"},
+  {id:"tanievo-009",name:"Whiskas Adult Mix smaków 40 × 85 g",category:"Dla zwierząt",store:"Ceneo",icon:"🐾",productUrl:"https://www.ceneo.pl/148943696#crid=818415&pid=31443"},
+  {id:"tanievo-010",name:"DicloMAX Mobilat żel 100 g",category:"Zdrowie",store:"Ceneo",icon:"🧴",productUrl:"https://www.ceneo.pl/179816741#crid=818416&pid=31443"}
 ];
 
 const grid = document.getElementById("productGrid");
@@ -145,15 +146,15 @@ function render() {
       </div>
       <div class="product-category">${safeCategory}</div>
       <h3>${safeName}</h3>
-      ${liveCatalog ? `<div class="price-row"><span class="price">${money(product.price)}</span></div>` : `<div class="demo-price-note">Karta demonstracyjna — brak aktualnej ceny</div>`}
-      <div class="store">${safeStore} · ${liveCatalog ? "aktualizacja: " + (product.updatedAt ? formatDate(product.updatedAt) : "czas nieznany") : "dane przykładowe"}</div>
+      ${liveCatalog ? `<div class="price-row"><span class="price">${money(product.price)}</span></div>` : `<div class="demo-price-note">Sprawdź aktualną cenę u partnera</div>`}
+      <div class="store">${safeStore} · link partnerski</div>
       ${liveCatalog && product.availability ? `<div class="store">Dostępność: ${escapeHTML(product.availability)}</div>` : ""}
-      ${safeProductUrl(product.productUrl) ? `<a class="offer-link" href="${escapeHTML(product.productUrl)}" target="_blank" rel="sponsored nofollow noopener"><span>Sprawdź cenę w sklepie ↗</span></a>` : `<div class="offer-link"><span>Oferta demonstracyjna — bez linku zakupu</span><span aria-hidden="true">ⓘ</span></div>`}
+      ${safeProductUrl(product.productUrl) ? `<a class="offer-link" href="${escapeHTML(product.productUrl)}" target="_blank" rel="sponsored nofollow noopener"><span>Sprawdź produkt ↗</span></a>` : `<div class="offer-link"><span>Brak aktywnego linku</span><span aria-hidden="true">ⓘ</span></div>`}
     </article>`;
   }).join("");
 
   const count = list.length;
-  document.getElementById("resultCount").textContent = `${count} ${count === 1 ? "oferta" : count < 5 ? "oferty" : "ofert"}`;
+  document.getElementById("resultCount").textContent = `${count} ${count === 1 ? "produkt" : count < 5 ? "produkty" : "produktów"}`;
   document.getElementById("emptyState").hidden = count !== 0;
   grid.hidden = count === 0;
   favoritesToggle.setAttribute("aria-pressed", String(favoritesOnly));
@@ -233,12 +234,11 @@ if (mobileNavToggle && mainNav) {
 document.getElementById("year").textContent = new Date().getFullYear();
 render();
 // Katalog live pozostaje wyłączony do czasu przyznania API i potwierdzenia przez Ceneo zasad prezentacji oraz przetwarzania danych.
-if (window.LOWCA_ENABLE_LIVE_CATALOG === true) loadLiveCatalog();
 
 const copyPromoButton = document.getElementById("copyPromoText");
 if (copyPromoButton) {
   copyPromoButton.addEventListener("click", async () => {
-    const promoText = "Sprawdź Tanievo.pl — niezależny projekt z poradnikiem zakupowym i wybranymi linkami partnerskimi. Główny katalog produktów jest obecnie demonstracyjny.\nhttps://ryspyc-art.github.io/lowca-okazji/";
+    const promoText = "Sprawdź Tanievo.pl — poradniki zakupowe i wybrane linki partnerskie do produktów.\nhttps://ryspyc-art.github.io/lowca-okazji/";
     const feedback = document.getElementById("shareFeedback");
     try {
       await navigator.clipboard.writeText(promoText);
