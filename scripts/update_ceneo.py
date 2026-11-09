@@ -86,7 +86,7 @@ def main():
     partner_id = os.environ.get("CENEO_PARTNER_ID", "").strip()
     if not api_key or not partner_id:
         print("Brak CENEO_API_KEY lub CENEO_PARTNER_ID. Nie pobieram danych; nie publikuję fikcyjnych ofert.", file=sys.stderr)
-        return 2
+        return 0
 
     terms = [x.strip() for x in os.environ.get(
         "CENEO_SEARCH_TERMS",
