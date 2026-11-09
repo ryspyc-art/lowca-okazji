@@ -20,7 +20,7 @@ let favoritesOnly = false;
 function loadFavorites() {
   try {
     const value = JSON.parse(localStorage.getItem("lowcaFavorites") || "[]");
-    return Array.isArray(value) ? value.filter(v => Number.isInteger(v) || typeof v === "string") : [];
+    return Array.isArray(value) ? value.filter(v => Number.isInteger(v) || typeof v === "string").map(String) : [];
   } catch {
     return [];
   }
@@ -33,7 +33,7 @@ function escapeHTML(value) {
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
   }[char]));
 }
-function safeProductUrl(value) {
+function safeImage(value) {\n  try { return new URL(value).protocol === "https:"; } catch { return false; }\n}\nfunction safeProductUrl(value) {
   try { return new URL(value).protocol === "https:"; } catch { return false; }
 }
 let liveCatalog = false;
@@ -80,13 +80,13 @@ function render() {
   let list = products.filter(product => {
     const matchesCategory = category === "Wszystkie" || product.category === category;
     const matchesSearch = (product.name + " " + product.category).toLocaleLowerCase("pl").includes(search.value.trim().toLocaleLowerCase("pl"));
-    const matchesFavorites = !favoritesOnly || favorites.includes(product.id);
+    const matchesFavorites = !favoritesOnly || favorites.includes(String(product.id));
     return matchesCategory && matchesSearch && matchesFavorites;
   });
 
   if (sort.value === "price-asc") list.sort((a,b) => a.price - b.price);
   if (sort.value === "price-desc") list.sort((a,b) => b.price - a.price);
-  if (sort.value === "discount") list.sort((a,b) => b.discount - a.discount);
+  if (sort.value === "discount") {\n    if (liveCatalog) list.sort((a,b) => a.price - b.price);\n    else list.sort((a,b) => b.discount - a.discount);\n  }
 
   grid.innerHTML = list.map(product => {
     const safeName = escapeHTML(product.name);
@@ -96,8 +96,8 @@ function render() {
     return `<article class="product-card">
       <div class="product-visual">
         ${Number.isFinite(product.discount) ? `<span class="discount-pill">−${product.discount}%</span>` : ""}
-        <span aria-hidden="true">${product.icon}</span>
-        <button class="fav ${saved ? "saved" : ""}" data-fav="${product.id}" aria-label="${saved ? "Usuń z" : "Dodaj do"} ulubionych: ${product.name}" aria-pressed="${saved}">${saved ? "♥" : "♡"}</button>
+        ${safeImage(product.image) ? `<img class="product-image" src="${escapeHTML(product.image)}" alt="" loading="lazy">` : `<span aria-hidden="true">${escapeHTML(product.icon || "🛍️")}</span>`}
+        <button class="fav ${saved ? "saved" : ""}" data-fav="${escapeHTML(String(product.id))}" aria-label="${saved ? "Usuń z" : "Dodaj do"} ulubionych: ${safeName}" aria-pressed="${saved}">${saved ? "♥" : "♡"}</button>
       </div>
       <div class="product-category">${safeCategory}</div>
       <h3>${safeName}</h3>
