@@ -24,6 +24,7 @@ Dlatego przed uruchomieniem porównywarki trzeba uzyskać od Ceneo pisemną odpo
 - Katalog demonstracyjny bez fikcyjnych cen i rabatów.
 - Strona „Dla partnerów” z opisem projektu i statusem integracji.
 - Strona wyjaśniająca zasady linków afiliacyjnych.
+- Polityka prywatności dla obecnej wersji demonstracyjnej; wymaga uzupełnienia danych administratora i kontaktu przed uruchomieniem komercyjnym.
 - Podstawowe metadane SEO, robots.txt i sitemap.xml.
 - Prototyp importera Ceneo w repozytorium.
 - Workflow GitHub Actions do ręcznego uruchamiania po zatwierdzeniu zasad.
@@ -37,6 +38,15 @@ Importer wymaga sekretu GitHub Actions:
 - `CENEO_API_PUBLICATION_APPROVED` — wartość `YES` wyłącznie po otrzymaniu pisemnego potwierdzenia Ceneo.
 
 **Nie ustawiaj `CENEO_API_PUBLICATION_APPROVED=YES` przed wyjaśnieniem zasad z Ceneo.** Klucza API nie wolno umieszczać w kodzie strony ani w publicznym JavaScript.
+
+## Ograniczenia feedu Awin
+
+Importer Awin nie jest obecnie uruchamiany przez workflow Ceneo. Jeżeli zostanie użyty w osobnym, zatwierdzonym procesie, wymaga jawnych list dozwolonych hostów:
+- `AWIN_FEED_ALLOWED_HOSTS` — dokładny host serwera feedu,
+- `AWIN_ALLOWED_PRODUCT_HOSTS` — dokładne hosty stron produktów,
+- `AWIN_ALLOWED_IMAGE_HOSTS` — opcjonalne dokładne hosty obrazów.
+
+Adresy muszą korzystać z HTTPS, nie mogą zawierać danych logowania ani niestandardowych portów. Przekierowania feedu są odrzucane. Bez skonfigurowanej allowlisty importer nie pobiera lub nie publikuje ofert.
 
 ## Kolejne kroki
 
