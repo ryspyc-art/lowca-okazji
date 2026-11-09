@@ -12,7 +12,7 @@ import os
 import sys
 import urllib.parse
 import urllib.request
-from datetime import datetime, timezone, timedelta, timedelta
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 BASE = "https://partnerzyapi.ceneo.pl"
