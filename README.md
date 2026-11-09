@@ -14,6 +14,7 @@ Responsywna, statyczna strona publikowana przez GitHub Pages.
 - `index.html` — struktura strony, treści i metadane SEO,
 - `style.css` — wygląd i układ responsywny,
 - `app.js` — wyszukiwanie, filtrowanie, sortowanie i ulubione,
+- `site.js` — wspólne drobne funkcje stron informacyjnych,
 - `robots.txt` i `sitemap.xml` — podstawowa konfiguracja indeksowania,
 - `favicon.svg` — ikona strony,
 - `o-afiliacji.html` — wyjaśnienie działania linków partnerskich,
