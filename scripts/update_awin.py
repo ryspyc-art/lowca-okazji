@@ -99,7 +99,7 @@ def main():
     if not added and not existing:
         raise RuntimeError("Feed Awin nie zawiera poprawnych ofert. Nie tworzę pustego katalogu.")
     output = {
-        "source": "Ceneo + Awin",
+        "source": " + ".join(sorted({item.get("source", "Partner") for item in existing.values()})),
         "fetchedAt": now,
         "count": len(existing),
         "items": list(existing.values()),
