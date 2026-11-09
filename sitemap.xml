@@ -25,4 +25,5 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+  <url><loc>https://ryspyc-art.github.io/lowca-okazji/poradnik-porownywanie-cen.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
