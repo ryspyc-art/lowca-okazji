@@ -1,4 +1,4 @@
-# Cenolot
+# Tanievo
 
 Responsywna, statyczna strona publikowana przez GitHub Pages.
 
@@ -43,3 +43,7 @@ Przed zakupem użytkownik powinien sprawdzić aktualną cenę, dostępność i w
 Szczegółowa instrukcja konfiguracji sekretów, Ceneo, Awin, Google i promocji znajduje się w [docs/uruchomienie-integracji.md](docs/uruchomienie-integracji.md).
 
 Nie należy przedstawiać danych demonstracyjnych jako rzeczywistych promocji.
+
+
+## Rebranding Tanievo.pl
+Marka serwisu to Tanievo.pl. Do czasu rejestracji domeny i konfiguracji DNS witryna pozostaje dostępna pod dotychczasowym adresem GitHub Pages. Nie ustawiaj domeny tanievo.pl jako canonical ani nie zmieniaj DNS przed jej rejestracją i potwierdzeniem własności.
