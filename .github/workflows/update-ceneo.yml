@@ -27,8 +27,14 @@ jobs:
           CENEO_SEARCH_TERMS: ${{ vars.CENEO_SEARCH_TERMS }}
         run: python3 scripts/update_ceneo.py
 
+      - name: Importuj opcjonalny feed Awin
+        if: ${{ secrets.AWIN_FEED_URL != '' }}
+        env:
+          AWIN_FEED_URL: ${{ secrets.AWIN_FEED_URL }}
+        run: python3 scripts/update_awin.py
+
       - name: Zapisz zaktualizowany katalog
-        if: ${{ secrets.CENEO_API_KEY != '' && secrets.CENEO_PARTNER_ID != '' }}
+        if: ${{ (secrets.CENEO_API_KEY != '' && secrets.CENEO_PARTNER_ID != '') || secrets.AWIN_FEED_URL != '' }}
         run: |
           if [ -f products.json ]; then
             git config user.name "github-actions[bot]"
@@ -43,5 +49,5 @@ jobs:
           fi
 
       - name: Informacja o brakujących danych dostępowych
-        if: ${{ secrets.CENEO_API_KEY == '' || secrets.CENEO_PARTNER_ID == '' }}
-        run: echo "Automatyzacja jest gotowa. Dodaj sekrety CENEO_API_KEY i CENEO_PARTNER_ID w ustawieniach repozytorium, aby uruchomić pobieranie."
+        if: ${{ (secrets.CENEO_API_KEY == '' || secrets.CENEO_PARTNER_ID == '') && secrets.AWIN_FEED_URL == '' }}
+        run: echo "Automatyzacja jest gotowa. Dodaj sekrety CENEO_API_KEY i CENEO_PARTNER_ID dla Ceneo lub AWIN_FEED_URL dla Awin."
