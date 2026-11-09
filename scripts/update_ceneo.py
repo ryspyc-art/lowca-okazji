@@ -99,6 +99,20 @@ def affiliate_url(value, partner_id):
         return ""
 
 
+def safe_ceneo_image_url(value):
+    """Accept HTTPS image URLs only from Ceneo-controlled hostnames."""
+    try:
+        parsed = urllib.parse.urlsplit(str(value).strip())
+        host = (parsed.hostname or "").lower()
+        if parsed.scheme != "https" or not (host == "ceneo.pl" or host.endswith(".ceneo.pl")):
+            return ""
+        if parsed.username or parsed.password or parsed.port not in (None, 443):
+            return ""
+        return urllib.parse.urlunsplit(("https", host, parsed.path, parsed.query, ""))
+    except (TypeError, ValueError):
+        return ""
+
+
 def category_for(name):
     n = name.lower()
     if any(x in n for x in ("laptop", "komputer", "monitor", "procesor", "karta graficzna", "ram", "ssd", "smartfon", "telefon", "tablet", "słuchawk", "mysz", "klawiatur", "router")):
@@ -161,7 +175,7 @@ def main():
             price = parse_price(get(row, "LowestPrice", "Price"))
             product_url = affiliate_url(get(row, "Url", "ProductUrl"), partner_id)
             raw_image = str(get(row, "MediumThumbnailUrl", "ThumbnailUrl", "ImageUrl") or "").strip()
-            image = raw_image if raw_image.startswith("https://") else ""
+            image = safe_ceneo_image_url(raw_image)
             if not name or price is None or not product_url:
                 continue
             product_id = str(get(row, "Id") or (name + "|" + str(price)))
