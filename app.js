@@ -72,7 +72,11 @@ document.getElementById("categoryChips").addEventListener("click", event => {
   const button = event.target.closest("[data-category]");
   if (!button) return;
   category = button.dataset.category;
-  document.querySelectorAll(".chip").forEach(chip => {\n    const active = chip === button;\n    chip.classList.toggle("active", active);\n    chip.setAttribute("aria-pressed", String(active));\n  });
+  document.querySelectorAll(".chip").forEach(chip => {
+    const active = chip === button;
+    chip.classList.toggle("active", active);
+    chip.setAttribute("aria-pressed", String(active));
+  });
   render();
 });
 
@@ -94,7 +98,11 @@ document.getElementById("resetFilters").addEventListener("click", () => {
   favoritesOnly = false;
   search.value = "";
   sort.value = "recommended";
-  document.querySelectorAll(".chip").forEach(chip => {\n    const active = chip.dataset.category === "Wszystkie";\n    chip.classList.toggle("active", active);\n    chip.setAttribute("aria-pressed", String(active));\n  });
+  document.querySelectorAll(".chip").forEach(chip => {
+    const active = chip.dataset.category === "Wszystkie";
+    chip.classList.toggle("active", active);
+    chip.setAttribute("aria-pressed", String(active));
+  });
   render();
 });
 
