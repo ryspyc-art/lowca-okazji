@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Optional Awin CSV product-feed importer. Feed URL must be stored as a GitHub secret."""
 import csv
+import hashlib
 import io
 import json
 import os
@@ -77,7 +78,7 @@ def main():
         if not name or price <= 0 or not url.startswith("https://") or not merchant:
             continue
         if not product_id:
-            product_id = str(abs(hash((merchant, name, url))))
+            product_id = hashlib.sha256((merchant + "|" + name + "|" + url).encode("utf-8")).hexdigest()[:20]
         key = "awin-" + product_id
         existing[key] = {
             "id": key,
