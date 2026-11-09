@@ -17,6 +17,7 @@ Responsywna, statyczna strona publikowana przez GitHub Pages.
 - `robots.txt` i `sitemap.xml` — podstawowa konfiguracja indeksowania,
 - `favicon.svg` — ikona strony,
 - `o-afiliacji.html` — wyjaśnienie działania linków partnerskich,
+- `poradnik-jak-kupowac.html` — poradnik zakupowy wspierający ruch z wyszukiwarki,
 - `scripts/update_ceneo.py` — importer ofert Ceneo po uzyskaniu klucza API,
 - `scripts/update_awin.py` — importer feedu CSV Awin,
 - `.github/workflows/update-ceneo.yml` — harmonogram aktualizacji co 6 godzin,
