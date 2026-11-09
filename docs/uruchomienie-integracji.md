@@ -1,4 +1,4 @@
-# Łowca Okazji — przygotowanie integracji Ceneo
+# Cenolot — przygotowanie integracji Ceneo
 
 ## Aktualny status
 
