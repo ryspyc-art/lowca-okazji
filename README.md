@@ -1,4 +1,4 @@
-# Tanievo
+# Tanievo.pl
 
 Responsywna, statyczna strona publikowana przez GitHub Pages.
 
