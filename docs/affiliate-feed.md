@@ -58,8 +58,8 @@ Dostęp do feedów zależy od uprawnień wydawcy i aktywnych relacji z reklamoda
 - [x] Jasne oznaczenie danych demonstracyjnych.
 - [ ] Akceptacja wydawcy w sieci afiliacyjnej.
 - [ ] Dostęp do konkretnego feedu/API (wymaga zatwierdzenia konta i sekretów w GitHub).
-- [x] Bezpieczny proces pobierania i normalizacji danych przygotowany w skryptach Ceneo/Awin.
-- [x] Harmonogram GitHub Actions co 6 godzin.
-- [x] Frontend odczytuje wygenerowany katalog JSON.
+- [x] Proces pobierania i normalizacji danych przygotowany w skryptach Ceneo/Awin; publikacja pozostaje zablokowana do czasu zgód, konfiguracji i testów.
+- [ ] Automatyczny harmonogram aktualizacji — obecnie workflow jest uruchamiany ręcznie.
+- [x] Frontend ma warunkową obsługę katalogu JSON; domyślnie pozostaje wyłączona flagą `LOWCA_ENABLE_LIVE_CATALOG`.
 - [ ] Weryfikacja linków, cen, aktualizacji i oznaczeń afiliacyjnych.
 - [ ] Uruchomienie prawdziwego katalogu.
