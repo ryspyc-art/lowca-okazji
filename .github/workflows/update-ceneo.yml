@@ -2,8 +2,6 @@ name: Aktualizacja ofert partnerskich
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "17 */6 * * *"
 
 permissions:
   contents: write
@@ -28,13 +26,9 @@ jobs:
         env:
           CENEO_API_KEY: ${{ secrets.CENEO_API_KEY }}
           CENEO_PARTNER_ID: ${{ secrets.CENEO_PARTNER_ID }}
+          CENEO_API_PUBLICATION_APPROVED: ${{ secrets.CENEO_API_PUBLICATION_APPROVED }}
           CENEO_SEARCH_TERMS: ${{ vars.CENEO_SEARCH_TERMS }}
         run: python3 scripts/update_ceneo.py
-
-      - name: Importuj feed Awin (jeśli skonfigurowano dostęp)
-        env:
-          AWIN_FEED_URL: ${{ secrets.AWIN_FEED_URL }}
-        run: python3 scripts/update_awin.py
 
       - name: Zapisz zaktualizowany katalog
         run: |
