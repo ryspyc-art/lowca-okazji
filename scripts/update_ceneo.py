@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetches approved Ceneo affiliate API products and writes a public JSON catalog.
+"""Fetch approved Ceneo affiliate API products and write a public JSON catalog.
 
 Required environment:
   CENEO_API_KEY       API key issued by Ceneo (GitHub Actions secret)
@@ -16,6 +16,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 BASE = "https://partnerzyapi.ceneo.pl"
+SERVICE = "PartnerServiceV2.svc"  # Ceneo recommends the V2 OData endpoint.
 OUT = Path("products.json")
 TIMEOUT = 35
 
@@ -34,7 +35,7 @@ def get_token(api_key):
         try:
             payload = json.loads(body.decode("utf-8"))
             token = payload.get("access_token") or payload.get("accessToken")
-        except (ValueError, UnicodeDecodeError):
+        except (ValueError, UnicodeDecodeError, AttributeError):
             pass
     if not token:
         raise RuntimeError("Ceneo nie zwróciło tokenu access_token. Sprawdź klucz API i uprawnienia.")
@@ -53,7 +54,7 @@ def rows_from(payload):
     if isinstance(d, list):
         return d
     if isinstance(d, dict):
-        for key in ("results", "Results"):
+        for key in ("results", "Results", "value"):
             if isinstance(d.get(key), list):
                 return d[key]
     return []
@@ -70,13 +71,41 @@ def get(item, *names):
     return None
 
 
+def parse_price(value):
+    if value is None or isinstance(value, bool):
+        return None
+    try:
+        normalized = str(value).strip().replace("\u00a0", "").replace(" ", "").replace(",", ".")
+        price = float(normalized)
+        return price if price > 0 else None
+    except (TypeError, ValueError):
+        return None
+
+
+def affiliate_url(value, partner_id):
+    """Only accept Ceneo product URLs and set the documented #pid fragment."""
+    try:
+        parsed = urllib.parse.urlsplit(str(value).strip())
+        host = (parsed.hostname or "").lower()
+        if parsed.scheme not in ("http", "https") or not (host == "ceneo.pl" or host.endswith(".ceneo.pl")):
+            return ""
+        if parsed.username or parsed.password:
+            return ""
+        return urllib.parse.urlunsplit((
+            "https", parsed.netloc, parsed.path, parsed.query,
+            "pid=" + urllib.parse.quote(partner_id, safe="")
+        ))
+    except (TypeError, ValueError):
+        return ""
+
+
 def category_for(name):
     n = name.lower()
     if any(x in n for x in ("laptop", "komputer", "monitor", "procesor", "karta graficzna", "ram", "ssd", "smartfon", "telefon", "tablet", "słuchawk", "mysz", "klawiatur", "router")):
         return "Elektronika"
     if any(x in n for x in ("buty", "plecak", "rower", "sport", "trekking", "turystycz")):
         return "Sport"
-    if any(x in n for x in ("kurtka", "bluza", "spodnie", "koszul", "sukien", "buty")):
+    if any(x in n for x in ("kurtka", "bluza", "spodnie", "koszul", "sukien")):
         return "Moda"
     return "Dom"
 
@@ -103,27 +132,17 @@ def main():
             "pageIndex": "1",
             "$format": "json",
         })
-        url = BASE + "/PartnerService.svc/GetProducts?" + query
+        url = BASE + "/" + SERVICE + "/GetProducts?" + query
         body, _ = request(url, headers)
         payload = json.loads(body.decode("utf-8-sig"))
         for row in rows_from(payload):
             name = str(get(row, "Name") or "").strip()
-            raw_price = get(row, "LowestPrice", "Price")
-            raw_url = str(get(row, "Url", "ProductUrl") or "").strip()
-            if raw_url.startswith("http://www.ceneo.pl/"):
-                raw_url = "https://" + raw_url[len("http://"): ]
+            price = parse_price(get(row, "LowestPrice", "Price"))
+            product_url = affiliate_url(get(row, "Url", "ProductUrl"), partner_id)
             raw_image = str(get(row, "MediumThumbnailUrl", "ThumbnailUrl", "ImageUrl") or "").strip()
-            if raw_image.startswith("http://") and "ceneo.pl" in raw_image:
-                raw_image = "https://" + raw_image[len("http://"): ]
-            try:
-                price = float(str(raw_price).replace(",", "."))
-            except (TypeError, ValueError):
-                continue
-            if not name or price <= 0 or not raw_url.startswith("https://"):
-                continue
-            separator = "&" if "#" in raw_url else "#"
-            product_url = raw_url + separator + "pid=" + urllib.parse.quote(partner_id, safe="")
             image = raw_image if raw_image.startswith("https://") else ""
+            if not name or price is None or not product_url:
+                continue
             product_id = str(get(row, "Id") or (name + "|" + str(price)))
             products[product_id] = {
                 "id": "ceneo-" + product_id,
