@@ -13,11 +13,12 @@ Ceneo udostępnia API partnerom programu afiliacyjnego. Samo posiadanie strony n
    - `CENEO_PARTNER_ID` — Partner ID z panelu.
 6. Opcjonalnie w zakładce Variables dodaj `CENEO_SEARCH_TERMS`, np. `smartfon,laptop,karta graficzna,słuchawki,monitor`.
 
-Importer korzysta z OAuth 2.0 client_credentials, pobiera token i wywołuje PartnerService GetProducts. Do adresu produktu dopisuje Partner ID zgodnie z dokumentacją Ceneo. Nie umieszczaj klucza API w publicznych plikach strony.
+Importer korzysta z OAuth 2.0 client_credentials, pobiera token i wywołuje zalecany przez Ceneo endpoint `PartnerServiceV2.svc/GetProducts`. Klucz API pozostaje po stronie GitHub Actions i nie trafia do publicznego JavaScriptu. Link produktu otrzymuje identyfikator partnera w udokumentowanym fragmencie `#pid=`.
 
 Dokumentacja:
 - https://partnerzyapi.ceneo.pl/
 - https://partnerzyapi.ceneo.pl/Help/Service?name=PartnerService
+- https://partnerzyapi.ceneo.pl/Help/Service?name=PartnerServicePremium
 
 ## 2. Awin — opcjonalny drugi feed
 
@@ -35,7 +36,7 @@ Dokumentacja Awin:
 
 ## 3. Komputronik
 
-Program partnerski Komputronik (Polecaj-Ka) wymaga rejestracji i weryfikacji konta. Linki afiliacyjne generuje się w panelu programu. Obecne linki partnerskie w serwisie pozostają aktywnymi odnośnikami przekazanymi do projektu.
+Program partnerski Komputronik (Polecaj-Ka) wymaga rejestracji i weryfikacji konta. Linki afiliacyjne generuje się w panelu programu. Obecne linki partnerskie w serwisie pozostają odnośnikami przekazanymi do projektu.
 
 Nie znaleźliśmy publicznej dokumentacji feedu/API Komputronik dla wydawców. Dlatego nie próbujemy pobierać cen przez nieautoryzowane scrapowanie. Jeśli panel udostępni feed produktowy lub Komputronik przekaże oficjalną specyfikację integracji, można dodać go jako kolejny importer.
 
@@ -48,9 +49,11 @@ Oficjalny program:
 Workflow `.github/workflows/update-ceneo.yml`:
 - uruchamia się co 6 godzin,
 - można go uruchomić ręcznie w GitHub → Actions → Aktualizacja ofert partnerskich → Run workflow,
+- najpierw sprawdza składnię skryptów i uruchamia testy importera Ceneo,
 - uruchamia importery Ceneo i Awin, jeśli są skonfigurowane sekrety,
 - zapisuje zmieniony `products.json` do repozytorium,
-- nie umieszcza kluczy API w przeglądarce.
+- nie umieszcza kluczy API w przeglądarce,
+- nie ukrywa błędów połączenia z Ceneo — nieudana autoryzacja lub błąd API będzie widoczny w logu zadania.
 
 Po pojawieniu się `products.json` frontend automatycznie pobiera dane. Jeśli nie ma poprawnego feedu, pozostaje katalog demonstracyjny — nie publikuje fikcyjnych cen.
 
@@ -72,9 +75,12 @@ Nie publikujemy automatycznie postów w grupach ani nie wysyłamy spamu. Przed p
 
 ## 7. Status
 
-- [x] Importer Ceneo przygotowany.
+- [x] Importer Ceneo przygotowany i przełączony na zalecany endpoint V2.
+- [x] Walidacja domeny linków i identyfikatora partnera Ceneo.
+- [x] Testy jednostkowe importera Ceneo.
 - [x] Importer Awin CSV przygotowany.
 - [x] Harmonogram GitHub Actions co 6 godzin.
+- [x] Kontrola składni i testy uruchamiane przed aktualizacją feedów.
 - [x] Frontend pobiera `products.json`, gdy katalog istnieje.
 - [x] Sekcja udostępniania Facebook / tekst do grup.
 - [ ] Otrzymanie klucza API Ceneo i Partner ID.
