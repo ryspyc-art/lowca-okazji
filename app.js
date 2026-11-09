@@ -1,4 +1,4 @@
-const products = [
+let products = [
   {id:1,name:"Słuchawki bezprzewodowe",category:"Elektronika",price:129,old:179,store:"Przykładowy sklep",icon:"🎧",discount:28},
   {id:2,name:"Smartwatch sportowy",category:"Elektronika",price:189,old:249,store:"Przykładowy sklep",icon:"⌚",discount:24},
   {id:3,name:"Lampka biurkowa LED",category:"Dom",price:49,old:69,store:"Przykładowy sklep",icon:"💡",discount:29},
@@ -20,12 +20,57 @@ let favoritesOnly = false;
 function loadFavorites() {
   try {
     const value = JSON.parse(localStorage.getItem("lowcaFavorites") || "[]");
-    return Array.isArray(value) ? value.filter(Number.isInteger) : [];
+    return Array.isArray(value) ? value.filter(v => Number.isInteger(v) || typeof v === "string") : [];
   } catch {
     return [];
   }
 }
 let favorites = loadFavorites();
+
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  }[char]));
+}
+function safeProductUrl(value) {
+  try { return new URL(value).protocol === "https:"; } catch { return false; }
+}
+let liveCatalog = false;
+async function loadLiveCatalog() {
+  try {
+    const response = await fetch("./products.json?cache=" + Date.now(), {cache:"no-store"});
+    if (!response.ok) return;
+    const payload = await response.json();
+    const items = Array.isArray(payload) ? payload : payload.items;
+    if (!Array.isArray(items) || !items.length) return;
+    const normalized = items.filter(item =>
+      item && (typeof item.id === "string" || Number.isInteger(item.id)) &&
+      typeof item.name === "string" && Number.isFinite(Number(item.price)) &&
+      Number(item.price) > 0 && safeProductUrl(item.productUrl)
+    ).map(item => ({
+      id: String(item.id),
+      name: item.name,
+      category: typeof item.category === "string" ? item.category : "Inne",
+      price: Number(item.price),
+      store: typeof item.merchant === "string" ? item.merchant : "Sklep partnerski",
+      productUrl: item.productUrl,
+      image: item.image || "",
+      updatedAt: item.updatedAt || payload.fetchedAt || "",
+      icon: "🛍️"
+    }));
+    if (!normalized.length) return;
+    products = normalized;
+    liveCatalog = true;
+    const note = document.querySelector(".demo-note");
+    if (note) note.textContent = "Oferty partnerskie • katalog aktualizowany";
+    const disclaimer = document.querySelector(".disclaimer");
+    if (disclaimer) disclaimer.textContent = "Ceny i dostępność mogą się zmieniać. Przed zakupem sprawdź aktualne warunki u sprzedawcy. Linki partnerskie mogą przynieść stronie prowizję.";
+    render();
+  } catch (error) {
+    console.warn("Nie udało się pobrać katalogu live; pozostaje katalog demonstracyjny.", error);
+  }
+}
 
 function money(value) {
   return value.toFixed(2).replace(".", ",") + " zł";
@@ -44,18 +89,21 @@ function render() {
   if (sort.value === "discount") list.sort((a,b) => b.discount - a.discount);
 
   grid.innerHTML = list.map(product => {
+    const safeName = escapeHTML(product.name);
+    const safeCategory = escapeHTML(product.category);
+    const safeStore = escapeHTML(product.store || product.merchant || "Sklep partnerski");
     const saved = favorites.includes(product.id);
     return `<article class="product-card">
       <div class="product-visual">
-        <span class="discount-pill">−${product.discount}%</span>
+        ${Number.isFinite(product.discount) ? `<span class="discount-pill">−${product.discount}%</span>` : ""}
         <span aria-hidden="true">${product.icon}</span>
         <button class="fav ${saved ? "saved" : ""}" data-fav="${product.id}" aria-label="${saved ? "Usuń z" : "Dodaj do"} ulubionych: ${product.name}" aria-pressed="${saved}">${saved ? "♥" : "♡"}</button>
       </div>
-      <div class="product-category">${product.category}</div>
-      <h3>${product.name}</h3>
-      <div class="price-row"><span class="price">${money(product.price)}</span><span class="old-price">${money(product.old)}</span></div>
-      <div class="store">${product.store} · dane przykładowe</div>
-      <div class="offer-link"><span>Oferta demonstracyjna — bez linku zakupu</span><span aria-hidden="true">ⓘ</span></div>
+      <div class="product-category">${safeCategory}</div>
+      <h3>${safeName}</h3>
+      <div class="price-row"><span class="price">${money(product.price)}</span>${Number.isFinite(product.old) ? `<span class="old-price">${money(product.old)}</span>` : ""}</div>
+      <div class="store">${safeStore} · ${liveCatalog ? "aktualne dane z feedu" : "dane przykładowe"}</div>
+      ${safeProductUrl(product.productUrl) ? `<a class="offer-link" href="${escapeHTML(product.productUrl)}" target="_blank" rel="sponsored nofollow noopener"><span>Sprawdź cenę w sklepie ↗</span></a>` : `<div class="offer-link"><span>Oferta demonstracyjna — bez linku zakupu</span><span aria-hidden="true">ⓘ</span></div>`}
     </article>`;
   }).join("");
 
@@ -109,8 +157,8 @@ document.getElementById("resetFilters").addEventListener("click", () => {
 grid.addEventListener("click", event => {
   const button = event.target.closest("[data-fav]");
   if (!button) return;
-  const id = Number(button.dataset.fav);
-  if (!Number.isInteger(id) || !products.some(product => product.id === id)) return;
+  const id = button.dataset.fav;
+  if (!products.some(product => String(product.id) === id)) return;
   favorites = favorites.includes(id) ? favorites.filter(value => value !== id) : [...favorites, id];
   try { localStorage.setItem("lowcaFavorites", JSON.stringify(favorites)); } catch {}
   render();
@@ -118,3 +166,5 @@ grid.addEventListener("click", event => {
 
 document.getElementById("year").textContent = new Date().getFullYear();
 render();
+
+loadLiveCatalog();
