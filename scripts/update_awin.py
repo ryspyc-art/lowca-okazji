@@ -7,7 +7,7 @@ import json
 import os
 import sys
 import urllib.request
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta, timedelta
 from pathlib import Path
 
 OUT = Path("products.json")
@@ -56,8 +56,16 @@ def main():
     if OUT.exists():
         try:
             payload = json.loads(OUT.read_text(encoding="utf-8"))
+            cutoff = datetime.now(timezone.utc) - timedelta(hours=72)
             for item in payload.get("items", []):
-                existing[str(item.get("id"))] = item
+                try:
+                    updated = datetime.fromisoformat(str(item.get("updatedAt", "")).replace("Z", "+00:00"))
+                    if updated.tzinfo is None:
+                        updated = updated.replace(tzinfo=timezone.utc)
+                    if updated >= cutoff:
+                        existing[str(item.get("id"))] = item
+                except (TypeError, ValueError):
+                    continue
         except (ValueError, AttributeError):
             pass
 
