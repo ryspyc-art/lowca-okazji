@@ -1,0 +1,47 @@
+name: Aktualizacja ofert Ceneo
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ceneo-catalog-update
+  cancel-in-progress: false
+
+jobs:
+  update-catalog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pobierz repozytorium
+        uses: actions/checkout@v4
+
+      - name: Uruchom pobieranie ofert
+        if: ${{ secrets.CENEO_API_KEY != '' && secrets.CENEO_PARTNER_ID != '' }}
+        env:
+          CENEO_API_KEY: ${{ secrets.CENEO_API_KEY }}
+          CENEO_PARTNER_ID: ${{ secrets.CENEO_PARTNER_ID }}
+          CENEO_SEARCH_TERMS: ${{ vars.CENEO_SEARCH_TERMS }}
+        run: python3 scripts/update_ceneo.py
+
+      - name: Zapisz zaktualizowany katalog
+        if: ${{ secrets.CENEO_API_KEY != '' && secrets.CENEO_PARTNER_ID != '' }}
+        run: |
+          if [ -f products.json ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add products.json
+            if ! git diff --cached --quiet; then
+              git commit -m "Aktualizacja katalogu ofert Ceneo"
+              git push
+            else
+              echo "Brak zmian w katalogu."
+            fi
+          fi
+
+      - name: Informacja o brakujących danych dostępowych
+        if: ${{ secrets.CENEO_API_KEY == '' || secrets.CENEO_PARTNER_ID == '' }}
+        run: echo "Automatyzacja jest gotowa. Dodaj sekrety CENEO_API_KEY i CENEO_PARTNER_ID w ustawieniach repozytorium, aby uruchomić pobieranie."
