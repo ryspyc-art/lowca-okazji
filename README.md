@@ -34,7 +34,7 @@ Przed zakupem użytkownik powinien sprawdzić aktualną cenę, dostępność i w
 1. Uzyskać i utrzymać akceptację wydawcy w programie partnerskim Ceneo.
 2. Uzyskać pisemne potwierdzenie Ceneo dotyczące wykorzystania API, prezentacji danych i linkowania.
 3. Dopiero po potwierdzeniu zasad skonfigurować klucz API jako sekret GitHub Actions.
-4. Rozbudować oznaczenia reklamowe oraz przygotować politykę prywatności i wymagane informacje o danych/plikach cookies, jeśli zostaną wdrożone narzędzia śledzące.
+4. Uzupełnić i zweryfikować politykę prywatności oraz wymagane informacje o danych/cookies przed uruchomieniem nowych funkcji.
 5. Uzupełnić zweryfikowane dane administratora i kontakt w polityce prywatności przed uruchomieniem funkcji komercyjnych.
 6. Dla ewentualnego feedu Awin skonfigurować osobne sekrety/zmienne `AWIN_FEED_URL`, `AWIN_FEED_ALLOWED_HOSTS`, `AWIN_ALLOWED_PRODUCT_HOSTS` oraz opcjonalnie `AWIN_ALLOWED_IMAGE_HOSTS`. Listy hostów muszą zawierać dokładne nazwy domen rozdzielone przecinkami; bez nich importer odmawia pobrania lub publikacji ofert.
 7. Testować działanie strony na telefonach i komputerach.
