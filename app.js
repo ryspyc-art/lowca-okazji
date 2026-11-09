@@ -114,7 +114,7 @@ function render() {
       <div class="product-category">${safeCategory}</div>
       <h3>${safeName}</h3>
       <div class="price-row"><span class="price">${money(product.price)}</span>${Number.isFinite(product.old) ? `<span class="old-price">${money(product.old)}</span>` : ""}</div>
-      <div class="store">${safeStore} · ${liveCatalog ? "aktualizacja: " + (product.updatedAt ? formatDate(product.updatedAt) : "czas nieznany") : "dane przykładowe"}</div>
+      <div class="store">${safeStore} · ${liveCatalog ? "aktualizacja: " + (product.updatedAt ? formatDate(product.updatedAt) : "czas nieznany") : "dane przykładowe"}</div>\n      ${liveCatalog && product.availability ? `<div class="store">Dostępność: ${escapeHTML(product.availability)}</div>` : ""}
       ${safeProductUrl(product.productUrl) ? `<a class="offer-link" href="${escapeHTML(product.productUrl)}" target="_blank" rel="sponsored nofollow noopener"><span>Sprawdź cenę w sklepie ↗</span></a>` : `<div class="offer-link"><span>Oferta demonstracyjna — bez linku zakupu</span><span aria-hidden="true">ⓘ</span></div>`}
     </article>`;
   }).join("");
