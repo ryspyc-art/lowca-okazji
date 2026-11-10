@@ -106,7 +106,7 @@ def safe_ceneo_image_url(value):
     try:
         parsed = urllib.parse.urlsplit(str(value).strip())
         host = (parsed.hostname or "").lower()
-        if parsed.scheme != "https" or not (host == "ceneo.pl" or host.endswith(".ceneo.pl")):
+        if parsed.scheme != "https" or not (host == "ceneo.pl" or host.endswith(".ceneo.pl") or host == "ceneostatic.pl" or host.endswith(".ceneostatic.pl")):
             return ""
         if parsed.username or parsed.password or parsed.port not in (None, 443):
             return ""
