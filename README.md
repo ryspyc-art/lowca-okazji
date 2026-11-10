@@ -8,13 +8,13 @@ Responsywna, statyczna strona publikowana przez GitHub Pages.
 - zapisywanie ulubionych produktów w pamięci lokalnej przeglądarki,
 - filtrowanie zapisanych pozycji,
 - responsywny układ na telefonach i komputerach,
-- katalog 57 pozycji: 17 kart demonstracyjnych z wyłączonymi linkami afiliacyjnymi oraz 40 dodatkowych pozycji prowadzących do wyszukiwania w Ceneo; aktywne linki partnerskie nie są obecnie publikowane,
+- katalog 57 pozycji, z których każda prowadzi do zwykłego wyszukiwania w Ceneo; linki afiliacyjne dla 17 wybranych produktów pozostają wyłączone do czasu weryfikacji,
 - oznaczenie linków partnerskich i brak własnych, niezweryfikowanych cen.
 
 ## Pliki
 - `index.html` — struktura strony, treści i metadane SEO,
 - `style.css` — wygląd i układ responsywny,
-- `app.js` — katalog demonstracyjny, wyszukiwanie, filtrowanie, bezpieczne linki wyszukiwawcze i ulubione,
+- `app.js` — katalog demonstracyjny, wyszukiwanie, filtrowanie, zwykłe linki do wyszukiwania w Ceneo i ulubione,
 - `site.js` — wspólne drobne funkcje stron informacyjnych,
 - `robots.txt` i `sitemap.xml` — podstawowa konfiguracja indeksowania,
 - `favicon.svg` — ikona strony,
@@ -35,7 +35,7 @@ Responsywna, statyczna strona publikowana przez GitHub Pages.
 - `products.json` — plik katalogu tworzony przez ręcznie uruchamiany workflow po zatwierdzeniu integracji; obecnie nie jest publikowany.
 
 ## Ważne informacje
-Katalog zawiera 17 kart demonstracyjnych z wyłączonymi linkami afiliacyjnymi oraz 40 pozycji wyszukiwawczych w Ceneo. Nie publikuje własnych cen ani stanów magazynowych; aktualne warunki należy sprawdzić bezpośrednio u sprzedawcy. Prototyp automatycznej integracji API Ceneo pozostaje wyłączony do czasu otrzymania klucza API i pisemnego potwierdzenia zasad wykorzystania danych.
+Katalog zawiera 57 kart z odnośnikami do zwykłego wyszukiwania produktów w Ceneo. Linki afiliacyjne pozostają wyłączone do czasu ich wygenerowania i weryfikacji. Serwis nie publikuje własnych cen ani stanów magazynowych; aktualne warunki należy sprawdzić bezpośrednio u sprzedawcy. Prototyp automatycznej integracji API Ceneo pozostaje wyłączony do czasu otrzymania klucza API i pisemnego potwierdzenia zasad wykorzystania danych.
 
 Przed zakupem użytkownik powinien sprawdzić aktualną cenę, dostępność i warunki bezpośrednio w sklepie. Aktywne linki afiliacyjne zostaną dodane dopiero po wygenerowaniu ich w Panelu Partnera i potwierdzeniu zasad publikacji.
 
