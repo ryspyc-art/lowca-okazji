@@ -6,6 +6,11 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://tanievo.pl/jak-korzystac-z-tanievo.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://tanievo.pl/o-afiliacji.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
