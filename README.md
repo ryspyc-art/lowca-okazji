@@ -54,5 +54,5 @@ Szczegółowa instrukcja konfiguracji sekretów, Ceneo, Awin, Google i promocji 
 Nie należy przedstawiać danych demonstracyjnych jako rzeczywistych promocji.
 
 
-## Rebranding Tanievo.pl
-Marka serwisu to Tanievo.pl. Do czasu rejestracji domeny i konfiguracji DNS witryna pozostaje dostępna pod dotychczasowym adresem GitHub Pages. Nie ustawiaj domeny tanievo.pl jako canonical ani nie zmieniaj DNS przed jej rejestracją i potwierdzeniem własności.
+## Domena Tanievo.pl
+Repozytorium zawiera plik `CNAME` z domeną `tanievo.pl`, a canonical, Open Graph, robots.txt i sitemap.xml wskazują adres `https://tanievo.pl/`. Ostatni build i deploy GitHub Pages zakończyły się sukcesem. Sam status wdrożenia nie potwierdza jednak propagacji DNS ani gotowości certyfikatu HTTPS — te elementy należy sprawdzić w panelu OVH i w Settings → Pages na GitHubie.
