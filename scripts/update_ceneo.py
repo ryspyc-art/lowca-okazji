@@ -190,7 +190,7 @@ def main():
                 "image": image,
                 "productUrl": product_url,
                 "merchant": "Ceneo — porównanie ofert",
-                "source": "Ceneo + inne źródła partnerskie",
+                "source": "Ceneo",
                 "updatedAt": datetime.now(timezone.utc).isoformat(),
                 "availability": "Sprawdź u sprzedawcy",
             }
