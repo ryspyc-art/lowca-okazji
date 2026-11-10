@@ -4,9 +4,9 @@
 
 - Strona działa jako katalog demonstracyjny.
 - Karty przykładowe nie pokazują cen, rabatów ani dostępności.
-- W pliku `app.js` 17 kart produktów ma skonfigurowane odnośniki do kart produktów w Ceneo z identyfikatorami partnera. W katalogu jest łącznie 57 pozycji: 17 kart produktowych i 40 pozycji wyszukiwawczych. Sam zapis parametrów `crid` i `pid` nie potwierdza naliczania prowizji; raportowanie wymaga weryfikacji w Panelu Partnera.
+- W katalogu jest łącznie 57 pozycji: 17 kart produktowych z wyłączonymi linkami afiliacyjnymi i 40 pozycji wyszukiwawczych. Aktywne linki partnerskie nie są obecnie publikowane.
 - Ceneo odmówiło obecnie dostępu do niestandardowego API i zaleciło rozwój własnych treści oraz korzystanie ze standardowych kreacji z panelu.
-- Standardowe kreacje (linki tekstowe, banery, rotatory i wyszukiwarka) wymagają kodu wygenerowanego na aktywnym koncie Partnera. W repozytorium zachowano robocze dane 17 odnośników, ale nie są one publikowane na stronie do czasu sprawdzenia skuteczności w panelu.
+- Standardowe kreacje (linki tekstowe, banery, rotatory i wyszukiwarka) wymagają kodu wygenerowanego na aktywnym koncie Partnera. Nie należy publikować ręcznie skonstruowanych ani niezweryfikowanych adresów afiliacyjnych.
 - Importer i workflow pozostają zablokowane do czasu pisemnego potwierdzenia zasad wykorzystania danych przez Ceneo.
 
 ## Co wynika z regulaminu Ceneo
@@ -25,7 +25,7 @@ Dlatego przed uruchomieniem porównywarki trzeba uzyskać od Ceneo pisemną odpo
 - Katalog demonstracyjny bez fikcyjnych cen i rabatów.
 - Strona „Dla partnerów” z opisem projektu i statusem integracji.
 - Strona wyjaśniająca zasady linków afiliacyjnych.
-- Polityka prywatności dla obecnej wersji demonstracyjnej; wymaga uzupełnienia danych administratora i kontaktu przed uruchomieniem komercyjnym.
+- Polityka prywatności dla obecnej wersji demonstracyjnej; przed uruchomieniem funkcji komercyjnych należy zweryfikować kompletność danych administratora, podstawy i zakres przetwarzania oraz obowiązki informacyjne.
 - Podstawowe metadane SEO, robots.txt i sitemap.xml.
 - Prototyp importera Ceneo w repozytorium.
 - Workflow GitHub Actions do ręcznego uruchamiania po zatwierdzeniu zasad.
@@ -53,8 +53,8 @@ Adresy muszą korzystać z HTTPS, nie mogą zawierać danych logowania ani niest
 
 1. Rozwinąć własne poradniki i uzyskać stabilny ruch organiczny.
 2. Zalogować się do Panelu Partnera Ceneo, sprawdzić status konta i w zakładce „Twoje strony” dodać lub zweryfikować `https://tanievo.pl/`. Ceneo wymaga zgłoszenia wszystkich powierzchni, na których publikowane są kreacje. Instrukcja: https://pp.ceneo.pl/najczesciej-zadawane-pytania.
-3. Utrzymywać w katalogu wyłącznie pełne adresy wygenerowane w Panelu Partnera, bez ręcznej zmiany `crid` i `pid`.
-4. Zweryfikować kliknięcia i raportowanie prowizji w panelu Ceneo; sama obecność parametrów w adresie nie potwierdza jeszcze naliczania prowizji.
+3. Dodawać do serwisu wyłącznie pełne adresy i kody kreacji wygenerowane w Panelu Partnera, bez ręcznej modyfikacji kodu śledzącego.
+4. Po wdrożeniu testowo zweryfikować kliknięcia i raportowanie w Panelu Partnera; samo umieszczenie linku nie potwierdza naliczenia prowizji.
 5. Uzupełnić dane administratora i dokumenty wymagane przed uruchomieniem funkcji komercyjnych.
 6. Po zebraniu rzeczywistych statystyk i opisaniu sposobu kierowania ruchu do Ceneo przygotować ponowny, merytoryczny wniosek o API.
 7. Dopiero po pisemnej zgodzie skonfigurować sekrety GitHub i przetestować integrację.
