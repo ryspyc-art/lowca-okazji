@@ -53,3 +53,22 @@
 @media(max-width:480px){.top-cta{padding:10px 11px;font-size:11px}.mobile-nav-toggle{padding:9px 10px}}
 
 .catalog-status{border:1px solid #dfe8d4;background:#f7faf2;border-radius:12px;padding:24px 26px;margin:0 0 34px;color:#26321f}.catalog-status .promo-kicker{font-size:10px;font-weight:900;letter-spacing:1.5px;color:#e56b00}.catalog-status h2{font-size:22px;margin:10px 0}.catalog-status p{font-size:13px;line-height:1.7;color:#526071;max-width:780px}.catalog-status small{font-size:11px;color:#697386}.demo-price-note{font-size:11px;font-weight:700;color:#697386;padding:10px 0;border-top:1px solid #edf0eb;margin-top:10px}
+
+
+/* Katalog kategorii — rozbudowa strony głównej */
+.category-hub{max-width:1180px;margin:0 auto;padding:64px 45px 30px}
+.category-heading{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:22px}
+.category-heading h2{font-size:30px;letter-spacing:-1.2px;margin:8px 0}
+.category-heading p{margin:0;color:#7b8490;font-size:12px;line-height:1.6}
+.category-all{font-size:11px;font-weight:800;color:#101827;white-space:nowrap;border-bottom:1px solid #ff7900;padding-bottom:5px}
+.category-all span{color:#e56b00;margin-left:7px}
+.category-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.category-tile{min-height:132px;position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:7px;text-align:left;padding:17px;border:1px solid #e8ede4;border-radius:11px;background:#fff;color:#101827;cursor:pointer;transition:transform .18s,box-shadow .18s,border-color .18s}
+.category-tile:hover,.category-tile:focus-visible{transform:translateY(-3px);border-color:#ffb16b;box-shadow:0 10px 25px #1725360c;outline:none}
+.category-symbol{width:37px;height:37px;display:grid;place-items:center;border-radius:9px;background:#f2f5ec;font-size:20px}
+.category-tile strong{font-size:12px}
+.category-tile small{font-size:10px;color:#89919d}
+.category-arrow{position:absolute;right:16px;top:18px;color:#e56b00;font-size:16px}
+.category-footnote{font-size:10px;color:#9aa2ad;margin:13px 0 0;line-height:1.5}
+@media(max-width:800px){.category-hub{padding:48px 7vw 20px}.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.category-heading h2{font-size:26px}}
+@media(max-width:420px){.category-grid{gap:8px}.category-tile{min-height:122px;padding:13px}.category-tile strong{font-size:11px}.category-heading{align-items:flex-start;flex-direction:column}}
