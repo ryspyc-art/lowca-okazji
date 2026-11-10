@@ -8,13 +8,13 @@ Responsywna, statyczna strona publikowana przez GitHub Pages.
 - zapisywanie ulubionych produktów w pamięci lokalnej przeglądarki,
 - filtrowanie zapisanych pozycji,
 - responsywny układ na telefonach i komputerach,
-- katalog 57 pozycji: 17 kart produktów oczekujących na potwierdzenie linków afiliacyjnych oraz 40 dodatkowych pozycji prowadzących do wyszukiwania w Ceneo; linki afiliacyjne są wyłączone do czasu potwierdzenia śledzenia,
+- katalog 57 pozycji: 17 kart demonstracyjnych z wyłączonymi linkami afiliacyjnymi oraz 40 dodatkowych pozycji prowadzących do wyszukiwania w Ceneo; aktywne linki partnerskie nie są obecnie publikowane,
 - oznaczenie linków partnerskich i brak własnych, niezweryfikowanych cen.
 
 ## Pliki
 - `index.html` — struktura strony, treści i metadane SEO,
 - `style.css` — wygląd i układ responsywny,
-- `app.js` — katalog wybranych produktów, linki partnerskie, wyszukiwanie, filtrowanie i ulubione,
+- `app.js` — katalog demonstracyjny, wyszukiwanie, filtrowanie, bezpieczne linki wyszukiwawcze i ulubione,
 - `site.js` — wspólne drobne funkcje stron informacyjnych,
 - `robots.txt` i `sitemap.xml` — podstawowa konfiguracja indeksowania,
 - `favicon.svg` — ikona strony,
@@ -35,16 +35,16 @@ Responsywna, statyczna strona publikowana przez GitHub Pages.
 - `products.json` — plik katalogu tworzony przez ręcznie uruchamiany workflow po zatwierdzeniu integracji; obecnie nie jest publikowany.
 
 ## Ważne informacje
-Katalog zawiera 17 kart produktów z wyłączonymi linkami afiliacyjnymi do czasu potwierdzenia śledzenia oraz 40 pozycji wyszukiwawczych. Nie publikuje własnych cen ani stanów magazynowych; aktualne warunki należy sprawdzić na stronie partnera. Prototyp automatycznej integracji API Ceneo pozostaje wyłączony do czasu otrzymania klucza API i pisemnego potwierdzenia zasad wykorzystania danych.
+Katalog zawiera 17 kart demonstracyjnych z wyłączonymi linkami afiliacyjnymi oraz 40 pozycji wyszukiwawczych w Ceneo. Nie publikuje własnych cen ani stanów magazynowych; aktualne warunki należy sprawdzić bezpośrednio u sprzedawcy. Prototyp automatycznej integracji API Ceneo pozostaje wyłączony do czasu otrzymania klucza API i pisemnego potwierdzenia zasad wykorzystania danych.
 
-Przed zakupem użytkownik powinien sprawdzić aktualną cenę, dostępność i warunki bezpośrednio w sklepie. Linki afiliacyjne są oznaczone, a kliknięcie lub zakup może przynieść wydawcy prowizję.
+Przed zakupem użytkownik powinien sprawdzić aktualną cenę, dostępność i warunki bezpośrednio w sklepie. Aktywne linki afiliacyjne zostaną dodane dopiero po wygenerowaniu ich w Panelu Partnera i potwierdzeniu zasad publikacji.
 
 ## Kolejne kroki przed pełnym uruchomieniem serwisu
 1. Uzyskać i utrzymać akceptację wydawcy w programie partnerskim Ceneo.
 2. Uzyskać pisemne potwierdzenie Ceneo dotyczące wykorzystania API, prezentacji danych i linkowania.
 3. Dla standardowych kreacji używać wyłącznie pełnych adresów wygenerowanych w Panelu Partnera; nie modyfikować parametrów śledzących.
 4. Dopiero po potwierdzeniu zasad skonfigurować klucz API jako sekret GitHub Actions.
-5. Uzupełnić zweryfikowane dane administratora i kontakt w polityce prywatności przed uruchomieniem funkcji komercyjnych.
+5. Zweryfikować kompletność informacji o administratorze, danych kontaktowych i obowiązków informacyjnych przed uruchomieniem funkcji komercyjnych.
 6. Dla ewentualnego feedu Awin skonfigurować osobne sekrety/zmienne `AWIN_FEED_URL`, `AWIN_FEED_ALLOWED_HOSTS`, `AWIN_ALLOWED_PRODUCT_HOSTS` oraz opcjonalnie `AWIN_ALLOWED_IMAGE_HOSTS`. Listy hostów muszą zawierać dokładne nazwy domen rozdzielone przecinkami; bez nich importer odmawia pobrania lub publikacji ofert.
 7. Testować działanie strony na telefonach i komputerach.
 8. Dodać i zweryfikować stronę w Google Search Console po potwierdzeniu własności witryny.
