@@ -255,7 +255,9 @@ if (mobileNavToggle && mainNav) {
 document.getElementById("year").textContent = new Date().getFullYear();
 buildCategoryNavigation();
 render();
-// Katalog live pozostaje wyłączony do czasu przyznania API i potwierdzenia przez Ceneo zasad prezentacji oraz przetwarzania danych.
+// Jeśli zatwierdzony workflow opublikuje products.json, strona pobierze aktualny katalog.
+// Brak pliku oznacza pozostawienie bezpiecznego katalogu demonstracyjnego.
+loadLiveCatalog();
 
 const copyPromoButton = document.getElementById("copyPromoText");
 if (copyPromoButton) {
