@@ -8,7 +8,7 @@ Responsywna, statyczna strona publikowana przez GitHub Pages.
 - zapisywanie ulubionych produktów w pamięci lokalnej przeglądarki,
 - filtrowanie zapisanych pozycji,
 - responsywny układ na telefonach i komputerach,
-- katalog 57 pozycji: 17 kart produktów z odnośnikami do Ceneo oraz 40 dodatkowych pozycji prowadzących do wyszukiwania (naliczanie prowizji dla linków produktowych wymaga weryfikacji w Panelu Partnera),
+- katalog 57 pozycji: 17 kart produktów oczekujących na potwierdzenie linków afiliacyjnych oraz 40 dodatkowych pozycji prowadzących do wyszukiwania w Ceneo; linki afiliacyjne są wyłączone do czasu potwierdzenia śledzenia,
 - oznaczenie linków partnerskich i brak własnych, niezweryfikowanych cen.
 
 ## Pliki
@@ -35,7 +35,7 @@ Responsywna, statyczna strona publikowana przez GitHub Pages.
 - `products.json` — plik katalogu tworzony przez ręcznie uruchamiany workflow po zatwierdzeniu integracji; obecnie nie jest publikowany.
 
 ## Ważne informacje
-Katalog zawiera 17 wybranych kart produktów z linkami zawierającymi parametry afiliacyjne oraz 40 pozycji wyszukiwawczych. Nie publikuje własnych cen ani stanów magazynowych; aktualne warunki należy sprawdzić na stronie partnera. Prototyp automatycznej integracji API Ceneo pozostaje wyłączony do czasu otrzymania klucza API i pisemnego potwierdzenia zasad wykorzystania danych.
+Katalog zawiera 17 kart produktów z wyłączonymi linkami afiliacyjnymi do czasu potwierdzenia śledzenia oraz 40 pozycji wyszukiwawczych. Nie publikuje własnych cen ani stanów magazynowych; aktualne warunki należy sprawdzić na stronie partnera. Prototyp automatycznej integracji API Ceneo pozostaje wyłączony do czasu otrzymania klucza API i pisemnego potwierdzenia zasad wykorzystania danych.
 
 Przed zakupem użytkownik powinien sprawdzić aktualną cenę, dostępność i warunki bezpośrednio w sklepie. Linki afiliacyjne są oznaczone, a kliknięcie lub zakup może przynieść wydawcy prowizję.
 
