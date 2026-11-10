@@ -52,7 +52,7 @@ Adresy muszą korzystać z HTTPS, nie mogą zawierać danych logowania ani niest
 ## Kolejne kroki
 
 1. Rozwinąć własne poradniki i uzyskać stabilny ruch organiczny.
-2. Zalogować się do Panelu Partnera Ceneo, sprawdzić status konta i dodać/zweryfikować powierzchnię Tanievo.
+2. Zalogować się do Panelu Partnera Ceneo, sprawdzić status konta i w zakładce „Twoje strony” dodać lub zweryfikować `https://tanievo.pl/`. Ceneo wymaga zgłoszenia wszystkich powierzchni, na których publikowane są kreacje. Instrukcja: https://pp.ceneo.pl/najczesciej-zadawane-pytania.
 3. Utrzymywać w katalogu wyłącznie pełne adresy wygenerowane w Panelu Partnera, bez ręcznej zmiany `crid` i `pid`.
 4. Zweryfikować kliknięcia i raportowanie prowizji w panelu Ceneo; sama obecność parametrów w adresie nie potwierdza jeszcze naliczania prowizji.
 5. Uzupełnić dane administratora i dokumenty wymagane przed uruchomieniem funkcji komercyjnych.
