@@ -46,11 +46,11 @@ class SiteIntegrityTests(unittest.TestCase):
         self.assertIn("robots", names)
         self.assertIn("og:title", properties)
 
-    def test_ceneo_affiliate_catalog_links_are_disclosed_and_tagged(self):
-        product_urls = re.findall(r'productUrl:"(https://www\.ceneo\.pl/\d+#crid=\d+&pid=\d+)"', self.app)
-        self.assertEqual(len(product_urls), 17)
-        for url in product_urls:
-            self.assertRegex(url, r"^https://www\.ceneo\.pl/\d+#crid=\d+&pid=\d+$")
+    def test_unverified_ceneo_affiliate_links_are_not_published(self):
+        product_urls = re.findall(r'productUrl:"(https://www\\.ceneo\\.pl/\\d+#crid=\\d+&pid=\\d+)"', self.app)
+        self.assertEqual(product_urls, [])
+        self.assertEqual(len(re.findall(r'productUrl:""', self.app)), 17)
+        self.assertIn("Linki afiliacyjne pozostają wyłączone do czasu potwierdzenia poprawnego śledzenia", self.html)
         self.assertIn('rel="${product.linkType === "search" ? "nofollow noopener" : "sponsored nofollow noopener"}"', self.app)
 
     def test_discovery_catalog_is_not_mislabeled_as_affiliate(self):
