@@ -8,7 +8,7 @@ Responsywna, statyczna strona publikowana przez GitHub Pages.
 - zapisywanie ulubionych produktów w pamięci lokalnej przeglądarki,
 - filtrowanie zapisanych pozycji,
 - responsywny układ na telefonach i komputerach,
-- katalog 10 wybranych produktów z 10 linkami partnerskimi wygenerowanymi w panelu Ceneo,
+- katalog 10 wybranych produktów z odnośnikami do kart produktów w Ceneo, skonfigurowanymi z identyfikatorami partnera (naliczanie prowizji wymaga weryfikacji w panelu),
 - oznaczenie linków partnerskich i brak własnych, niezweryfikowanych cen.
 
 ## Pliki
@@ -42,8 +42,9 @@ Przed zakupem użytkownik powinien sprawdzić aktualną cenę, dostępność i w
 ## Kolejne kroki przed pełnym uruchomieniem serwisu
 1. Uzyskać i utrzymać akceptację wydawcy w programie partnerskim Ceneo.
 2. Uzyskać pisemne potwierdzenie Ceneo dotyczące wykorzystania API, prezentacji danych i linkowania.
-3. Dla standardowych kreacji używać wyłącznie pełnych adresów wygenerowanych w Panelu Partnera; nie modyfikować parametrów śledzących.\n4. Dopiero po potwierdzeniu zasad skonfigurować klucz API jako sekret GitHub Actions.
-4. Uzupełnić zweryfikowane dane administratora i kontakt w polityce prywatności przed uruchomieniem funkcji komercyjnych.
+3. Dla standardowych kreacji używać wyłącznie pełnych adresów wygenerowanych w Panelu Partnera; nie modyfikować parametrów śledzących.
+4. Dopiero po potwierdzeniu zasad skonfigurować klucz API jako sekret GitHub Actions.
+5. Uzupełnić zweryfikowane dane administratora i kontakt w polityce prywatności przed uruchomieniem funkcji komercyjnych.
 6. Dla ewentualnego feedu Awin skonfigurować osobne sekrety/zmienne `AWIN_FEED_URL`, `AWIN_FEED_ALLOWED_HOSTS`, `AWIN_ALLOWED_PRODUCT_HOSTS` oraz opcjonalnie `AWIN_ALLOWED_IMAGE_HOSTS`. Listy hostów muszą zawierać dokładne nazwy domen rozdzielone przecinkami; bez nich importer odmawia pobrania lub publikacji ofert.
 7. Testować działanie strony na telefonach i komputerach.
 8. Dodać i zweryfikować stronę w Google Search Console po potwierdzeniu własności witryny.
