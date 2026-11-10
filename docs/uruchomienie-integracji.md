@@ -4,9 +4,9 @@
 
 - Strona działa jako katalog demonstracyjny.
 - Karty przykładowe nie pokazują cen, rabatów ani dostępności.
-- W pliku `app.js` 10 kart produktów ma skonfigurowane odnośniki do kart produktów w Ceneo z identyfikatorami partnera. Sam zapis parametrów `crid` i `pid` nie potwierdza naliczania prowizji; raportowanie wymaga weryfikacji w Panelu Partnera.
+- W pliku `app.js` 17 kart produktów ma skonfigurowane odnośniki do kart produktów w Ceneo z identyfikatorami partnera. W katalogu jest łącznie 57 pozycji: 17 kart produktowych i 40 pozycji wyszukiwawczych. Sam zapis parametrów `crid` i `pid` nie potwierdza naliczania prowizji; raportowanie wymaga weryfikacji w Panelu Partnera.
 - Ceneo odmówiło obecnie dostępu do niestandardowego API i zaleciło rozwój własnych treści oraz korzystanie ze standardowych kreacji z panelu.
-- Standardowe kreacje (linki tekstowe, banery, rotatory i wyszukiwarka) wymagają kodu wygenerowanego na aktywnym koncie Partnera. W katalogu znajduje się 10 odnośników do kart produktów z parametrami partnera; ich skuteczność trzeba sprawdzić w panelu.
+- Standardowe kreacje (linki tekstowe, banery, rotatory i wyszukiwarka) wymagają kodu wygenerowanego na aktywnym koncie Partnera. W katalogu znajduje się 17 odnośników do kart produktów z parametrami partnera; ich skuteczność trzeba sprawdzić w panelu.
 - Importer i workflow pozostają zablokowane do czasu pisemnego potwierdzenia zasad wykorzystania danych przez Ceneo.
 
 ## Co wynika z regulaminu Ceneo
