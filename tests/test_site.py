@@ -48,7 +48,7 @@ class SiteIntegrityTests(unittest.TestCase):
 
     def test_ceneo_affiliate_catalog_links_are_disclosed_and_tagged(self):
         product_urls = re.findall(r'productUrl:"(https://www\.ceneo\.pl/\d+#crid=\d+&pid=\d+)"', self.app)
-        self.assertEqual(len(product_urls), 10)
+        self.assertEqual(len(product_urls), 17)
         for url in product_urls:
             self.assertRegex(url, r"^https://www\.ceneo\.pl/\d+#crid=\d+&pid=\d+$")
         self.assertIn('rel="${product.linkType === "search" ? "nofollow noopener" : "sponsored nofollow noopener"}"', self.app)
