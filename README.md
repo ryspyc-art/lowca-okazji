@@ -4,7 +4,7 @@ Responsywna, statyczna strona publikowana przez GitHub Pages.
 
 ## Co działa
 - wyszukiwanie nazw produktów i kategorii,
-- filtrowanie kategorii i sortowanie katalogu,
+- filtrowanie kategorii; sortowanie według ceny jest dostępne dopiero po uruchomieniu zatwierdzonego katalogu z aktualnymi cenami,
 - zapisywanie ulubionych produktów w pamięci lokalnej przeglądarki,
 - filtrowanie zapisanych pozycji,
 - responsywny układ na telefonach i komputerach,
