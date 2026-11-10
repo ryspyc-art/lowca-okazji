@@ -164,6 +164,21 @@ function render() {
   if (favoritesCount) favoritesCount.textContent = String(favorites.length);
 }
 
+document.querySelector(".category-grid")?.addEventListener("click", event => {
+  const tile = event.target.closest("[data-category-jump]");
+  if (!tile) return;
+  category = tile.dataset.categoryJump;
+  favoritesOnly = false;
+  search.value = "";
+  document.querySelectorAll(".chip").forEach(chip => {
+    const active = chip.dataset.category === category;
+    chip.classList.toggle("active", active);
+    chip.setAttribute("aria-pressed", String(active));
+  });
+  render();
+  document.getElementById("oferty").scrollIntoView({behavior:"smooth", block:"start"});
+});
+
 document.getElementById("categoryChips").addEventListener("click", event => {
   const button = event.target.closest("[data-category]");
   if (!button) return;
