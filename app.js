@@ -11,12 +11,18 @@ let products = [
   {id:"tanievo-010",name:"DicloMAX Mobilat żel 100 g",category:"Zdrowie",store:"Ceneo",icon:"🧴",productUrl:"https://www.ceneo.pl/179816741#crid=818416&pid=31443"}
 ];
 
+// Dodatkowe pozycje katalogowe do wyszukania w Ceneo; nie są potwierdzonymi ofertami afiliacyjnymi.
+const discoveryProducts = [["tanievo-011","Samsung Galaxy A56 5G","Telefony","📱"],["tanievo-012","Apple iPhone 16 128 GB","Telefony","📱"],["tanievo-013","Xiaomi Redmi Note 14 Pro 5G","Telefony","📱"],["tanievo-014","Sony WH-1000XM5","Elektronika","🎧"],["tanievo-015","JBL Tune 770NC","Elektronika","🎧"],["tanievo-016","Powerbank Xiaomi 20000 mAh","Elektronika","🔋"],["tanievo-017","Ładowarka Anker USB-C 30 W","Elektronika","🔌"],["tanievo-018","Monitor Dell 27 cali QHD","Komputery","🖥️"],["tanievo-019","Laptop Lenovo IdeaPad Slim 3","Komputery","💻"],["tanievo-020","SSD Samsung 990 EVO 1 TB","Komputery","💾"],["tanievo-021","Klawiatura Logitech K380","Komputery","⌨️"],["tanievo-022","Mysz Logitech MX Master 3S","Komputery","🖱️"],["tanievo-023","Sony PlayStation 5 Slim","Gaming","🎮"],["tanievo-024","Xbox Wireless Controller","Gaming","🎮"],["tanievo-025","Telewizor Samsung QLED 55 cali","RTV","📺"],["tanievo-026","Soundbar JBL Bar 500","RTV","🔊"],["tanievo-027","DeLonghi Magnifica S","AGD","☕"],["tanievo-028","Xiaomi Robot Vacuum S10","AGD","🤖"],["tanievo-029","Dyson V8","AGD","🧹"],["tanievo-030","Philips Airfryer 3000","AGD","🍟"],["tanievo-031","Blender Bosch VitaPower","AGD","🥤"],["tanievo-032","Czajnik Bosch Styline","AGD","🫖"],["tanievo-033","Zestaw garnków Tefal Ingenio","Dom","🍳"],["tanievo-034","Patelnia Tefal Unlimited 28 cm","Dom","🍳"],["tanievo-035","Pościel bawełniana 160 × 200 cm","Dom","🛏️"],["tanievo-036","Xiaomi Smart Air Purifier 4","Dom","🌬️"],["tanievo-037","Lampa biurkowa LED","Dom","💡"],["tanievo-038","Bosch Professional GSR 18V-55","Narzędzia","🛠️"],["tanievo-039","Szlifierka kątowa Makita 9558HNRG","Narzędzia","⚙️"],["tanievo-040","Zestaw kluczy nasadowych Yato","Narzędzia","🔧"],["tanievo-041","Kosiarka Bosch UniversalRotak","Ogród","🌱"],["tanievo-042","Myjka Kärcher K 4 Power Control","Ogród","🚿"],["tanievo-043","Kurtka trekkingowa softshell","Moda","🧥"],["tanievo-044","Adidas Terrex AX4","Obuwie","🥾"],["tanievo-045","Nike Revolution 7","Obuwie","👟"],["tanievo-046","Garmin Forerunner 165","Sport","⌚"],["tanievo-047","Mata fitness 180 cm","Sport","🧘"],["tanievo-048","Michelin Alpin 6 205/55 R16","Motoryzacja","🚗"],["tanievo-049","Wideorejestrator 70mai A500S","Motoryzacja","📹"],["tanievo-050","Legowisko wodoodporne dla psa","Dla zwierząt","🐾"]].map(([id,name,category,icon]) => ({id,name,category,icon,store:"Wyszukaj w Ceneo",productUrl:"https://www.ceneo.pl/;szukaj-" + encodeURIComponent(name),linkType:"search"}));
+products = [...products, ...discoveryProducts];
+
 const grid = document.getElementById("productGrid");
 const search = document.getElementById("searchInput");
 const sort = document.getElementById("sortSelect");
 const favoritesToggle = document.getElementById("favoritesToggle");
+const catalogCategories = [...new Set(products.map(p => p.category))].sort((a,b) => a.localeCompare(b,"pl"));
 let category = "Wszystkie";
 let favoritesOnly = false;
+function buildCategoryNavigation(){const chips=document.getElementById("categoryChips");if(chips)chips.innerHTML=["Wszystkie",...catalogCategories].map((name,i)=>'<button class="chip '+(i===0?"active":"") + '" data-category="'+escapeHTML(name)+'" aria-pressed="'+(i===0?"true":"false")+'">'+escapeHTML(name)+'</button>').join("");document.querySelectorAll("[data-category-jump]").forEach(tile=>{const n=products.filter(p=>p.category===tile.dataset.categoryJump).length;const s=tile.querySelector("small");if(s)s.textContent=n+(n===1?" produkt":n<5?" produkty":" produktów")});const note=document.querySelector(".demo-note");if(note)note.textContent=products.length+" produktów w katalogu";}
 
 function loadFavorites() {
   try {
@@ -147,9 +153,9 @@ function render() {
       <div class="product-category">${safeCategory}</div>
       <h3>${safeName}</h3>
       ${liveCatalog ? `<div class="price-row"><span class="price">${money(product.price)}</span></div>` : `<div class="demo-price-note">Sprawdź aktualną cenę u partnera</div>`}
-      <div class="store">${safeStore} · ${product.productUrl ? "link partnerski" : "weryfikacja linku w toku"}</div>
+      <div class="store">${safeStore} · ${product.linkType === "search" ? "wyszukiwanie produktu" : product.productUrl ? "link partnerski" : "weryfikacja linku w toku"}</div>
       ${liveCatalog && product.availability ? `<div class="store">Dostępność: ${escapeHTML(product.availability)}</div>` : ""}
-      ${safeProductUrl(product.productUrl) ? `<a class="offer-link" href="${escapeHTML(product.productUrl)}" target="_blank" rel="sponsored nofollow noopener"><span>Sprawdź produkt ↗</span></a>` : `<div class="offer-link"><span>Brak aktywnego linku</span><span aria-hidden="true">ⓘ</span></div>`}
+      ${safeProductUrl(product.productUrl) ? `<a class="offer-link" href="${escapeHTML(product.productUrl)}" target="_blank" rel="${product.linkType === "search" ? "nofollow noopener" : "sponsored nofollow noopener"}"><span>${product.linkType === "search" ? "Szukaj w Ceneo ↗" : "Sprawdź produkt ↗"}</span></a>` : `<div class="offer-link"><span>Brak aktywnego linku</span><span aria-hidden="true">ⓘ</span></div>`}
     </article>`;
   }).join("");
 
@@ -247,6 +253,7 @@ if (mobileNavToggle && mainNav) {
 }
 
 document.getElementById("year").textContent = new Date().getFullYear();
+buildCategoryNavigation();
 render();
 // Katalog live pozostaje wyłączony do czasu przyznania API i potwierdzenia przez Ceneo zasad prezentacji oraz przetwarzania danych.
 
