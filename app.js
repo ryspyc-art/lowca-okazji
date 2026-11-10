@@ -1,14 +1,14 @@
 let products = [
-  {id:"tanievo-001",name:"Apple AirPods 5 (MKFW4ZM/A)",category:"Elektronika",store:"Ceneo",icon:"🎧",productUrl:"https://www.ceneo.pl/199946527#crid=818405&pid=31443"},
-  {id:"tanievo-002",name:"Telewizor QLED Sharp 65JT8765E 65 cali",category:"RTV",store:"Ceneo",icon:"📺",productUrl:"https://www.ceneo.pl/202179594#crid=818406&pid=31443"},
-  {id:"tanievo-003",name:"Karta graficzna MSI GeForce RTX 5080 Gaming Trio OC 16 GB GDDR7",category:"Elektronika",store:"Ceneo",icon:"🎮",productUrl:"https://www.ceneo.pl/179994603#crid=818417&pid=31443"},
-  {id:"tanievo-004",name:"Hulajnoga elektryczna KuKirin G2",category:"Sport",store:"Ceneo",icon:"🛴",productUrl:"https://www.ceneo.pl/176018202#crid=818408&pid=31443"},
-  {id:"tanievo-005",name:"Thermos Mountain FFX 0,5 l Matt Black Green",category:"Dom",store:"Ceneo",icon:"☕",productUrl:"https://www.ceneo.pl/117967166#crid=818409&pid=31443"},
-  {id:"tanievo-006",name:"Opony zimowe Dębica Frigo 2 205/55 R16 91T",category:"Motoryzacja",store:"Ceneo",icon:"🚗",productUrl:"https://www.ceneo.pl/705846#crid=818410&pid=31443"},
-  {id:"tanievo-007",name:"Wobell mata antyszronowa na przednią szybę",category:"Motoryzacja",store:"Ceneo",icon:"🚘",productUrl:"https://www.ceneo.pl/196019290#crid=818412&pid=31443"},
-  {id:"tanievo-008",name:"Wkrętarka akumulatorowa DeWALT DCD800N 18 V",category:"Narzędzia",store:"Ceneo",icon:"🛠️",productUrl:"https://www.ceneo.pl/175282068#crid=818413&pid=31443"},
-  {id:"tanievo-009",name:"Whiskas Adult Mix smaków 40 × 85 g",category:"Dla zwierząt",store:"Ceneo",icon:"🐾",productUrl:"https://www.ceneo.pl/148943696#crid=818415&pid=31443"},
-  {id:"tanievo-010",name:"DicloMAX Mobilat żel 100 g",category:"Zdrowie",store:"Ceneo",icon:"🧴",productUrl:"https://www.ceneo.pl/179816741#crid=818416&pid=31443"}
+  {id:"tanievo-001",name:"Apple AirPods 5 (MKFW4ZM/A)",category:"Elektronika",store:"Ceneo",icon:"🎧",image:"https://image.ceneostatic.pl/data/products/199946927/f-apple-airpods-5-z-bezprzewodowym-etui-ladujacym-mkfw4zm-a.jpg",productUrl:"https://www.ceneo.pl/199946527#crid=818405&pid=31443"},
+  {id:"tanievo-002",name:"Telewizor QLED Sharp 65JT8765E 65 cali",category:"RTV",store:"Ceneo",icon:"📺",image:"https://image.ceneostatic.pl/offercandidates/9QDgAHRodHRwOi8vZjAxLmVzZnIucGwvZm90by8zLzE5MzcwMzU5NjE2OS81OTIwMjM3MjEzNWUzOTNiYTVlZGM5OWQzNmVjYjZhYS9zaGFycC10ZWxld2l6b3ItNjVqdDg3NjUsMTkzNzAzNTk2MTY5XzYud2VicA%3D%3D",productUrl:"https://www.ceneo.pl/202179594#crid=818406&pid=31443"},
+  {id:"tanievo-003",name:"Karta graficzna MSI GeForce RTX 5080 Gaming Trio OC 16 GB GDDR7",category:"Elektronika",store:"Ceneo",icon:"🎮",image:"https://image.ceneostatic.pl/offercandidates/9QDgAGtodHRwczovL2Nkbi54LWtvbS5wbC9pL3NldHVwL2ltYWdlcy9wcm9kL2JpZy8xNTAweDE1MDAsLDIwMjUvMy9wcl8yMDI1XzNfMjRfMTFfMTNfMTVfMjJfMDAuanBnP2ZpbHRlcnM9dHJpbQ%3D%3D",productUrl:"https://www.ceneo.pl/179994603#crid=818417&pid=31443"},
+  {id:"tanievo-004",name:"Hulajnoga elektryczna KuKirin G2",category:"Sport",store:"Ceneo",icon:"🛴",image:"https://image.ceneostatic.pl/offercandidates/9QDgAEVodHRwczovL2EuYWxsZWdyb2ltZy5jb20vb3JpZ2luYWwvMTEwYjk3Lzc4MmNiYzQ5NDFiMDkzNTMxOTJjNjc2ODgxNzc%3D",productUrl:"https://www.ceneo.pl/176018202#crid=818408&pid=31443"},
+  {id:"tanievo-005",name:"Thermos Mountain FFX 0,5 l Matt Black Green",category:"Dom",store:"Ceneo",icon:"☕",image:"https://image.ceneostatic.pl/offercandidates/9QDgAF1odHRwczovL21lZGlhLmdyYW1pbm8uY29tL21lZHVzYS9UaGVybW9zLU1vdW50YWluLUZGWC1ibGFjay0wMS0wMU01NTFIWVlISEhRSEFKU01OMzVYMEo4OS5qcGc%3D",productUrl:"https://www.ceneo.pl/117967166#crid=818409&pid=31443"},
+  {id:"tanievo-006",name:"Opony zimowe Dębica Frigo 2 205/55 R16 91T",category:"Motoryzacja",store:"Ceneo",icon:"🚗",image:"https://image.ceneostatic.pl/offercandidates/9QDgAEVodHRwczovL2EuYWxsZWdyb2ltZy5jb20vb3JpZ2luYWwvMTE3NjljL2Y1Yjc0OTFjNDcwODhiMDU1Y2U3NmExYWRkOWU%3D",productUrl:"https://www.ceneo.pl/705846#crid=818410&pid=31443"},
+  {id:"tanievo-007",name:"Wobell mata antyszronowa na przednią szybę",category:"Motoryzacja",store:"Ceneo",icon:"🚘",image:"https://image.ceneostatic.pl/offercandidates/9QDgAEVodHRwczovL2EuYWxsZWdyb2ltZy5jb20vb3JpZ2luYWwvMTE3ZmI2LzVmMTlmNjZhNGE0YmJjMjdiYTAzNjJkOGU0YzM%3D",productUrl:"https://www.ceneo.pl/196019290#crid=818412&pid=31443"},
+  {id:"tanievo-008",name:"Wkrętarka akumulatorowa DeWALT DCD800N 18 V",category:"Narzędzia",store:"Ceneo",icon:"🛠️",image:"https://image.ceneostatic.pl/offercandidates/9QDgAEVodHRwczovL2EuYWxsZWdyb2ltZy5jb20vb3JpZ2luYWwvMTE3ZmUyL2Q4YzhiNDMzNGQwNjg2NzQyNmJjMTM4ZGQzMjY%3D",productUrl:"https://www.ceneo.pl/175282068#crid=818413&pid=31443"},
+  {id:"tanievo-009",name:"Whiskas Adult Mix smaków 40 × 85 g",category:"Dla zwierząt",store:"Ceneo",icon:"🐾",image:"https://image.ceneostatic.pl/offercandidates/9QDgAEpodHRwczovL3pvb2FydC5jb20ucGwvaHBlY2lhaS82ZmFhZTk3ODM1ZjhkYzlkMGIyYjdmY2MxZGU1NDhiYS82NTY5NV8xLnBuZw%3D%3D",productUrl:"https://www.ceneo.pl/148943696#crid=818415&pid=31443"},
+  {id:"tanievo-010",name:"DicloMAX Mobilat żel 100 g",category:"Zdrowie",store:"Ceneo",icon:"🧴",image:"https://image.ceneostatic.pl/offercandidates/9QDgAFVodHRwczovL2JhY2tlbmQuZHJtYXgucGwvbWVkaWEvY2F0YWxvZy9wcm9kdWN0LzIvOC8yODFkZGRkZWE2MmE2XzU5MDk5OTE1MjIzNjBfVDEuanBn",productUrl:"https://www.ceneo.pl/179816741#crid=818416&pid=31443"}
 ];
 
 // Dodatkowe pozycje katalogowe do wyszukania w Ceneo; nie są potwierdzonymi ofertami afiliacyjnymi.
@@ -147,7 +147,7 @@ function render() {
     return `<article class="product-card">
       <div class="product-visual">
         ${Number.isFinite(product.discount) ? `<span class="discount-pill">−${product.discount}%</span>` : ""}
-        ${safeImage(product.image) ? `<img class="product-image" src="${escapeHTML(product.image)}" alt="" loading="lazy">` : `<span aria-hidden="true">${escapeHTML(product.icon || "🛍️")}</span>`}
+        ${safeImage(product.image) ? `<img class="product-image" src="${escapeHTML(product.image)}" alt="${safeName}" loading="lazy" decoding="async">` : `<span aria-hidden="true">${escapeHTML(product.icon || "🛍️")}</span>`}
         <button class="fav ${saved ? "saved" : ""}" data-fav="${escapeHTML(String(product.id))}" aria-label="${saved ? "Usuń z" : "Dodaj do"} ulubionych: ${safeName}" aria-pressed="${saved}">${saved ? "♥" : "♡"}</button>
       </div>
       <div class="product-category">${safeCategory}</div>
