@@ -51,6 +51,8 @@ class SiteIntegrityTests(unittest.TestCase):
         self.assertEqual(product_urls, [])
         self.assertEqual(len(re.findall(r'productUrl:""', self.app)), 17)
         self.assertIn("Linki afiliacyjne pozostają wyłączone do czasu potwierdzenia poprawnego śledzenia", self.html)
+        self.assertIn('product.productUrl = "https://www.ceneo.pl/;szukaj-" + encodeURIComponent(product.name);', self.app)
+        self.assertIn('product.linkType = "search";', self.app)
         self.assertIn('rel="${product.linkType === "search" ? "nofollow noopener" : "sponsored nofollow noopener"}"', self.app)
 
     def test_discovery_catalog_is_not_mislabeled_as_affiliate(self):
