@@ -47,21 +47,21 @@ class SiteIntegrityTests(unittest.TestCase):
         self.assertIn("og:title", properties)
 
     def test_ceneo_affiliate_catalog_links_are_disclosed_and_tagged(self):
-        product_urls = re.findall(r'productUrl:"(https://www\\.ceneo\\.pl/[^"]+)"', self.app)
+        product_urls = re.findall(r'productUrl:"(https://www\.ceneo\.pl/[^"]+)"', self.app)
         self.assertEqual(len(product_urls), 10)
         for url in product_urls:
-            self.assertRegex(url, r"^https://www\\.ceneo\\.pl/\\d+#crid=\\d+&pid=\\d+$")
+            self.assertRegex(url, r"^https://www\.ceneo\.pl/\d+#crid=\d+&pid=\d+$")
         self.assertIn('rel="${product.linkType === "search" ? "nofollow noopener" : "sponsored nofollow noopener"}"', self.app)
 
     def test_discovery_catalog_is_not_mislabeled_as_affiliate(self):
-        discovery_ids = re.findall(r'\\["tanievo-(\\d{3})"', self.app)
+        discovery_ids = re.findall(r'\["tanievo-(\d{3})"', self.app)
         self.assertEqual(len(discovery_ids), 40)
         self.assertEqual(discovery_ids[0], "011")
         self.assertEqual(discovery_ids[-1], "050")
         self.assertIn('linkType:"search"', self.app)
 
     def test_live_catalog_loader_is_wired_but_api_is_not_enabled(self):
-        self.assertEqual(len(re.findall(r"(?m)^loadLiveCatalog\\(\\);$", self.app)), 1)
+        self.assertEqual(len(re.findall(r"(?m)^loadLiveCatalog\(\);$", self.app)), 1)
         self.assertIn('CENEO_API_PUBLICATION_APPROVED', (ROOT / "scripts" / "update_ceneo.py").read_text(encoding="utf-8"))
 
     def test_privacy_policy_is_linked(self):
