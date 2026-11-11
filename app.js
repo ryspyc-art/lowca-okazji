@@ -107,18 +107,15 @@ async function loadAmazonOffers() {
     const payload = await response.json();
     if (!payload || !Array.isArray(payload.offers)) return;
     const imported = payload.offers.filter(item => {
-      if (!item || typeof item.id !== "string" || typeof item.name !== "string" ||
-          typeof item.productUrl !== "string" || !isSafeExternalHttpsUrl(item.productUrl)) return false;
+      if (!item || typeof item.id !== "string" || typeof item.name !== "string" || typeof item.productUrl !== "string" || !isSafeExternalHttpsUrl(item.productUrl)) return false;
       const url = new URL(item.productUrl);
-      return url.hostname === "www.amazon.pl" &&
-        url.searchParams.get("tag") === "tanievo-21" &&
-        typeof item.asin === "string" && url.pathname.includes("/dp/" + item.asin) &&
-        Number.isFinite(Number(item.price)) && Number(item.price) > 0;
+      if (item.linkType === "comparison") return url.hostname === "www.ceneo.pl" && typeof item.amazonSearchUrl === "string" && isSafeExternalHttpsUrl(item.amazonSearchUrl) && new URL(item.amazonSearchUrl).hostname === "www.amazon.pl" && new URL(item.amazonSearchUrl).searchParams.get("tag") === "tanievo-21" && Number.isFinite(Number(item.price)) && Number(item.price) > 0;
+      return url.hostname === "www.amazon.pl" && url.searchParams.get("tag") === "tanievo-21" && typeof item.asin === "string" && url.pathname.includes("/dp/" + item.asin) && Number.isFinite(Number(item.price)) && Number(item.price) > 0;
     }).map(item => ({
       id:item.id, name:item.name, category:normalizeCategory(item.category || "Inne"),
       price:Number(item.price), store:item.merchant || "Amazon", productUrl:item.productUrl,
-      linkType:"affiliate", image:safeImage(item.image) ? item.image : "",
-      availability:item.availability || "Sprawdź u sprzedawcy", ceneoUrl:typeof item.ceneoUrl === "string" && isSafeExternalHttpsUrl(item.ceneoUrl) && new URL(item.ceneoUrl).hostname === "www.ceneo.pl" ? item.ceneoUrl : "", icon:"🛍️"
+      linkType:item.linkType === "comparison" ? "comparison" : "affiliate", amazonSearchUrl:item.amazonSearchUrl || "", ceneoUrl:item.ceneoUrl || "",
+      image:safeImage(item.image) ? item.image : "", availability:item.availability || "Sprawdź u sprzedawcy", icon:"🛍️"
     }));
     for (const offer of imported) {
       const index = products.findIndex(product => String(product.id) === offer.id);
@@ -223,6 +220,7 @@ function render() {
       ${liveCatalog && product.availability ? `<div class="store">Dostępność: ${escapeHTML(product.availability)}</div>` : ""}
       ${safeProductUrl(product.productUrl) ? `<a class="offer-link" href="${escapeHTML(product.productUrl)}" target="_blank" rel="${product.linkType === "search" ? "nofollow noopener" : "sponsored nofollow noopener"}"><span>${product.linkType === "search" ? "Szukaj w Ceneo ↗" : "Sprawdź produkt ↗"}</span></a>` : `<div class="offer-link"><span>Brak aktywnego linku</span><span aria-hidden="true">ⓘ</span></div>`}
       ${product.ceneoUrl && safeProductUrl(product.ceneoUrl) && new URL(product.ceneoUrl).hostname === "www.ceneo.pl" ? `<a class="offer-link" href="${escapeHTML(product.ceneoUrl)}" target="_blank" rel="nofollow noopener"><span>Porównaj ceny na Ceneo ↗</span></a>` : ""}
+      ${product.amazonSearchUrl && safeProductUrl(product.amazonSearchUrl) && new URL(product.amazonSearchUrl).hostname === "www.amazon.pl" ? `<a class="offer-link" href="${escapeHTML(product.amazonSearchUrl)}" target="_blank" rel="sponsored nofollow noopener"><span>Szukaj na Amazon ↗</span></a>` : ""}
     </article>`;
   }).join("");
 
