@@ -32,6 +32,66 @@
       "availability": "Sprawdź u sprzedawcy",
       "ceneoUrl": "https://www.ceneo.pl/199941317",
       "ceneoLabel": "Porównaj ceny na Ceneo"
+    },
+    {
+      "id": "tanievo-060",
+      "name": "Samsung Galaxy Buds3 Pro",
+      "category": "Słuchawki",
+      "merchant": "Cena orientacyjna",
+      "price": 599.7,
+      "currency": "PLN",
+      "productUrl": "https://www.ceneo.pl/;szukaj-Samsung+Galaxy+Buds3+Pro",
+      "amazonSearchUrl": "https://www.amazon.pl/s?k=Samsung+Galaxy+Buds3+Pro&tag=tanievo-21",
+      "ceneoUrl": "https://www.ceneo.pl/;szukaj-Samsung+Galaxy+Buds3+Pro",
+      "linkType": "comparison",
+      "priceSource": "Wynik wyszukiwania zakupowego; cena orientacyjna",
+      "availability": "Cena orientacyjna — sprawdź aktualną ofertę",
+      "image": ""
+    },
+    {
+      "id": "tanievo-061",
+      "name": "Sony WF-1000XM5",
+      "category": "Słuchawki",
+      "merchant": "Cena orientacyjna",
+      "price": 738,
+      "currency": "PLN",
+      "productUrl": "https://www.ceneo.pl/;szukaj-Sony+WF-1000XM5",
+      "amazonSearchUrl": "https://www.amazon.pl/s?k=Sony+WF-1000XM5&tag=tanievo-21",
+      "ceneoUrl": "https://www.ceneo.pl/;szukaj-Sony+WF-1000XM5",
+      "linkType": "comparison",
+      "priceSource": "Wynik wyszukiwania zakupowego; cena orientacyjna",
+      "availability": "Cena orientacyjna — sprawdź aktualną ofertę",
+      "image": ""
+    },
+    {
+      "id": "tanievo-062",
+      "name": "Samsung Galaxy S26 Ultra 256 GB",
+      "category": "Smartfony",
+      "merchant": "Cena orientacyjna",
+      "price": 4799,
+      "currency": "PLN",
+      "productUrl": "https://www.ceneo.pl/;szukaj-Samsung+Galaxy+S26+Ultra+256GB",
+      "amazonSearchUrl": "https://www.amazon.pl/s?k=Samsung+Galaxy+S26+Ultra+256GB&tag=tanievo-21",
+      "ceneoUrl": "https://www.ceneo.pl/;szukaj-Samsung+Galaxy+S26+Ultra+256GB",
+      "linkType": "comparison",
+      "priceSource": "Wynik wyszukiwania zakupowego; wariant i cena wymagają weryfikacji",
+      "availability": "Cena orientacyjna — sprawdź aktualną ofertę",
+      "image": ""
+    },
+    {
+      "id": "tanievo-063",
+      "name": "Google Pixel 10 Pro 256 GB",
+      "category": "Smartfony",
+      "merchant": "Cena orientacyjna",
+      "price": 3949.75,
+      "currency": "PLN",
+      "productUrl": "https://www.ceneo.pl/;szukaj-Google+Pixel+10+Pro+256GB",
+      "amazonSearchUrl": "https://www.amazon.pl/s?k=Google+Pixel+10+Pro+256GB&tag=tanievo-21",
+      "ceneoUrl": "https://www.ceneo.pl/;szukaj-Google+Pixel+10+Pro+256GB",
+      "linkType": "comparison",
+      "priceSource": "Wynik wyszukiwania zakupowego; wariant i cena wymagają weryfikacji",
+      "availability": "Cena orientacyjna — sprawdź aktualną ofertę",
+      "image": ""
     }
   ]
 }
