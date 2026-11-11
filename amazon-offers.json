@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-11",
+  "updatedAt": "2026-11-12",
   "offers": [
     {
       "id": "tanievo-058",
@@ -67,15 +67,15 @@
       "id": "tanievo-062",
       "name": "Samsung Galaxy S26 Ultra 256 GB",
       "category": "Smartfony",
-      "merchant": "Cena orientacyjna",
-      "price": 4799,
+      "merchant": "Ceneo — najniższa widoczna oferta",
+      "price": 3279,
       "currency": "PLN",
-      "productUrl": "https://www.ceneo.pl/;szukaj-Samsung+Galaxy+S26+Ultra+256GB",
+      "productUrl": "https://www.ceneo.pl/Smartfony/p%3ASamsung/Popularne_modele%3ASamsung_Galaxy_S26_Ultra%3B0112-0.htm",
+      "ceneoUrl": "https://www.ceneo.pl/Smartfony/p%3ASamsung/Popularne_modele%3ASamsung_Galaxy_S26_Ultra%3B0112-0.htm",
       "amazonSearchUrl": "https://www.amazon.pl/s?k=Samsung+Galaxy+S26+Ultra+256GB&tag=tanievo-21",
-      "ceneoUrl": "https://www.ceneo.pl/;szukaj-Samsung+Galaxy+S26+Ultra+256GB",
       "linkType": "comparison",
-      "priceSource": "Wynik wyszukiwania zakupowego; wariant i cena wymagają weryfikacji",
-      "availability": "Cena orientacyjna — sprawdź aktualną ofertę",
+      "priceSource": "Ceneo: oferta od 3 279 zł; sprawdzić dokładny wariant, sklep, stan i dostawę przed zakupem",
+      "availability": "Cena od — potwierdź wariant i dostępność",
       "image": ""
     },
     {
@@ -90,6 +90,36 @@
       "ceneoUrl": "https://www.ceneo.pl/;szukaj-Google+Pixel+10+Pro+256GB",
       "linkType": "comparison",
       "priceSource": "Wynik wyszukiwania zakupowego; wariant i cena wymagają weryfikacji",
+      "availability": "Cena orientacyjna — sprawdź aktualną ofertę",
+      "image": ""
+    },
+    {
+      "id": "tanievo-064",
+      "name": "Samsung Galaxy S26 256 GB",
+      "category": "Smartfony",
+      "merchant": "x-kom — cena z porównania ofert",
+      "price": 3499,
+      "currency": "PLN",
+      "productUrl": "https://www.ceneo.pl/;szukaj-Samsung+Galaxy+S26+256GB",
+      "ceneoUrl": "https://www.ceneo.pl/;szukaj-Samsung+Galaxy+S26+256GB",
+      "amazonSearchUrl": "https://www.amazon.pl/s?k=Samsung+Galaxy+S26+256GB&tag=tanievo-21",
+      "linkType": "comparison",
+      "priceSource": "Wynik zestawienia cen z listopada 2026: od 3 499 zł w x-kom; potwierdzić wariant i aktualną cenę",
+      "availability": "Cena orientacyjna — sprawdź aktualną ofertę",
+      "image": ""
+    },
+    {
+      "id": "tanievo-065",
+      "name": "Apple iPhone 17 Pro 256 GB",
+      "category": "Smartfony",
+      "merchant": "Lantre — cena z wyników zakupowych",
+      "price": 4599,
+      "currency": "PLN",
+      "productUrl": "https://www.ceneo.pl/;szukaj-Apple+iPhone+17+Pro+256GB",
+      "ceneoUrl": "https://www.ceneo.pl/;szukaj-Apple+iPhone+17+Pro+256GB",
+      "amazonSearchUrl": "https://www.amazon.pl/s?k=Apple+iPhone+17+Pro+256GB&tag=tanievo-21",
+      "linkType": "comparison",
+      "priceSource": "Wynik zakupowy wskazał 4 599 zł w Lantre; pojemność i aktualną ofertę należy potwierdzić",
       "availability": "Cena orientacyjna — sprawdź aktualną ofertę",
       "image": ""
     }
