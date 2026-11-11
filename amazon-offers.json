@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "updatedAt": "2026-11-11",
+  "offers": [
+    {
+      "id": "tanievo-058",
+      "name": "Apple AirPods Pro 3",
+      "category": "Elektronika",
+      "merchant": "Amazon",
+      "price": 951,
+      "currency": "PLN",
+      "productUrl": "https://www.amazon.pl/dp/B0FQF32239/ref=cm_sw_r_as_gl_api_gl_i_J6DA85MZ6MJAN3SJRE5D?linkCode=ml1&tag=tanievo-21&linkId=de2135f17c53b51a033f3a184f6574e6&gaOptInStatus=true",
+      "linkType": "affiliate",
+      "asin": "B0FQF32239",
+      "priceCheckedAt": "2026-11-11",
+      "image": "",
+      "availability": "Sprawdź u sprzedawcy"
+    }
+  ]
+}
