@@ -100,6 +100,38 @@ let liveCatalog = false;
   const option = sort.querySelector('option[value="' + value + '"]');
   if (option) option.hidden = true;
 });
+async function loadAmazonOffers() {
+  try {
+    const response = await fetch("./amazon-offers.json?cache=" + Date.now(), {cache:"no-store"});
+    if (!response.ok) return;
+    const payload = await response.json();
+    if (!payload || !Array.isArray(payload.offers)) return;
+    const imported = payload.offers.filter(item => {
+      if (!item || typeof item.id !== "string" || typeof item.name !== "string" ||
+          typeof item.productUrl !== "string" || !isSafeExternalHttpsUrl(item.productUrl)) return false;
+      const url = new URL(item.productUrl);
+      return url.hostname === "www.amazon.pl" &&
+        url.searchParams.get("tag") === "tanievo-21" &&
+        typeof item.asin === "string" && url.pathname.includes("/dp/" + item.asin) &&
+        Number.isFinite(Number(item.price)) && Number(item.price) > 0;
+    }).map(item => ({
+      id:item.id, name:item.name, category:normalizeCategory(item.category || "Inne"),
+      price:Number(item.price), store:item.merchant || "Amazon", productUrl:item.productUrl,
+      linkType:"affiliate", image:safeImage(item.image) ? item.image : "",
+      availability:item.availability || "Sprawdź u sprzedawcy", icon:"🛍️"
+    }));
+    for (const offer of imported) {
+      const index = products.findIndex(product => String(product.id) === offer.id);
+      if (index >= 0) products[index] = {...products[index], ...offer};
+      else products.unshift(offer);
+    }
+    buildCategoryNavigation();
+    render();
+  } catch (error) {
+    console.warn("Nie udało się wczytać ofert Amazon PartnerNet.", error);
+  }
+}
+
 async function loadLiveCatalog() {
   try {
     const response = await fetch("./products.json?cache=" + Date.now(), {cache:"no-store"});
@@ -292,6 +324,7 @@ render();
 // Jeśli zatwierdzony workflow opublikuje products.json, strona pobierze aktualny katalog.
 // Brak pliku oznacza pozostawienie bezpiecznego katalogu demonstracyjnego.
 loadLiveCatalog();
+loadAmazonOffers();
 
 const copyPromoButton = document.getElementById("copyPromoText");
 if (copyPromoButton) {
