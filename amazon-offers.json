@@ -29,7 +29,9 @@
       "priceCheckedAt": "2026-11-11",
       "priceSource": "Indeksowana oferta Amazon.pl w zewnętrznych porównywarkach; cena niepotwierdzona bezpośrednio na stronie Amazon",
       "image": "",
-      "availability": "Sprawdź u sprzedawcy"
+      "availability": "Sprawdź u sprzedawcy",
+      "ceneoUrl": "https://www.ceneo.pl/199941317",
+      "ceneoLabel": "Porównaj ceny na Ceneo"
     }
   ]
 }
