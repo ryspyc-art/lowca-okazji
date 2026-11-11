@@ -16,7 +16,8 @@ let products = [
   {id:"tanievo-054",name:"Sudocrem Expert krem barierowy 400 g",category:"Zdrowie i higiena",store:"Ceneo",icon:"🧴",productUrl:""},
   {id:"tanievo-055",name:"LEGO City 60508 Napad na policyjny pociąg",category:"Zabawki",store:"Ceneo",icon:"🧩",productUrl:""},
   {id:"tanievo-056",name:"Pampers Premium Care rozmiar 1, 156 szt.",category:"Dziecko",store:"Ceneo",icon:"🍼",productUrl:""},
-  {id:"tanievo-057",name:"Liqui Moly Diesel Spulung 500 ml (2666)",category:"Motoryzacja",store:"Ceneo",icon:"🚗",productUrl:""}
+  {id:"tanievo-057",name:"Liqui Moly Diesel Spulung 500 ml (2666)",category:"Motoryzacja",store:"Ceneo",icon:"🚗",productUrl:""},
+  {id:"tanievo-058",name:"Apple AirPods Pro 3",category:"Elektronika",store:"Amazon PartnerNet",icon:"🎧",image:"",price:951,productUrl:"https://www.amazon.pl/dp/B0FQF32239/ref=cm_sw_r_as_gl_api_gl_i_J6DA85MZ6MJAN3SJRE5D?linkCode=ml1&tag=tanievo-21&linkId=de2135f17c53b51a033f3a184f6574e6&gaOptInStatus=true",linkType:"affiliate"}
 ];
 
 // Dodatkowe pozycje katalogowe do wyszukania w Ceneo; nie są potwierdzonymi ofertami afiliacyjnymi.
@@ -41,8 +42,10 @@ products.forEach(product => {
 for (const product of products) {
   if (!product.productUrl) {
     product.productUrl = "https://www.ceneo.pl/;szukaj-" + encodeURIComponent(product.name);
+    product.linkType = "search";
+  } else if (!product.linkType) {
+    product.linkType = "affiliate";
   }
-  product.linkType = "search";
   if (!product.store) product.store = "Ceneo";
 }
 
@@ -183,7 +186,7 @@ function render() {
       </div>
       <div class="product-category">${safeCategory}</div>
       <h3>${safeName}</h3>
-      ${liveCatalog ? `<div class="price-row"><span class="price">${money(product.price)}</span></div>` : `<div class="demo-price-note">Sprawdź aktualną cenę u partnera</div>`}
+      ${Number.isFinite(product.price) ? `<div class="price-row"><span class="price">${money(product.price)}</span></div>` : liveCatalog ? `<div class="demo-price-note">Sprawdź aktualną cenę u partnera</div>` : `<div class="demo-price-note">Sprawdź aktualną cenę u partnera</div>`}
       <div class="store">${safeStore} · ${product.linkType === "search" ? "wyszukiwanie produktu" : product.productUrl ? "link partnerski" : "weryfikacja linku w toku"}</div>
       ${liveCatalog && product.availability ? `<div class="store">Dostępność: ${escapeHTML(product.availability)}</div>` : ""}
       ${safeProductUrl(product.productUrl) ? `<a class="offer-link" href="${escapeHTML(product.productUrl)}" target="_blank" rel="${product.linkType === "search" ? "nofollow noopener" : "sponsored nofollow noopener"}"><span>${product.linkType === "search" ? "Szukaj w Ceneo ↗" : "Sprawdź produkt ↗"}</span></a>` : `<div class="offer-link"><span>Brak aktywnego linku</span><span aria-hidden="true">ⓘ</span></div>`}
