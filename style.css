@@ -119,3 +119,9 @@
 @media(max-width:900px){.picks-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.buyer-checklist{margin-left:7vw;margin-right:7vw;grid-template-columns:1fr;gap:28px}.benefit-strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:800px){.benefit-strip{padding:22px 7vw}.shopping-picks{padding:52px 7vw}.shopping-picks-heading{align-items:flex-start;flex-direction:column}.shopping-picks-heading h2{font-size:27px}.hero-art{min-height:280px}.buyer-checklist{padding:30px 24px}}
 @media(max-width:480px){.picks-grid{grid-template-columns:1fr 1fr;gap:8px}.pick-card{min-height:170px;padding:14px}.pick-card strong{font-size:13px}.pick-card>span:last-child{font-size:9px}.benefit-strip{gap:16px 9px}.benefit-strip>div{grid-template-columns:28px 1fr}.benefit-strip>div>span{width:27px;height:27px;font-size:14px}.benefit-strip strong{font-size:10px}.benefit-strip small{font-size:8px}.hero-product-mini{width:185px;right:-4px}.hero-product-main{left:-3px}.hero-floating-note{right:-3px}}
+
+/* Responsywny baner Ceneo — desktop i urządzenia mobilne */
+.ceneo-banner-wrap{width:min(100% - 32px,1180px);margin:28px auto 30px;display:flex;justify-content:center;align-items:center;overflow:hidden}
+.ceneo-banner-link{display:block;width:100%;max-width:100%;text-align:center;line-height:0}
+.ceneo-banner-image{display:block;width:100%;max-width:100%;height:auto;max-height:none;object-fit:contain;margin:0 auto}
+@media(max-width:600px){.ceneo-banner-wrap{width:calc(100% - 24px);margin:20px auto 24px}.ceneo-banner-link{width:100%}.ceneo-banner-image{width:100%;height:auto}}
