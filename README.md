@@ -8,7 +8,7 @@ Responsywna, statyczna strona publikowana przez GitHub Pages.
 - zapisywanie ulubionych produktów w pamięci lokalnej przeglądarki,
 - filtrowanie zapisanych pozycji,
 - responsywny układ na telefonach i komputerach,
-- katalog 57 pozycji, z których każda prowadzi do zwykłego wyszukiwania w Ceneo; linki afiliacyjne dla 17 wybranych produktów pozostają wyłączone do czasu weryfikacji,
+- katalog demonstracyjny oraz dodatkowe rekordy ofert wczytywane z `amazon-offers.json`; wpisy są rozróżniane jako wyszukiwanie, porównanie lub link afiliacyjny,
 - oznaczenie linków partnerskich i brak własnych, niezweryfikowanych cen.
 
 ## Pliki
@@ -35,7 +35,7 @@ Responsywna, statyczna strona publikowana przez GitHub Pages.
 - `products.json` — plik katalogu tworzony przez ręcznie uruchamiany workflow po zatwierdzeniu integracji; obecnie nie jest publikowany.
 
 ## Ważne informacje
-Katalog zawiera 57 kart z odnośnikami do zwykłego wyszukiwania produktów w Ceneo. Linki afiliacyjne pozostają wyłączone do czasu ich wygenerowania i weryfikacji. Serwis nie publikuje własnych cen ani stanów magazynowych; aktualne warunki należy sprawdzić bezpośrednio u sprzedawcy. Prototyp automatycznej integracji API Ceneo pozostaje wyłączony do czasu otrzymania klucza API i pisemnego potwierdzenia zasad wykorzystania danych.
+Katalog demonstracyjny zawiera pozycje prowadzące do wyszukiwania produktów w Ceneo oraz wybrane rekordy z `amazon-offers.json`. Linki afiliacyjne są oznaczane oddzielnie; przed zakupem należy potwierdzić cenę, dostępność i warunki u sprzedawcy. Serwis nie publikuje własnych cen ani stanów magazynowych; aktualne warunki należy sprawdzić bezpośrednio u sprzedawcy. Prototyp automatycznej integracji API Ceneo pozostaje wyłączony do czasu otrzymania klucza API i pisemnego potwierdzenia zasad wykorzystania danych.
 
 Przed zakupem użytkownik powinien sprawdzić aktualną cenę, dostępność i warunki bezpośrednio w sklepie. Aktywne linki afiliacyjne zostaną dodane dopiero po wygenerowaniu ich w Panelu Partnera i potwierdzeniu zasad publikacji.
 
