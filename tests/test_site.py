@@ -49,6 +49,13 @@ class SiteIntegrityTests(unittest.TestCase):
         self.assertIn('href="https://tanievo.pl/"', self.html)
         self.assertIn("https://tanievo.pl/sitemap.xml", (ROOT / "robots.txt").read_text(encoding="utf-8"))
 
+    def test_store_comparison_page_and_komputronik_disclosure(self):
+        page = (ROOT / "porownanie-sklepow.html").read_text(encoding="utf-8")
+        self.assertIn("Komputronik", page)
+        self.assertIn("Media Expert", page)
+        self.assertIn("linkami afiliacyjnymi Tanievo", page)
+        self.assertIn('href="porownanie-sklepow.html"', self.html)
+
     def test_has_search_engine_metadata(self):
         names = {item.get("name") for item in self.parser.meta}
         properties = {item.get("property") for item in self.parser.meta}
