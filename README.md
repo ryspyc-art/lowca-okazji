@@ -22,6 +22,8 @@ Responsywna, statyczna strona publikowana przez GitHub Pages.
 - `polityka-prywatnosci.html` — informacja o localStorage, hostingu i aktualnym zakresie przetwarzania danych,
 - `dla-partnerow.html` — opis projektu, standardów prezentacji ofert i planowanych integracji dla partnerów,
 - `poradnik-jak-kupowac.html` — poradnik zakupowy wspierający ruch z wyszukiwarki,
+- `porownywarka.html` i `porownywarka.js` — porównywarka ofert po kodzie producenta/EAN, z sortowaniem cen i znanych kosztów dostawy,
+- `porownania.json` — dane porównawcze z ceną, dostawą, dostępnością, bezpośrednim adresem oferty i datą sprawdzenia,
 - `porownanie-sklepow.html` — porównanie cen wybranego modelu w Komputronik i innych sklepach, z datą sprawdzenia i źródłami,
 - `poradnik-porownywanie-cen.html` — poradnik porównywania cen,
 - `poradnik-weryfikacja-sprzedawcy.html` — poradnik weryfikacji sklepu,
