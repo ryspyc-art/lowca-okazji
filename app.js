@@ -59,8 +59,12 @@ products.forEach(product => {
 const ceneoTracking = "cid=52090&crid=818403&pid=31443";
 for (const product of products) {
   if (!product.productUrl) {
-    const searchUrl = "https://www.ceneo.pl/;szukaj-" + encodeURIComponent(product.name);
-    product.productUrl = searchUrl + "#" + ceneoTracking;
+    product.productUrl = "https://www.ceneo.pl/;szukaj-" + encodeURIComponent(product.name);
+    product.linkType = "search";
+  }
+  if (product.id !== "tanievo-001" && product.linkType === "search") {
+    const baseUrl = product.productUrl.split("#")[0];
+    product.productUrl = baseUrl + "#" + ceneoTracking;
     product.linkType = "affiliate";
   } else if (!product.linkType) {
     product.linkType = "affiliate";
