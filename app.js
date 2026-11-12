@@ -28,7 +28,9 @@ products = [...products, ...discoveryProducts];
 function normalizeCategory(value) {
   const aliases = {
     "Odzież outdoor": "Moda",
-    "Zdrowie i higiena": "Zdrowie"
+    "Zdrowie i higiena": "Zdrowie",
+    "Smartfony": "Telefony",
+    "Słuchawki": "Elektronika"
   };
   return aliases[value] || value;
 }
@@ -53,10 +55,10 @@ const grid = document.getElementById("productGrid");
 const search = document.getElementById("searchInput");
 const sort = document.getElementById("sortSelect");
 const favoritesToggle = document.getElementById("favoritesToggle");
-const catalogCategories = [...new Set(products.map(p => p.category))].sort((a,b) => a.localeCompare(b,"pl"));
+let catalogCategories = [...new Set(products.map(p => p.category))].sort((a,b) => a.localeCompare(b,"pl"));
 let category = "Wszystkie";
 let favoritesOnly = false;
-function buildCategoryNavigation(){const chips=document.getElementById("categoryChips");if(chips)chips.innerHTML=["Wszystkie",...catalogCategories].map((name,i)=>'<button class="chip '+(i===0?"active":"") + '" data-category="'+escapeHTML(name)+'" aria-pressed="'+(i===0?"true":"false")+'">'+escapeHTML(name)+'</button>').join("");document.querySelectorAll("[data-category-jump]").forEach(tile=>{const n=products.filter(p=>p.category===tile.dataset.categoryJump).length;const s=tile.querySelector("small");if(s)s.textContent=n+(n===1?" produkt":n<5?" produkty":" produktów")});const note=document.querySelector(".demo-note");if(note)note.textContent=products.length+" produktów w katalogu";}
+function buildCategoryNavigation(){catalogCategories=[...new Set(products.map(p=>p.category))].sort((a,b)=>a.localeCompare(b,"pl"));const chips=document.getElementById("categoryChips");if(chips)chips.innerHTML=["Wszystkie",...catalogCategories].map((name,i)=>'<button class="chip '+(i===0?"active":"") + '" data-category="'+escapeHTML(name)+'" aria-pressed="'+(i===0?"true":"false")+'">'+escapeHTML(name)+'</button>').join("");document.querySelectorAll("[data-category-jump]").forEach(tile=>{const n=products.filter(p=>p.category===tile.dataset.categoryJump).length;const s=tile.querySelector("small");if(s)s.textContent=n+(n===1?" produkt":n<5?" produkty":" produktów")});const note=document.querySelector(".demo-note");if(note)note.textContent=products.length+" produktów w katalogu";}
 
 function loadFavorites() {
   try {
@@ -110,10 +112,10 @@ async function loadAmazonOffers() {
       if (!item || typeof item.id !== "string" || typeof item.name !== "string" || typeof item.productUrl !== "string" || !isSafeExternalHttpsUrl(item.productUrl)) return false;
       const url = new URL(item.productUrl);
       if (item.linkType === "comparison") return url.hostname === "www.ceneo.pl" && typeof item.amazonSearchUrl === "string" && isSafeExternalHttpsUrl(item.amazonSearchUrl) && new URL(item.amazonSearchUrl).hostname === "www.amazon.pl" && new URL(item.amazonSearchUrl).searchParams.get("tag") === "tanievo-21" && Number.isFinite(Number(item.price)) && Number(item.price) > 0;
-      return url.hostname === "www.amazon.pl" && url.searchParams.get("tag") === "tanievo-21" && typeof item.asin === "string" && url.pathname.includes("/dp/" + item.asin) && Number.isFinite(Number(item.price)) && Number(item.price) > 0;
+      return url.hostname === "www.amazon.pl" && url.searchParams.get("tag") === "tanievo-21" && typeof item.asin === "string" && url.pathname.includes("/dp/" + item.asin);
     }).map(item => ({
       id:item.id, name:item.name, category:normalizeCategory(item.category || "Inne"),
-      price:Number(item.price), store:item.merchant || "Amazon", productUrl:item.productUrl,
+      price:Number.isFinite(Number(item.price)) && Number(item.price) > 0 ? Number(item.price) : null, priceSource:item.priceSource || "", priceCheckedAt:item.priceCheckedAt || "", store:item.merchant || "Amazon", productUrl:item.productUrl,
       linkType:item.linkType === "comparison" ? "comparison" : "affiliate", amazonSearchUrl:item.amazonSearchUrl || "", ceneoUrl:item.ceneoUrl || "",
       image:safeImage(item.image) ? item.image : "", availability:item.availability || "Sprawdź u sprzedawcy", icon:"🛍️"
     }));
@@ -215,11 +217,11 @@ function render() {
       </div>
       <div class="product-category">${safeCategory}</div>
       <h3>${safeName}</h3>
-      ${Number.isFinite(product.price) ? `<div class="price-row"><span class="price">${money(product.price)}</span></div>` : liveCatalog ? `<div class="demo-price-note">Sprawdź aktualną cenę u partnera</div>` : `<div class="demo-price-note">Sprawdź aktualną cenę u partnera</div>`}
+      ${Number.isFinite(product.price) ? `<div class="price-row"><span class="price">${money(product.price)}</span></div>` : `<div class="demo-price-note">${product.priceSource ? "Cena niepotwierdzona — sprawdź u sprzedawcy" : "Sprawdź aktualną cenę u partnera"}</div>`}
       <div class="store">${safeStore} · ${product.linkType === "search" ? "wyszukiwanie produktu" : product.productUrl ? "link partnerski" : "weryfikacja linku w toku"}</div>
       ${liveCatalog && product.availability ? `<div class="store">Dostępność: ${escapeHTML(product.availability)}</div>` : ""}
-      ${safeProductUrl(product.productUrl) ? `<a class="offer-link" href="${escapeHTML(product.productUrl)}" target="_blank" rel="${product.linkType === "search" ? "nofollow noopener" : "sponsored nofollow noopener"}"><span>${product.linkType === "search" ? "Szukaj w Ceneo ↗" : "Sprawdź produkt ↗"}</span></a>` : `<div class="offer-link"><span>Brak aktywnego linku</span><span aria-hidden="true">ⓘ</span></div>`}
-      ${product.ceneoUrl && safeProductUrl(product.ceneoUrl) && new URL(product.ceneoUrl).hostname === "www.ceneo.pl" ? `<a class="offer-link" href="${escapeHTML(product.ceneoUrl)}" target="_blank" rel="nofollow noopener"><span>Porównaj ceny na Ceneo ↗</span></a>` : ""}
+      ${safeProductUrl(product.productUrl) ? `<a class="offer-link" href="${escapeHTML(product.productUrl)}" target="_blank" rel="${product.linkType === "affiliate" ? "sponsored nofollow noopener" : "nofollow noopener"}"><span>${product.linkType === "search" ? "Szukaj w Ceneo ↗" : product.linkType === "comparison" ? "Sprawdź Ceneo ↗" : "Sprawdź produkt ↗"}</span></a>` : `<div class="offer-link"><span>Brak aktywnego linku</span><span aria-hidden="true">ⓘ</span></div>`}
+      ${product.ceneoUrl && product.ceneoUrl !== product.productUrl && safeProductUrl(product.ceneoUrl) && new URL(product.ceneoUrl).hostname === "www.ceneo.pl" ? `<a class="offer-link" href="${escapeHTML(product.ceneoUrl)}" target="_blank" rel="nofollow noopener"><span>Porównaj ceny na Ceneo ↗</span></a>` : ""}
       ${product.amazonSearchUrl && safeProductUrl(product.amazonSearchUrl) && new URL(product.amazonSearchUrl).hostname === "www.amazon.pl" ? `<a class="offer-link" href="${escapeHTML(product.amazonSearchUrl)}" target="_blank" rel="sponsored nofollow noopener"><span>Szukaj na Amazon ↗</span></a>` : ""}
     </article>`;
   }).join("");
