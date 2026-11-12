@@ -58,6 +58,29 @@ class SiteIntegrityTests(unittest.TestCase):
                 self.assertIn(term, page)
         self.assertIn('href="porownanie-sklepow.html"', self.html)
 
+    def test_comparison_engine_has_model_ids_direct_links_and_sorting(self):
+        page = (ROOT / "porownywarka.html").read_text(encoding="utf-8")
+        script = (ROOT / "porownywarka.js").read_text(encoding="utf-8")
+        data = json.loads((ROOT / "porownania.json").read_text(encoding="utf-8"))
+        self.assertIn('href="porownywarka.html"', self.html)
+        self.assertIn('id="comparisonSort"', page)
+        self.assertIn('modelCode', json.dumps(data))
+        self.assertIn('ean', json.dumps(data))
+        self.assertIn('shipping', json.dumps(data))
+        self.assertIn('availability', json.dumps(data))
+        self.assertIn('checkedAt', json.dumps(data))
+        self.assertIn('offer.url', script)
+        self.assertIn('at - bt', script)
+        self.assertIn('allowedHosts', script)
+        for product in data["products"]:
+            self.assertTrue(product.get("modelCode"))
+            self.assertTrue(product.get("ean"))
+            self.assertGreaterEqual(len(product.get("offers", [])), 2)
+            for offer in product["offers"]:
+                self.assertTrue(offer.get("url", "").startswith("https://"))
+                self.assertTrue(offer.get("checkedAt"))
+                self.assertIsInstance(offer.get("price"), (int, float))
+
     def test_product_images_have_verified_sources_and_fallback(self):
         self.assertIn("verifiedProductImages", self.app)
         self.assertIn("cdn.newtime.ua/upload/2025-09/navushniki-apple-airpods-pro-3_2400.webp", self.app)
