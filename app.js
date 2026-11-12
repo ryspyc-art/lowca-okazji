@@ -1,5 +1,5 @@
 let products = [
-  {id:"tanievo-001",name:"Apple AirPods 5 (MKFW4ZM/A)",category:"Elektronika",store:"Ceneo",icon:"🎧",image:"https://image.ceneostatic.pl/data/products/199946927/f-apple-airpods-5-z-bezprzewodowym-etui-ladujacym-mkfw4zm-a.jpg",productUrl:""},
+  {id:"tanievo-001",name:"Apple AirPods 5 (MKFW4ZM/A)",category:"Elektronika",store:"Ceneo",icon:"🎧",image:"https://image.ceneostatic.pl/data/products/199946927/f-apple-airpods-5-z-bezprzewodowym-etui-ladujacym-mkfw4zm-a.jpg",productUrl:"https://www.ceneo.pl/199946527#cid=52090&crid=818403&pid=31443",linkType:"affiliate"},
   {id:"tanievo-002",name:"Telewizor QLED Sharp 65JT8765E 65 cali",category:"RTV",store:"Ceneo",icon:"📺",image:"https://image.ceneostatic.pl/offercandidates/9QDgAHRodHRwOi8vZjAxLmVzZnIucGwvZm90by8zLzE5MzcwMzU5NjE2OS81OTIwMjM3MjEzNWUzOTNiYTVlZGM5OWQzNmVjYjZhYS9zaGFycC10ZWxld2l6b3ItNjVqdDg3NjUsMTkzNzAzNTk2MTY5XzYud2VicA%3D%3D",productUrl:""},
   {id:"tanievo-003",name:"Karta graficzna MSI GeForce RTX 5080 Gaming Trio OC 16 GB GDDR7",category:"Elektronika",store:"Ceneo",icon:"🎮",image:"https://image.ceneostatic.pl/offercandidates/9QDgAGtodHRwczovL2Nkbi54LWtvbS5wbC9pL3NldHVwL2ltYWdlcy9wcm9kL2JpZy8xNTAweDE1MDAsLDIwMjUvMy9wcl8yMDI1XzNfMjRfMTFfMTNfMTVfMjJfMDAuanBnP2ZpbHRlcnM9dHJpbQ%3D%3D",productUrl:""},
   {id:"tanievo-004",name:"Hulajnoga elektryczna KuKirin G2",category:"Sport",store:"Ceneo",icon:"🛴",image:"https://image.ceneostatic.pl/offercandidates/9QDgAEVodHRwczovL2EuYWxsZWdyb2ltZy5jb20vb3JpZ2luYWwvMTEwYjk3Lzc4MmNiYzQ5NDFiMDkzNTMxOTJjNjc2ODgxNzc%3D",productUrl:""},
@@ -52,13 +52,16 @@ products.forEach(product => {
   product.category = normalizeCategory(product.category);
 });
 
-// Każda karta katalogowa ma zwykły, nieafiliacyjny odnośnik do wyszukania
-// dokładnej nazwy produktu w Ceneo. Nie dodajemy parametrów śledzących.
-// Linki partnerskie pozostają wyłączone do czasu zatwierdzenia przez Ceneo.
+// Ceneo potwierdziło możliwość używania wspólnych parametrów afiliacyjnych
+// PID/CRID/CID dla różnych produktów, jeśli nie wymagamy statystyk per produkt.
+// AirPods 5 zachowuje dokładny link wygenerowany w panelu; pozostałe produkty
+// kierują do wyszukiwania swojej nazwy w Ceneo z tymi samymi parametrami.
+const ceneoTracking = "cid=52090&crid=818403&pid=31443";
 for (const product of products) {
   if (!product.productUrl) {
-    product.productUrl = "https://www.ceneo.pl/;szukaj-" + encodeURIComponent(product.name);
-    product.linkType = "search";
+    const searchUrl = "https://www.ceneo.pl/;szukaj-" + encodeURIComponent(product.name);
+    product.productUrl = searchUrl + "#" + ceneoTracking;
+    product.linkType = "affiliate";
   } else if (!product.linkType) {
     product.linkType = "affiliate";
   }
