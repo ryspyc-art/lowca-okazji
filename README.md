@@ -22,6 +22,7 @@ Responsywna, statyczna strona publikowana przez GitHub Pages.
 - `polityka-prywatnosci.html` — informacja o localStorage, hostingu i aktualnym zakresie przetwarzania danych,
 - `dla-partnerow.html` — opis projektu, standardów prezentacji ofert i planowanych integracji dla partnerów,
 - `poradnik-jak-kupowac.html` — poradnik zakupowy wspierający ruch z wyszukiwarki,
+- `porownanie-sklepow.html` — porównanie cen wybranego modelu w Komputronik i innych sklepach, z datą sprawdzenia i źródłami,
 - `poradnik-porownywanie-cen.html` — poradnik porównywania cen,
 - `poradnik-weryfikacja-sprzedawcy.html` — poradnik weryfikacji sklepu,
 - `poradnik-koszt-dostawy.html` — poradnik liczenia całkowitego kosztu,
@@ -33,6 +34,9 @@ Responsywna, statyczna strona publikowana przez GitHub Pages.
 - `scripts/update_awin.py` — importer feedu CSV Awin z walidacją hostów i blokadą przekierowań,
 - `.github/workflows/update-ceneo.yml` — ręczny workflow aktualizacji (obecnie zablokowany do czasu pisemnego potwierdzenia Ceneo),
 - `products.json` — plik katalogu tworzony przez ręcznie uruchamiany workflow po zatwierdzeniu integracji; obecnie nie jest publikowany.
+
+## Porównywanie sklepów
+Komputronik jest dodany jako dodatkowy sklep do porównań. Na obecnym etapie linki do niego są zwykłymi linkami, a nie linkami afiliacyjnymi Tanievo. Ceny porównawcze są datowane i wymagają potwierdzenia u sprzedawcy przed zakupem.
 
 ## Ważne informacje
 Katalog demonstracyjny zawiera pozycje prowadzące do wyszukiwania produktów w Ceneo oraz wybrane rekordy z `amazon-offers.json`. Linki afiliacyjne są oznaczane oddzielnie; przed zakupem należy potwierdzić cenę, dostępność i warunki u sprzedawcy. Serwis nie publikuje własnych cen ani stanów magazynowych; aktualne warunki należy sprawdzić bezpośrednio u sprzedawcy. Prototyp automatycznej integracji API Ceneo pozostaje wyłączony do czasu otrzymania klucza API i pisemnego potwierdzenia zasad wykorzystania danych.
