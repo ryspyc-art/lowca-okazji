@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta name="description" content="Porównuj identyczne modele w sklepach. Cena produktu, dostawa, dostępność, EAN i bezpośrednie linki.">
+<link rel="canonical" href="https://tanievo.pl/porownywarka.html"><link rel="stylesheet" href="style.css">
+<title>Porównywarka cen — identyczne modele i oferty | Tanievo.pl</title>
+<style>
+.compare-page{max-width:1120px;margin:auto;padding:52px 22px 80px}.compare-page h1{font-size:clamp(32px,5vw,50px);margin:12px 0}.compare-lead{max-width:800px;color:#647184;line-height:1.8}.compare-tools{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap;padding:18px 0;border-bottom:1px solid #e5eaf0}.compare-tools select{padding:10px 12px;border:1px solid #d9e0e8;border-radius:8px;background:#fff}.compare-status{font-size:12px;color:#687588}.product-compare{margin:24px 0;background:#fff;border:1px solid #e5eaf0;border-radius:16px;padding:24px}.product-heading{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.product-heading h2{margin:7px 0;font-size:24px}.product-heading p{font-size:12px;color:#647184;margin:6px 0}.eyebrow{font-size:10px;font-weight:900;letter-spacing:1.4px;color:#d86b0b}.offer-count{white-space:nowrap;background:#edf5e9;color:#315b25;border-radius:30px;padding:7px 11px;font-size:11px;font-weight:800}.offer-row{display:grid;grid-template-columns:1.4fr .8fr .8fr .8fr auto;gap:15px;align-items:center;border-top:1px solid #e9edf1;padding:18px 0}.offer-main strong,.offer-price strong,.offer-delivery strong,.offer-total strong{display:block;font-size:14px}.offer-condition,.offer-price span,.offer-delivery span,.offer-total span{display:block;font-size:10px;color:#788495;margin-top:4px}.offer-main p{font-size:11px;color:#657184;line-height:1.5;margin:6px 0 0}.offer-total strong{color:#17633b}.offer-action a{display:inline-block;background:#101827;color:white;text-decoration:none;border-radius:8px;padding:11px 13px;font-size:11px;font-weight:800;white-space:nowrap}.offer-checked{grid-column:1/-1;font-size:10px;color:#8993a0;margin:0}.compare-disclaimer{font-size:12px;color:#758092;line-height:1.7;margin-top:22px}.empty-note{padding:30px;background:#fff;border-radius:12px;color:#667}.compare-page footer{margin-top:35px}
+@media(max-width:760px){.compare-page{padding:35px 14px 55px}.product-compare{padding:17px}.product-heading{display:block}.offer-count{display:inline-block;margin:10px 0}.offer-row{grid-template-columns:1fr 1fr;gap:12px}.offer-main{grid-column:1/-1}.offer-action{grid-column:1/-1}.offer-action a{display:block;text-align:center}.offer-checked{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="index.html"><span class="brand-mark">T</span><span>Tanievo.pl</span></a><nav><a href="index.html#kategorie">Kategorie</a><a href="index.html#oferty">Oferty</a><a href="porownywarka.html">Porównywarka</a><a href="porownanie-sklepow.html">Sklepy</a><a href="poradnik-jak-kupowac.html">Poradnik</a></nav><a class="top-cta" href="index.html">Katalog ↗</a></header>
+<main class="compare-page">
+<div class="eyebrow">PORÓWNYWANIE IDENTYCZNYCH MODELI</div><h1>Ta sama rzecz. Różne ceny.</h1>
+<p class="compare-lead">Dopasowujemy produkty po kodzie producenta i EAN. Pokazujemy wyłącznie bezpośrednie karty ofert, rozdzielamy cenę produktu od dostawy i nie zgadujemy dostępności. Jeśli koszt dostawy nie jest znany, nie doliczamy go na oko.</p>
+<div class="compare-tools"><label for="comparisonSort">Sortuj oferty: <select id="comparisonSort"><option value="total">Najniższy znany koszt całkowity</option><option value="price">Najniższa cena produktu</option></select></label><span class="compare-status" id="comparisonStatus" aria-live="polite">Wczytywanie ofert…</span></div>
+<div id="comparisonResults" aria-live="polite"></div>
+<p class="compare-disclaimer">Ostatnia aktualizacja zbioru: <strong id="dataUpdated">—</strong>. Ceny i dostępność mogą zmienić się u sprzedawcy. Koszt całkowity jest sortowany wyłącznie tam, gdzie znany jest koszt dostawy; oferty z niepotwierdzoną dostawą są oznaczone i nie są sztucznie porównywane. Linki afiliacyjne są oznaczone. Tanievo może otrzymać prowizję bez dodatkowego kosztu dla kupującego.</p>
+</main>
+<footer><a class="brand footer-brand" href="index.html"><span class="brand-mark">T</span><span>Tanievo.pl</span></a><p>Kupuj świadomie. Nie przepłacaj.</p><small>© Tanievo.pl</small></footer>
+<script src="porownywarka.js"></script>
+</body></html>
