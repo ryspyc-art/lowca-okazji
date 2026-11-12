@@ -51,10 +51,11 @@ class SiteIntegrityTests(unittest.TestCase):
 
     def test_store_comparison_page_and_komputronik_disclosure(self):
         page = (ROOT / "porownanie-sklepow.html").read_text(encoding="utf-8")
-        self.assertIn("Komputronik", page)
-        self.assertIn("Media Expert", page)
-        self.assertIn("afiliacyjnymi Tanievo", page)
-        self.assertIn("zwykłymi odnośnikami", page)
+        for term in ("Komputronik", "Acer Nitro V 16S", "Gigabyte A18",
+                     "Morele", "OleOle", "afiliacyjnymi Tanievo",
+                     "zwykłymi odnośnikami"):
+            with self.subTest(term=term):
+                self.assertIn(term, page)
         self.assertIn('href="porownanie-sklepow.html"', self.html)
 
     def test_has_search_engine_metadata(self):
