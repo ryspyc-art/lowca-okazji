@@ -53,7 +53,8 @@ class SiteIntegrityTests(unittest.TestCase):
         page = (ROOT / "porownanie-sklepow.html").read_text(encoding="utf-8")
         self.assertIn("Komputronik", page)
         self.assertIn("Media Expert", page)
-        self.assertIn("linkami afiliacyjnymi Tanievo", page)
+        self.assertIn("afiliacyjnymi Tanievo", page)
+        self.assertIn("zwykłymi odnośnikami", page)
         self.assertIn('href="porownanie-sklepow.html"', self.html)
 
     def test_has_search_engine_metadata(self):
