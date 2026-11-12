@@ -2,6 +2,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 import re
 import unittest
+import json
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -46,14 +47,20 @@ class SiteIntegrityTests(unittest.TestCase):
         self.assertIn("robots", names)
         self.assertIn("og:title", properties)
 
-    def test_unverified_ceneo_affiliate_links_are_not_published(self):
+    def test_affiliate_and_search_links_are_distinguished(self):
         product_urls = re.findall(r'productUrl:"(https://www\\.ceneo\\.pl/\\d+#crid=\\d+&pid=\\d+)"', self.app)
         self.assertEqual(product_urls, [])
-        self.assertEqual(len(re.findall(r'productUrl:""', self.app)), 17)
-        self.assertIn("Linki afiliacyjne pozostają wyłączone do czasu potwierdzenia poprawnego śledzenia", self.html)
         self.assertIn('product.productUrl = "https://www.ceneo.pl/;szukaj-" + encodeURIComponent(product.name);', self.app)
         self.assertIn('product.linkType = "search";', self.app)
-        self.assertIn('rel="${product.linkType === "search" ? "nofollow noopener" : "sponsored nofollow noopener"}"', self.app)
+        self.assertIn('rel="${product.linkType === "affiliate" ? "sponsored nofollow noopener" : "nofollow noopener"}"', self.app)
+        offers = json.loads((ROOT / "amazon-offers.json").read_text(encoding="utf-8"))
+        from urllib.parse import urlparse, parse_qs
+        for offer in offers["offers"]:
+            if offer.get("linkType") != "comparison":
+                parsed = urlparse(offer["productUrl"])
+                self.assertEqual(parsed.scheme, "https")
+                self.assertEqual(parsed.hostname, "www.amazon.pl")
+                self.assertEqual(parse_qs(parsed.query).get("tag"), ["tanievo-21"])
 
     def test_discovery_catalog_is_not_mislabeled_as_affiliate(self):
         discovery_ids = re.findall(r'\["tanievo-(\d{3})"', self.app)
