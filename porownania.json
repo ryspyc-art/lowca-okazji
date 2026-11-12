@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-11-12T20:00:00+01:00",
+  "currency": "PLN",
+  "products": [
+    {
+      "id": "apple-airpods-pro-3-mfhp4zm-a",
+      "name": "Apple AirPods Pro 3",
+      "manufacturer": "Apple",
+      "modelCode": "MFHP4ZM/A",
+      "ean": "00195950543742",
+      "variant": "Białe, etui MagSafe USB-C",
+      "offers": [
+        {
+          "store": "Amazon.pl",
+          "price": 951.00,
+          "shipping": null,
+          "availability": "Cena widoczna w ofercie; stan magazynowy i dostawa do potwierdzenia w koszyku",
+          "condition": "Nowy — potwierdź u sprzedawcy",
+          "url": "https://www.amazon.pl/Apple-Bezprzewodowe-sluchawki-sluchowego-przestrzenny/dp/B0FQF32239?tag=tanievo-21",
+          "sourceUrl": "https://www.amazon.pl/Apple-Bezprzewodowe-sluchawki-sluchowego-przestrzenny/dp/B0FQF32239",
+          "checkedAt": "2026-11-12T20:00:00+01:00",
+          "shippingNote": "Koszt dostawy niepotwierdzony",
+          "affiliate": true
+        },
+        {
+          "store": "x-kom",
+          "price": 959.00,
+          "shipping": 0,
+          "availability": "Dostępny według karty produktu; dostawa bezpłatna",
+          "condition": "Nowy",
+          "url": "https://www.x-kom.pl/p/1362333-sluchawki-bezprzewodowe-apple-airpods-pro-3-anc.html",
+          "sourceUrl": "https://www.x-kom.pl/p/1362333-sluchawki-bezprzewodowe-apple-airpods-pro-3-anc.html",
+          "checkedAt": "2026-11-12T20:00:00+01:00",
+          "shippingNote": "Darmowa dostawa wskazana na karcie produktu",
+          "affiliate": false
+        }
+      ]
+    }
+  ]
+}
