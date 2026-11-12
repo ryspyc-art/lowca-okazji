@@ -40,6 +40,15 @@ class SiteIntegrityTests(unittest.TestCase):
                     "shareFeedback", "year"}
         self.assertTrue(required.issubset(set(self.parser.ids)))
 
+    def test_comparison_navigation_points_to_comparison_hub(self):
+        self.assertIn('href="#aktualne-porownania">Porównania</a>', self.html)
+        self.assertIn('id="aktualne-porownania"', self.html)
+
+    def test_custom_domain_configuration_is_consistent(self):
+        self.assertEqual((ROOT / "CNAME").read_text(encoding="utf-8").strip(), "tanievo.pl")
+        self.assertIn('href="https://tanievo.pl/"', self.html)
+        self.assertIn("https://tanievo.pl/sitemap.xml", (ROOT / "robots.txt").read_text(encoding="utf-8"))
+
     def test_has_search_engine_metadata(self):
         names = {item.get("name") for item in self.parser.meta}
         properties = {item.get("property") for item in self.parser.meta}
