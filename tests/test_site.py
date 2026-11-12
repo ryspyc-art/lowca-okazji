@@ -58,6 +58,14 @@ class SiteIntegrityTests(unittest.TestCase):
                 self.assertIn(term, page)
         self.assertIn('href="porownanie-sklepow.html"', self.html)
 
+    def test_product_images_have_verified_sources_and_fallback(self):
+        self.assertIn("verifiedProductImages", self.app)
+        self.assertIn("cdn.newtime.ua/upload/2025-09/navushniki-apple-airpods-pro-3_2400.webp", self.app)
+        self.assertIn("Samsung Galaxy Buds3 Pro", self.app)
+        self.assertIn('grid.addEventListener("error"', self.app)
+        self.assertIn("product-image-fallback", self.app)
+        self.assertIn(".product-image{", (ROOT / "style.css").read_text(encoding="utf-8"))
+
     def test_has_search_engine_metadata(self):
         names = {item.get("name") for item in self.parser.meta}
         properties = {item.get("property") for item in self.parser.meta}
