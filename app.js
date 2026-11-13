@@ -19,6 +19,7 @@ let products = [
   {id:"tanievo-057",name:"Liqui Moly Diesel Spulung 500 ml (2666)",category:"Motoryzacja",store:"Ceneo",icon:"🚗",productUrl:""},
   {id:"tanievo-058",name:"Apple AirPods Pro 3",category:"Elektronika",store:"Amazon PartnerNet",icon:"🎧",image:"",price:951,productUrl:"https://www.amazon.pl/dp/B0FQF32239/ref=cm_sw_r_as_gl_api_gl_i_J6DA85MZ6MJAN3SJRE5D?linkCode=ml1&tag=tanievo-21&linkId=de2135f17c53b51a033f3a184f6574e6&gaOptInStatus=true",linkType:"affiliate"}
   ,{id:"tanievo-059",name:"AVG i Avast – oprogramowanie ochronne",category:"Oprogramowanie",store:"AVG i Avast · webePartners",icon:"🛡️",productUrl:"https://webep1.com/go/9febd7553f",linkType:"affiliate"}
+  ,{id:"tanievo-060",name:"Bitdefender – pakiety antywirusowe i ochrona urządzeń",category:"Oprogramowanie",store:"Bitdefender · webePartners",icon:"🛡️",productUrl:"https://webep1.com/c/12403/6aecbf4b2777780c42e8ebd9?r=aHR0cHM6Ly9iaXRkZWZlbmRlci5wbC8",linkType:"affiliate"}
 ];
 
 // Dodatkowe pozycje katalogowe do wyszukania w Ceneo; nie są potwierdzonymi ofertami afiliacyjnymi.
