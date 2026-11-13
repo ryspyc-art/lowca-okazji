@@ -18,8 +18,8 @@ let products = [
   {id:"tanievo-056",name:"Pampers Premium Care rozmiar 1, 156 szt.",category:"Dziecko",store:"Ceneo",icon:"🍼",productUrl:""},
   {id:"tanievo-057",name:"Liqui Moly Diesel Spulung 500 ml (2666)",category:"Motoryzacja",store:"Ceneo",icon:"🚗",productUrl:""},
   {id:"tanievo-058",name:"Apple AirPods Pro 3",category:"Elektronika",store:"Amazon PartnerNet",icon:"🎧",image:"",price:951,productUrl:"https://www.amazon.pl/dp/B0FQF32239/ref=cm_sw_r_as_gl_api_gl_i_J6DA85MZ6MJAN3SJRE5D?linkCode=ml1&tag=tanievo-21&linkId=de2135f17c53b51a033f3a184f6574e6&gaOptInStatus=true",linkType:"affiliate"}
-  ,{id:"tanievo-059",name:"AVG i Avast – oprogramowanie ochronne",category:"Oprogramowanie",store:"AVG i Avast · webePartners",icon:"🛡️",productUrl:"https://webep1.com/go/9febd7553f",linkType:"affiliate"}
-  ,{id:"tanievo-060",name:"Bitdefender – pakiety antywirusowe i ochrona urządzeń",category:"Oprogramowanie",store:"Bitdefender · webePartners",icon:"🛡️",productUrl:"https://webep1.com/c/12403/6aecbf4b2777780c42e8ebd9?r=aHR0cHM6Ly9iaXRkZWZlbmRlci5wbC8",linkType:"affiliate"}
+  ,{id:"tanievo-059",name:"AVG i Avast – oprogramowanie ochronne",category:"Oprogramowanie",store:"AVG i Avast · webePartners",icon:"🛡️",productUrl:"",linkType:"paused"}
+  ,{id:"tanievo-060",name:"Bitdefender – pakiety antywirusowe i ochrona urządzeń",category:"Oprogramowanie",store:"Bitdefender · webePartners",icon:"🛡️",productUrl:"",linkType:"paused"}
 ];
 
 // Dodatkowe pozycje katalogowe do wyszukania w Ceneo; nie są potwierdzonymi ofertami afiliacyjnymi.
@@ -253,9 +253,9 @@ function render() {
       <div class="product-category">${safeCategory}</div>
       <h3>${safeName}</h3>
       ${Number.isFinite(product.price) ? `<div class="price-row"><span class="price">${money(product.price)}</span></div>` : `<div class="demo-price-note">${product.priceSource ? "Cena niepotwierdzona — sprawdź u sprzedawcy" : "Sprawdź aktualną cenę u partnera"}</div>`}
-      <div class="store">${safeStore} · ${product.linkType === "search" ? "wyszukiwanie produktu" : product.productUrl ? "link partnerski" : "weryfikacja linku w toku"}</div>
+      <div class="store">${safeStore} · ${product.linkType === "paused" ? "oferta chwilowo niedostępna" : product.linkType === "search" ? "wyszukiwanie produktu" : product.productUrl ? "link partnerski" : "weryfikacja linku w toku"}</div>
       ${liveCatalog && product.availability ? `<div class="store">Dostępność: ${escapeHTML(product.availability)}</div>` : ""}
-      ${safeProductUrl(product.productUrl) ? `<a class="offer-link" href="${escapeHTML(product.productUrl)}" target="_blank" rel="${product.linkType === "affiliate" ? "sponsored nofollow noopener" : "nofollow noopener"}"><span>${product.linkType === "search" ? "Szukaj w Ceneo ↗" : product.linkType === "comparison" ? "Sprawdź Ceneo ↗" : "Sprawdź produkt ↗"}</span></a>` : `<div class="offer-link"><span>Brak aktywnego linku</span><span aria-hidden="true">ⓘ</span></div>`}
+      ${safeProductUrl(product.productUrl) ? `<a class="offer-link" href="${escapeHTML(product.productUrl)}" target="_blank" rel="${product.linkType === "affiliate" ? "sponsored nofollow noopener" : "nofollow noopener"}"><span>${product.linkType === "search" ? "Szukaj w Ceneo ↗" : product.linkType === "comparison" ? "Sprawdź Ceneo ↗" : "Sprawdź produkt ↗"}</span></a>` : `<div class="offer-link"><span>${product.linkType === "paused" ? "Oferta chwilowo niedostępna" : "Brak aktywnego linku"}</span><span aria-hidden="true">ⓘ</span></div>`}
       ${product.ceneoUrl && product.ceneoUrl !== product.productUrl && safeProductUrl(product.ceneoUrl) && new URL(product.ceneoUrl).hostname === "www.ceneo.pl" ? `<a class="offer-link" href="${escapeHTML(product.ceneoUrl)}" target="_blank" rel="nofollow noopener"><span>Porównaj ceny na Ceneo ↗</span></a>` : ""}
       ${product.amazonSearchUrl && safeProductUrl(product.amazonSearchUrl) && new URL(product.amazonSearchUrl).hostname === "www.amazon.pl" ? `<a class="offer-link" href="${escapeHTML(product.amazonSearchUrl)}" target="_blank" rel="sponsored nofollow noopener"><span>Szukaj na Amazon ↗</span></a>` : ""}
     </article>`;
