@@ -18,7 +18,7 @@ let products = [
   {id:"tanievo-056",name:"Pampers Premium Care rozmiar 1, 156 szt.",category:"Dziecko",store:"Ceneo",icon:"🍼",productUrl:""},
   {id:"tanievo-057",name:"Liqui Moly Diesel Spulung 500 ml (2666)",category:"Motoryzacja",store:"Ceneo",icon:"🚗",productUrl:""},
   {id:"tanievo-058",name:"Apple AirPods Pro 3",category:"Elektronika",store:"Amazon PartnerNet",icon:"🎧",image:"",price:951,productUrl:"https://www.amazon.pl/dp/B0FQF32239/ref=cm_sw_r_as_gl_api_gl_i_J6DA85MZ6MJAN3SJRE5D?linkCode=ml1&tag=tanievo-21&linkId=de2135f17c53b51a033f3a184f6574e6&gaOptInStatus=true",linkType:"affiliate"}
-  ,{id:"tanievo-059",name:"AVG i Avast – oprogramowanie ochronne",category:"Oprogramowanie",store:"AVG i Avast · webePartners",icon:"🛡️",productUrl:"",linkType:"paused"}
+  ,{id:"tanievo-059",name:"Avast – oprogramowanie ochronne",category:"Oprogramowanie",store:"Avast · webePartners",icon:"🛡️",productUrl:"https://webep1.com/go/9febd7553f",linkType:"affiliate"}
   ,{id:"tanievo-060",name:"Bitdefender – pakiety antywirusowe i ochrona urządzeń",category:"Oprogramowanie",store:"Bitdefender · webePartners",icon:"🛡️",productUrl:"",linkType:"paused"}
 ];
 
