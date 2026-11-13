@@ -144,8 +144,16 @@ async function loadAmazonOffers() {
     }));
     for (const offer of imported) {
       const index = products.findIndex(product => String(product.id) === offer.id);
-      if (index >= 0) products[index] = {...products[index], ...offer};
-      else products.unshift(offer);
+      if (index >= 0) {
+        // Nie pozwól, aby błędny lub powielony identyfikator nadpisał inną ofertę.
+        if (products[index].name !== offer.name) {
+          console.warn("Pominięto ofertę z kolizją ID:", offer.id, offer.name);
+          continue;
+        }
+        products[index] = {...products[index], ...offer};
+      } else {
+        products.unshift(offer);
+      }
     }
     buildCategoryNavigation();
     render();
