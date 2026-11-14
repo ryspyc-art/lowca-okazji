@@ -111,6 +111,12 @@ class SiteIntegrityTests(unittest.TestCase):
                 self.assertEqual(parsed.hostname, "www.amazon.pl")
                 self.assertEqual(parse_qs(parsed.query).get("tag"), ["tanievo-21"])
 
+    def test_ceneo_search_links_are_never_promoted_to_affiliate(self):
+        self.assertNotIn("const ceneoTracking", self.app)
+        self.assertNotIn("baseUrl + \"#\" + ceneoTracking", self.app)
+        self.assertIn('product.linkType = "search";', self.app)
+        self.assertIn('if (!product.productUrl && product.linkType !== "paused")', self.app)
+
     def test_discovery_catalog_is_not_mislabeled_as_affiliate(self):
         discovery_ids = re.findall(r'\["tanievo-(\d{3})"', self.app)
         self.assertEqual(len(discovery_ids), 40)
