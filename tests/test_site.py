@@ -96,27 +96,33 @@ class SiteIntegrityTests(unittest.TestCase):
         self.assertIn("robots", names)
         self.assertIn("og:title", properties)
 
-    def test_affiliate_and_search_links_are_distinguished(self):
-        product_urls = re.findall(r'productUrl:"(https://www\\.ceneo\\.pl/\\d+#crid=\\d+&pid=\\d+)"', self.app)
-        self.assertEqual(product_urls, [])
-        self.assertIn('product.productUrl = "https://www.ceneo.pl/;szukaj-" + encodeURIComponent(product.name);', self.app)
-        self.assertIn('product.linkType = "search";', self.app)
-        self.assertIn('rel="nofollow noopener noreferrer"', self.app)
-        self.assertIn('rel="sponsored nofollow noopener noreferrer"', self.app)
+    def test_affiliate_and_search_links_use_shared_ceneo_tracking(self):
+        exact_airpods_url = "https://www.ceneo.pl/199946527#cid=52090&crid=818403&pid=31443"
+        self.assertIn('productUrl:"' + exact_airpods_url + '"', self.app)
+        self.assertIn('const AIRPODS_5_CENEO_URL = "' + exact_airpods_url + '";', self.app)
+        self.assertIn('const CENEO_TRACKING = "cid=52090&crid=818403&pid=31443";', self.app)
+        self.assertIn('url.hash = CENEO_TRACKING;', self.app)
         self.assertIn('getCeneoUrl(product)', self.app)
         self.assertIn('getAmazonUrl(product)', self.app)
+        self.assertIn('rel="nofollow noopener noreferrer"', self.app)
+        self.assertIn('rel="sponsored nofollow noopener noreferrer"', self.app)
         offers = json.loads((ROOT / "amazon-offers.json").read_text(encoding="utf-8"))
         from urllib.parse import urlparse, parse_qs
         for offer in offers["offers"]:
-            if offer.get("linkType") != "comparison":
+            if offer.get("linkType") == "comparison":
+                for key in ("productUrl", "ceneoUrl"):
+                    if offer.get(key, "").startswith("https://www.ceneo.pl/"):
+                        self.assertEqual(urlparse(offer[key]).fragment, "cid=52090&crid=818403&pid=31443")
+            else:
                 parsed = urlparse(offer["productUrl"])
                 self.assertEqual(parsed.scheme, "https")
                 self.assertEqual(parsed.hostname, "www.amazon.pl")
                 self.assertEqual(parse_qs(parsed.query).get("tag"), ["tanievo-21"])
 
-    def test_ceneo_search_links_are_never_promoted_to_affiliate(self):
-        self.assertNotIn("const ceneoTracking", self.app)
-        self.assertNotIn("baseUrl + \"#\" + ceneoTracking", self.app)
+    def test_ceneo_search_links_receive_shared_tracking_without_changing_search_paths(self):
+        self.assertIn('const CENEO_TRACKING = "cid=52090&crid=818403&pid=31443";', self.app)
+        self.assertIn('function withCeneoTracking(candidate)', self.app)
+        self.assertIn('url.hash = CENEO_TRACKING;', self.app)
         self.assertIn('product.linkType = "search";', self.app)
         self.assertIn('if (!product.productUrl && product.linkType !== "paused")', self.app)
 
