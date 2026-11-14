@@ -23,7 +23,13 @@
   function render(products) {
     const mode = sort.value;
     root.innerHTML = products.map(product => {
-      const offers = [...product.offers].filter(o => safeUrl(o.url)).sort((a,b) => {
+      const now = Date.now();
+      const maxAgeMs = 72 * 60 * 60 * 1000;
+      const offers = [...product.offers].filter(o => {
+        const checked = Date.parse(o.checkedAt);
+        return safeUrl(o.url) && Number.isFinite(Number(o.price)) && Number(o.price) > 0 &&
+          Number.isFinite(checked) && checked <= now && now - checked <= maxAgeMs;
+      }).sort((a,b) => {
         if (mode === "price") return a.price - b.price;
         const at = total(a), bt = total(b);
         if (at === null && bt !== null) return 1;
@@ -44,11 +50,11 @@
       }).join("");
       return `<section class="product-compare">
         <div class="product-heading"><div><span class="eyebrow">DOPASOWANIE MODELU</span><h2>${escapeHTML(product.name)}</h2><p>Producent: ${escapeHTML(product.manufacturer)} · Kod: <b>${escapeHTML(product.modelCode)}</b> · EAN: <b>${escapeHTML(product.ean)}</b></p><p>${escapeHTML(product.variant)}</p></div><span class="offer-count">${offers.length} bezpośrednie oferty</span></div>
-        <div class="offer-list">${rows || "<p>Brak ofert spełniających warunki walidacji.</p>"}</div>
+        <div class="offer-list">${rows || "<p>Brak aktualnych ofert spełniających warunki walidacji (dane starsze niż 72 godziny są ukrywane).</p>"}</div>
       </section>`;
     }).join("");
     const count = products.reduce((n,p)=>n+p.offers.filter(o=>safeUrl(o.url)).length,0);
-    status.textContent = `Zweryfikowane rekordy: ${products.length} modeli · ${count} bezpośrednie oferty sklepów. Sortowanie: ${mode === "price" ? "cena produktu" : "znany koszt całkowity (cena + dostawa)"}.`;
+    status.textContent = `Modele: ${products.length} · ${count} aktualnych ofert (dane starsze niż 72 godziny są ukrywane). Sortowanie: ${mode === "price" ? "cena produktu" : "znany koszt całkowity (cena + dostawa)"}.`;
   }
   fetch(dataUrl + "?v=" + encodeURIComponent(Date.now()), {cache:"no-store"})
     .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
