@@ -101,7 +101,10 @@ class SiteIntegrityTests(unittest.TestCase):
         self.assertEqual(product_urls, [])
         self.assertIn('product.productUrl = "https://www.ceneo.pl/;szukaj-" + encodeURIComponent(product.name);', self.app)
         self.assertIn('product.linkType = "search";', self.app)
-        self.assertIn('rel="${product.linkType === "affiliate" ? "sponsored nofollow noopener" : "nofollow noopener"}"', self.app)
+        self.assertIn('rel="nofollow noopener noreferrer"', self.app)
+        self.assertIn('rel="sponsored nofollow noopener noreferrer"', self.app)
+        self.assertIn('getCeneoUrl(product)', self.app)
+        self.assertIn('getAmazonUrl(product)', self.app)
         offers = json.loads((ROOT / "amazon-offers.json").read_text(encoding="utf-8"))
         from urllib.parse import urlparse, parse_qs
         for offer in offers["offers"]:
