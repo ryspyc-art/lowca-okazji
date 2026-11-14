@@ -117,6 +117,17 @@ class SiteIntegrityTests(unittest.TestCase):
         self.assertIn('product.linkType = "search";', self.app)
         self.assertIn('if (!product.productUrl && product.linkType !== "paused")', self.app)
 
+    def test_comparison_renderer_escapes_catalog_text(self):
+        script = (ROOT / "porownywarka.js").read_text(encoding="utf-8")
+        self.assertIn("const escapeHTML", script)
+        self.assertIn("escapeHTML(product.name)", script)
+        self.assertIn("escapeHTML(offer.store)", script)
+
+    def test_price_sources_and_check_dates_are_rendered(self):
+        self.assertIn("product.priceSource", self.app)
+        self.assertIn("product.priceCheckedAt", self.app)
+        self.assertIn("Cena orientacyjna", self.app)
+
     def test_discovery_catalog_is_not_mislabeled_as_affiliate(self):
         discovery_ids = re.findall(r'\["tanievo-(\d{3})"', self.app)
         self.assertEqual(len(discovery_ids), 40)
