@@ -14,7 +14,7 @@ Responsywna, statyczna strona publikowana przez GitHub Pages z repozytorium `rys
 ## Pliki
 - `index.html` — struktura strony, treści i metadane SEO,
 - `style.css` — wygląd i układ responsywny,
-- `app.js` — katalog demonstracyjny, wyszukiwanie, filtrowanie, zwykłe linki do wyszukiwania w Ceneo i ulubione,
+- `app.js` — katalog demonstracyjny, wyszukiwanie, filtrowanie, linki do wyszukiwania w Ceneo ze wspólnymi parametrami partnera i ulubione,
 - `site.js` — wspólne drobne funkcje stron informacyjnych,
 - `robots.txt` i `sitemap.xml` — podstawowa konfiguracja indeksowania,
 - `favicon.svg` — ikona strony,
@@ -41,14 +41,14 @@ Responsywna, statyczna strona publikowana przez GitHub Pages z repozytorium `rys
 Komputronik jest dodany jako dodatkowy sklep do porównań. Na obecnym etapie linki do niego są zwykłymi linkami, a nie linkami afiliacyjnymi Tanievo. Ceny porównawcze są datowane i wymagają potwierdzenia u sprzedawcy przed zakupem.
 
 ## Ważne informacje
-Katalog demonstracyjny zawiera zwykłe wyszukiwania produktów w Ceneo oraz wybrane linki partnerskie Amazon PartnerNet i Avast przez webePartners. Linki afiliacyjne Ceneo pozostają wstrzymane do czasu potwierdzenia śledzenia i zasad publikacji. Linki partnerskie są oznaczane oddzielnie; przed zakupem należy potwierdzić cenę, dostępność i warunki u sprzedawcy. Serwis nie publikuje własnych cen ani stanów magazynowych; aktualne warunki należy sprawdzić bezpośrednio u sprzedawcy. Prototyp automatycznej integracji API Ceneo pozostaje wyłączony do czasu otrzymania klucza API i pisemnego potwierdzenia zasad wykorzystania danych.
+Katalog demonstracyjny zawiera zwykłe wyszukiwania produktów w Ceneo oraz wybrane linki partnerskie Amazon PartnerNet i Avast przez webePartners. Linki Ceneo zawierają wspólne parametry partnera `cid=52090`, `crid=818403`, `pid=31443`; ich obecność nie potwierdza naliczania kliknięć ani prowizji, co wymaga kontroli w prywatnym panelu Ceneo oraz potwierdzenia zasad publikacji. Linki partnerskie są oznaczane oddzielnie; przed zakupem należy potwierdzić cenę, dostępność i warunki u sprzedawcy. Serwis nie publikuje własnych cen ani stanów magazynowych; aktualne warunki należy sprawdzić bezpośrednio u sprzedawcy. Prototyp automatycznej integracji API Ceneo pozostaje wyłączony do czasu otrzymania klucza API i pisemnego potwierdzenia zasad wykorzystania danych.
 
-Przed zakupem użytkownik powinien sprawdzić aktualną cenę, dostępność i warunki bezpośrednio w sklepie. Nowe linki afiliacyjne należy dodawać wyłącznie po wygenerowaniu ich w odpowiednim Panelu Partnera i potwierdzeniu zasad publikacji. Linki Ceneo pozostają wyłączone do czasu potwierdzenia śledzenia.
+Przed zakupem użytkownik powinien sprawdzić aktualną cenę, dostępność i warunki bezpośrednio w sklepie. Nowe linki afiliacyjne należy dodawać wyłącznie po wygenerowaniu ich w odpowiednim Panelu Partnera i potwierdzeniu zasad publikacji. Parametry partnera Ceneo są dodane do odnośników katalogu; nie deklarujemy naliczania prowizji bez danych z panelu Ceneo.
 
 ## Kolejne kroki przed pełnym uruchomieniem serwisu
 1. Uzyskać i utrzymać akceptację wydawcy w programie partnerskim Ceneo.
 2. Uzyskać pisemne potwierdzenie Ceneo dotyczące wykorzystania API, prezentacji danych i linkowania.
-3. Dla standardowych kreacji używać wyłącznie pełnych adresów wygenerowanych w Panelu Partnera; nie modyfikować parametrów śledzących.
+3. Dla bezpośrednich kart produktów zachowywać pełne adresy z Panelu Partnera; wspólne parametry wyszukiwań muszą pozostać zgodne z konfiguracją partnera.
 4. Dopiero po potwierdzeniu zasad skonfigurować klucz API jako sekret GitHub Actions.
 5. Zweryfikować kompletność informacji o administratorze, danych kontaktowych i obowiązków informacyjnych przed uruchomieniem funkcji komercyjnych.
 6. Dla ewentualnego feedu Awin skonfigurować osobne sekrety/zmienne `AWIN_FEED_URL`, `AWIN_FEED_ALLOWED_HOSTS`, `AWIN_ALLOWED_PRODUCT_HOSTS` oraz opcjonalnie `AWIN_ALLOWED_IMAGE_HOSTS`. Listy hostów muszą zawierać dokładne nazwy domen rozdzielone przecinkami; bez nich importer odmawia pobrania lub publikacji ofert.
