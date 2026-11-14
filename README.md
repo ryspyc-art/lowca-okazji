@@ -41,9 +41,9 @@ Responsywna, statyczna strona publikowana przez GitHub Pages.
 Komputronik jest dodany jako dodatkowy sklep do porównań. Na obecnym etapie linki do niego są zwykłymi linkami, a nie linkami afiliacyjnymi Tanievo. Ceny porównawcze są datowane i wymagają potwierdzenia u sprzedawcy przed zakupem.
 
 ## Ważne informacje
-Katalog demonstracyjny zawiera pozycje prowadzące do wyszukiwania produktów w Ceneo oraz wybrane rekordy z `amazon-offers.json`. Linki afiliacyjne są oznaczane oddzielnie; przed zakupem należy potwierdzić cenę, dostępność i warunki u sprzedawcy. Serwis nie publikuje własnych cen ani stanów magazynowych; aktualne warunki należy sprawdzić bezpośrednio u sprzedawcy. Prototyp automatycznej integracji API Ceneo pozostaje wyłączony do czasu otrzymania klucza API i pisemnego potwierdzenia zasad wykorzystania danych.
+Katalog demonstracyjny zawiera zwykłe wyszukiwania produktów w Ceneo oraz wybrane linki partnerskie Amazon PartnerNet i Avast przez webePartners. Linki afiliacyjne Ceneo pozostają wstrzymane do czasu potwierdzenia śledzenia i zasad publikacji. Linki partnerskie są oznaczane oddzielnie; przed zakupem należy potwierdzić cenę, dostępność i warunki u sprzedawcy. Serwis nie publikuje własnych cen ani stanów magazynowych; aktualne warunki należy sprawdzić bezpośrednio u sprzedawcy. Prototyp automatycznej integracji API Ceneo pozostaje wyłączony do czasu otrzymania klucza API i pisemnego potwierdzenia zasad wykorzystania danych.
 
-Przed zakupem użytkownik powinien sprawdzić aktualną cenę, dostępność i warunki bezpośrednio w sklepie. Aktywne linki afiliacyjne zostaną dodane dopiero po wygenerowaniu ich w Panelu Partnera i potwierdzeniu zasad publikacji.
+Przed zakupem użytkownik powinien sprawdzić aktualną cenę, dostępność i warunki bezpośrednio w sklepie. Nowe linki afiliacyjne należy dodawać wyłącznie po wygenerowaniu ich w odpowiednim Panelu Partnera i potwierdzeniu zasad publikacji. Linki Ceneo pozostają wyłączone do czasu potwierdzenia śledzenia.
 
 ## Kolejne kroki przed pełnym uruchomieniem serwisu
 1. Uzyskać i utrzymać akceptację wydawcy w programie partnerskim Ceneo.
