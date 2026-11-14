@@ -1,5 +1,5 @@
 let products = [
-  {id:"tanievo-001",name:"Apple AirPods 5 (MKFW4ZM/A)",category:"Elektronika",store:"Ceneo",icon:"🎧",productUrl:"https://www.ceneo.pl/;szukaj-Apple+AirPods+5+MKFW4ZM%2FA",linkType:"search"},
+  {id:"tanievo-001",name:"Apple AirPods 5 (MKFW4ZM/A)",category:"Elektronika",store:"Ceneo",icon:"🎧",productUrl:"https://www.ceneo.pl/199946527#cid=52090&crid=818403&pid=31443",linkType:"affiliate"},
   {id:"tanievo-002",name:"Telewizor QLED Sharp 65JT8765E 65 cali",category:"RTV",store:"Ceneo",icon:"📺",image:"https://image.ceneostatic.pl/offercandidates/9QDgAHRodHRwOi8vZjAxLmVzZnIucGwvZm90by8zLzE5MzcwMzU5NjE2OS81OTIwMjM3MjEzNWUzOTNiYTVlZGM5OWQzNmVjYjZhYS9zaGFycC10ZWxld2l6b3ItNjVqdDg3NjUsMTkzNzAzNTk2MTY5XzYud2VicA%3D%3D",productUrl:""},
   {id:"tanievo-003",name:"Karta graficzna MSI GeForce RTX 5080 Gaming Trio OC 16 GB GDDR7",category:"Elektronika",store:"Ceneo",icon:"🎮",image:"https://image.ceneostatic.pl/offercandidates/9QDgAGtodHRwczovL2Nkbi54LWtvbS5wbC9pL3NldHVwL2ltYWdlcy9wcm9kL2JpZy8xNTAweDE1MDAsLDIwMjUvMy9wcl8yMDI1XzNfMjRfMTFfMTNfMTVfMjJfMDAuanBnP2ZpbHRlcnM9dHJpbQ%3D%3D",productUrl:""},
   {id:"tanievo-004",name:"Hulajnoga elektryczna KuKirin G2",category:"Sport",store:"Ceneo",icon:"🛴",image:"https://image.ceneostatic.pl/offercandidates/9QDgAEVodHRwczovL2EuYWxsZWdyb2ltZy5jb20vb3JpZ2luYWwvMTEwYjk3Lzc4MmNiYzQ5NDFiMDkzNTMxOTJjNjc2ODgxNzc%3D",productUrl:""},
@@ -54,9 +54,8 @@ products.forEach(product => {
   product.category = normalizeCategory(product.category);
 });
 
-// Zwykłe wyszukiwania w Ceneo nie są linkami afiliacyjnymi.
-// Parametry partnerskie pozostają wyłącznie w linkach wygenerowanych
-// bezpośrednio w panelach programów partnerskich.
+// Wspólne parametry identyfikujące kampanię Ceneo.
+// Ich obecność w adresie nie potwierdza naliczania kliknięć ani prowizji.
 for (const product of products) {
   if (!product.productUrl && product.linkType !== "paused") {
     product.productUrl = "https://www.ceneo.pl/;szukaj-" + encodeURIComponent(product.name);
@@ -115,14 +114,30 @@ function safeProductUrl(value) {
   return isSafeExternalHttpsUrl(value);
 }
 
-function getCeneoUrl(product) {
-  for (const candidate of [product.ceneoUrl, product.productUrl]) {
-    if (!safeProductUrl(candidate)) continue;
-    try {
-      if (new URL(candidate).hostname === "www.ceneo.pl") return candidate;
-    } catch {}
+const CENEO_TRACKING = "cid=52090&crid=818403&pid=31443";
+const AIRPODS_5_CENEO_URL = "https://www.ceneo.pl/199946527#cid=52090&crid=818403&pid=31443";
+
+function withCeneoTracking(candidate) {
+  if (!safeProductUrl(candidate)) return "";
+  try {
+    const url = new URL(candidate);
+    if (url.hostname !== "www.ceneo.pl") return "";
+    // Dla AirPods 5 zachowujemy dokładnie adres wskazany w Panelu Partnera.
+    if (url.pathname === "/199946527") return AIRPODS_5_CENEO_URL;
+    url.hash = CENEO_TRACKING;
+    return url.href;
+  } catch {
+    return "";
   }
-  return "https://www.ceneo.pl/;szukaj-" + encodeURIComponent(product.name);
+}
+
+function getCeneoUrl(product) {
+  if (String(product.id) === "tanievo-001") return AIRPODS_5_CENEO_URL;
+  for (const candidate of [product.ceneoUrl, product.productUrl]) {
+    const tracked = withCeneoTracking(candidate);
+    if (tracked) return tracked;
+  }
+  return withCeneoTracking("https://www.ceneo.pl/;szukaj-" + encodeURIComponent(product.name));
 }
 
 function getAmazonUrl(product) {
