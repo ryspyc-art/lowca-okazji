@@ -114,6 +114,37 @@ function safeImage(value) {
 function safeProductUrl(value) {
   return isSafeExternalHttpsUrl(value);
 }
+
+function getCeneoUrl(product) {
+  for (const candidate of [product.ceneoUrl, product.productUrl]) {
+    if (!safeProductUrl(candidate)) continue;
+    try {
+      if (new URL(candidate).hostname === "www.ceneo.pl") return candidate;
+    } catch {}
+  }
+  return "https://www.ceneo.pl/;szukaj-" + encodeURIComponent(product.name);
+}
+
+function getAmazonUrl(product) {
+  for (const candidate of [product.productUrl, product.amazonSearchUrl]) {
+    if (!safeProductUrl(candidate)) continue;
+    try {
+      const url = new URL(candidate);
+      if (url.hostname === "www.amazon.pl" && url.searchParams.get("tag") === "tanievo-21") return candidate;
+    } catch {}
+  }
+  return "https://www.amazon.pl/s?k=" + encodeURIComponent(product.name) + "&tag=tanievo-21";
+}
+
+function getDirectOfferUrl(product) {
+  if (!safeProductUrl(product.productUrl)) return "";
+  try {
+    const host = new URL(product.productUrl).hostname;
+    return host !== "www.ceneo.pl" && host !== "www.amazon.pl" ? product.productUrl : "";
+  } catch {
+    return "";
+  }
+}
 let liveCatalog = false;
 ["price-asc", "price-desc", "discount"].forEach(value => {
   const option = sort.querySelector('option[value="' + value + '"]');
@@ -258,9 +289,9 @@ function render() {
       ${Number.isFinite(product.price) ? `<div class="price-row"><span class="price">${money(product.price)}</span></div>${product.priceSource || product.priceCheckedAt || product.linkType === "comparison" ? `<div class="demo-price-note">${product.linkType === "comparison" ? "Cena orientacyjna · " : ""}${escapeHTML(product.priceSource || "Cena sprawdzona")}${product.priceCheckedAt ? " · sprawdzono: " + escapeHTML(product.priceCheckedAt) : ""}</div>` : ""}` : `<div class="demo-price-note">${product.priceSource ? "Cena niepotwierdzona — sprawdź u sprzedawcy" : "Sprawdź aktualną cenę u partnera"}</div>`}
       <div class="store">${safeStore} · ${product.linkType === "paused" ? "oferta chwilowo niedostępna" : product.linkType === "search" ? "wyszukiwanie produktu" : product.linkType === "comparison" ? "porównanie cen" : product.linkType === "affiliate" ? "link partnerski" : product.productUrl ? "link zewnętrzny" : "weryfikacja linku w toku"}</div>
       ${liveCatalog && product.availability ? `<div class="store">Dostępność: ${escapeHTML(product.availability)}</div>` : ""}
-      ${safeProductUrl(product.productUrl) ? `<a class="offer-link" href="${escapeHTML(product.productUrl)}" target="_blank" rel="${product.linkType === "affiliate" ? "sponsored nofollow noopener noreferrer" : "nofollow noopener noreferrer"}"><span>${product.linkType === "search" ? "Szukaj w Ceneo ↗" : product.linkType === "comparison" ? "Sprawdź Ceneo ↗" : "Sprawdź produkt ↗"}</span></a>` : `<div class="offer-link"><span>${product.linkType === "paused" ? "Oferta chwilowo niedostępna" : "Brak aktywnego linku"}</span><span aria-hidden="true">ⓘ</span></div>`}
-      ${product.ceneoUrl && product.ceneoUrl !== product.productUrl && safeProductUrl(product.ceneoUrl) && new URL(product.ceneoUrl).hostname === "www.ceneo.pl" ? `<a class="offer-link" href="${escapeHTML(product.ceneoUrl)}" target="_blank" rel="nofollow noopener"><span>Porównaj ceny na Ceneo ↗</span></a>` : ""}
-      ${product.amazonSearchUrl && safeProductUrl(product.amazonSearchUrl) && new URL(product.amazonSearchUrl).hostname === "www.amazon.pl" ? `<a class="offer-link" href="${escapeHTML(product.amazonSearchUrl)}" target="_blank" rel="sponsored nofollow noopener noreferrer"><span>Szukaj na Amazon ↗</span></a>` : ""}
+      <a class="offer-link" href="${escapeHTML(getCeneoUrl(product))}" target="_blank" rel="nofollow noopener noreferrer"><span>Sprawdź w Ceneo ↗</span></a>
+      <a class="offer-link" href="${escapeHTML(getAmazonUrl(product))}" target="_blank" rel="sponsored nofollow noopener noreferrer"><span>${getAmazonUrl(product).includes("/dp/") ? "Sprawdź na Amazon ↗" : "Szukaj na Amazon ↗"}</span></a>
+      ${getDirectOfferUrl(product) ? `<a class="offer-link" href="${escapeHTML(getDirectOfferUrl(product))}" target="_blank" rel="sponsored nofollow noopener noreferrer"><span>Sprawdź ofertę partnera ↗</span></a>` : ""}
     </article>`;
   }).join("");
 
