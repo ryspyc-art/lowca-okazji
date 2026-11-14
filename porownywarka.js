@@ -6,6 +6,9 @@
   const sort = document.getElementById("comparisonSort");
   const allowedHosts = new Set(["www.amazon.pl", "www.x-kom.pl"]);
   const money = value => new Intl.NumberFormat("pl-PL", {style:"currency",currency:"PLN"}).format(value);
+  const escapeHTML = value => String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  }[char]));
   const date = value => {
     const d = new Date(value);
     return Number.isNaN(d.getTime()) ? "brak danych" : new Intl.DateTimeFormat("pl-PL",{dateStyle:"medium",timeStyle:"short"}).format(d);
@@ -31,16 +34,16 @@
         const knownTotal = total(offer);
         const href = safeUrl(offer.url);
         return `<article class="offer-row">
-          <div class="offer-main"><strong>${offer.store}</strong><span class="offer-condition">${offer.condition}</span><p>${offer.availability}</p></div>
+          <div class="offer-main"><strong>${escapeHTML(offer.store)}</strong><span class="offer-condition">${escapeHTML(offer.condition)}</span><p>${escapeHTML(offer.availability)}</p></div>
           <div class="offer-price"><strong>${money(offer.price)}</strong><span>Cena produktu</span></div>
           <div class="offer-delivery"><strong>${offer.shipping === null ? "Do potwierdzenia" : offer.shipping === 0 ? "0,00 zł" : money(offer.shipping)}</strong><span>Dostawa</span></div>
           <div class="offer-total"><strong>${knownTotal === null ? "Nieznany" : money(knownTotal)}</strong><span>Łącznie</span></div>
           <div class="offer-action"><a href="${href}" target="_blank" rel="${offer.affiliate ? "sponsored nofollow noopener noreferrer" : "nofollow noopener noreferrer"}">Przejdź do sklepu ↗</a></div>
-          <p class="offer-checked">Aktualizacja danych: ${date(offer.checkedAt)} · ${offer.shippingNote}</p>
+          <p class="offer-checked">Aktualizacja danych: ${date(offer.checkedAt)} · ${escapeHTML(offer.shippingNote)}</p>
         </article>`;
       }).join("");
       return `<section class="product-compare">
-        <div class="product-heading"><div><span class="eyebrow">DOPASOWANIE MODELU</span><h2>${product.name}</h2><p>Producent: ${product.manufacturer} · Kod: <b>${product.modelCode}</b> · EAN: <b>${product.ean}</b></p><p>${product.variant}</p></div><span class="offer-count">${offers.length} bezpośrednie oferty</span></div>
+        <div class="product-heading"><div><span class="eyebrow">DOPASOWANIE MODELU</span><h2>${escapeHTML(product.name)}</h2><p>Producent: ${escapeHTML(product.manufacturer)} · Kod: <b>${escapeHTML(product.modelCode)}</b> · EAN: <b>${escapeHTML(product.ean)}</b></p><p>${escapeHTML(product.variant)}</p></div><span class="offer-count">${offers.length} bezpośrednie oferty</span></div>
         <div class="offer-list">${rows || "<p>Brak ofert spełniających warunki walidacji.</p>"}</div>
       </section>`;
     }).join("");
