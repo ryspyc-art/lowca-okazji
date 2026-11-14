@@ -1,5 +1,5 @@
 let products = [
-  {id:"tanievo-001",name:"Apple AirPods 5 (MKFW4ZM/A)",category:"Elektronika",store:"Ceneo",icon:"🎧",image:"https://image.ceneostatic.pl/data/products/199946927/f-apple-airpods-5-z-bezprzewodowym-etui-ladujacym-mkfw4zm-a.jpg",productUrl:"https://www.ceneo.pl/199946527#cid=52090&crid=818403&pid=31443",linkType:"affiliate"},
+  {id:"tanievo-001",name:"Apple AirPods 5 (MKFW4ZM/A)",category:"Elektronika",store:"Ceneo",icon:"🎧",productUrl:"https://www.ceneo.pl/;szukaj-Apple+AirPods+5+MKFW4ZM%2FA",linkType:"search"},
   {id:"tanievo-002",name:"Telewizor QLED Sharp 65JT8765E 65 cali",category:"RTV",store:"Ceneo",icon:"📺",image:"https://image.ceneostatic.pl/offercandidates/9QDgAHRodHRwOi8vZjAxLmVzZnIucGwvZm90by8zLzE5MzcwMzU5NjE2OS81OTIwMjM3MjEzNWUzOTNiYTVlZGM5OWQzNmVjYjZhYS9zaGFycC10ZWxld2l6b3ItNjVqdDg3NjUsMTkzNzAzNTk2MTY5XzYud2VicA%3D%3D",productUrl:""},
   {id:"tanievo-003",name:"Karta graficzna MSI GeForce RTX 5080 Gaming Trio OC 16 GB GDDR7",category:"Elektronika",store:"Ceneo",icon:"🎮",image:"https://image.ceneostatic.pl/offercandidates/9QDgAGtodHRwczovL2Nkbi54LWtvbS5wbC9pL3NldHVwL2ltYWdlcy9wcm9kL2JpZy8xNTAweDE1MDAsLDIwMjUvMy9wcl8yMDI1XzNfMjRfMTFfMTNfMTVfMjJfMDAuanBnP2ZpbHRlcnM9dHJpbQ%3D%3D",productUrl:""},
   {id:"tanievo-004",name:"Hulajnoga elektryczna KuKirin G2",category:"Sport",store:"Ceneo",icon:"🛴",image:"https://image.ceneostatic.pl/offercandidates/9QDgAEVodHRwczovL2EuYWxsZWdyb2ltZy5jb20vb3JpZ2luYWwvMTEwYjk3Lzc4MmNiYzQ5NDFiMDkzNTMxOTJjNjc2ODgxNzc%3D",productUrl:""},
@@ -63,7 +63,7 @@ for (const product of products) {
     product.linkType = "search";
   }
   if (!product.linkType && product.productUrl) {
-    product.linkType = "affiliate";
+    product.linkType = "external";
   }
   if (!product.store) product.store = "Ceneo";
 }
@@ -132,7 +132,7 @@ async function loadAmazonOffers() {
       return url.hostname === "www.amazon.pl" && url.searchParams.get("tag") === "tanievo-21" && typeof item.asin === "string" && url.pathname.includes("/dp/" + item.asin);
     }).map(item => ({
       id:item.id, name:item.name, category:normalizeCategory(item.category || "Inne"),
-      price:Number.isFinite(Number(item.price)) && Number(item.price) > 0 ? Number(item.price) : null, priceSource:item.priceSource || "", priceCheckedAt:item.priceCheckedAt || "", store:item.merchant || "Amazon", productUrl:item.productUrl,
+      price:Number.isFinite(Number(item.price)) && Number(item.price) > 0 && item.priceCheckedAt && (Date.now() - Date.parse(item.priceCheckedAt) <= 72 * 60 * 60 * 1000) && Date.now() >= Date.parse(item.priceCheckedAt) ? Number(item.price) : null, priceSource:item.priceSource || (item.priceCheckedAt ? "Cena sprawdzona: " + item.priceCheckedAt : "Cena niepotwierdzona — sprawdź u sprzedawcy"), priceCheckedAt:item.priceCheckedAt || "", store:item.merchant || "Amazon", productUrl:item.productUrl,
       linkType:item.linkType === "comparison" ? "comparison" : "affiliate", amazonSearchUrl:item.amazonSearchUrl || "", ceneoUrl:item.ceneoUrl || "",
       image:safeImage(item.image) ? item.image : "", availability:item.availability || "Sprawdź u sprzedawcy", icon:"🛍️"
     }));
@@ -183,6 +183,7 @@ async function loadLiveCatalog() {
       image: item.image || "",
       updatedAt: item.updatedAt || payload.fetchedAt || "",
       availability: typeof item.availability === "string" ? item.availability : "Sprawdź u sprzedawcy",
+      linkType: "affiliate",
       icon: "🛍️"
     }));
     if (!normalized.length) return;
@@ -255,9 +256,9 @@ function render() {
       <div class="product-category">${safeCategory}</div>
       <h3>${safeName}</h3>
       ${Number.isFinite(product.price) ? `<div class="price-row"><span class="price">${money(product.price)}</span></div>${product.priceSource || product.priceCheckedAt || product.linkType === "comparison" ? `<div class="demo-price-note">${product.linkType === "comparison" ? "Cena orientacyjna · " : ""}${escapeHTML(product.priceSource || "Cena sprawdzona")}${product.priceCheckedAt ? " · sprawdzono: " + escapeHTML(product.priceCheckedAt) : ""}</div>` : ""}` : `<div class="demo-price-note">${product.priceSource ? "Cena niepotwierdzona — sprawdź u sprzedawcy" : "Sprawdź aktualną cenę u partnera"}</div>`}
-      <div class="store">${safeStore} · ${product.linkType === "paused" ? "oferta chwilowo niedostępna" : product.linkType === "search" ? "wyszukiwanie produktu" : product.productUrl ? "link partnerski" : "weryfikacja linku w toku"}</div>
+      <div class="store">${safeStore} · ${product.linkType === "paused" ? "oferta chwilowo niedostępna" : product.linkType === "search" ? "wyszukiwanie produktu" : product.linkType === "comparison" ? "porównanie cen" : product.linkType === "affiliate" ? "link partnerski" : product.productUrl ? "link zewnętrzny" : "weryfikacja linku w toku"}</div>
       ${liveCatalog && product.availability ? `<div class="store">Dostępność: ${escapeHTML(product.availability)}</div>` : ""}
-      ${safeProductUrl(product.productUrl) ? `<a class="offer-link" href="${escapeHTML(product.productUrl)}" target="_blank" rel="${product.linkType === "affiliate" ? "sponsored nofollow noopener" : "nofollow noopener"}"><span>${product.linkType === "search" ? "Szukaj w Ceneo ↗" : product.linkType === "comparison" ? "Sprawdź Ceneo ↗" : "Sprawdź produkt ↗"}</span></a>` : `<div class="offer-link"><span>${product.linkType === "paused" ? "Oferta chwilowo niedostępna" : "Brak aktywnego linku"}</span><span aria-hidden="true">ⓘ</span></div>`}
+      ${safeProductUrl(product.productUrl) ? `<a class="offer-link" href="${escapeHTML(product.productUrl)}" target="_blank" rel="${product.linkType === "affiliate" ? "sponsored nofollow noopener noreferrer" : "nofollow noopener noreferrer"}"><span>${product.linkType === "search" ? "Szukaj w Ceneo ↗" : product.linkType === "comparison" ? "Sprawdź Ceneo ↗" : "Sprawdź produkt ↗"}</span></a>` : `<div class="offer-link"><span>${product.linkType === "paused" ? "Oferta chwilowo niedostępna" : "Brak aktywnego linku"}</span><span aria-hidden="true">ⓘ</span></div>`}
       ${product.ceneoUrl && product.ceneoUrl !== product.productUrl && safeProductUrl(product.ceneoUrl) && new URL(product.ceneoUrl).hostname === "www.ceneo.pl" ? `<a class="offer-link" href="${escapeHTML(product.ceneoUrl)}" target="_blank" rel="nofollow noopener"><span>Porównaj ceny na Ceneo ↗</span></a>` : ""}
       ${product.amazonSearchUrl && safeProductUrl(product.amazonSearchUrl) && new URL(product.amazonSearchUrl).hostname === "www.amazon.pl" ? `<a class="offer-link" href="${escapeHTML(product.amazonSearchUrl)}" target="_blank" rel="sponsored nofollow noopener"><span>Szukaj na Amazon ↗</span></a>` : ""}
     </article>`;
