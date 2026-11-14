@@ -260,7 +260,7 @@ function render() {
       ${liveCatalog && product.availability ? `<div class="store">Dostępność: ${escapeHTML(product.availability)}</div>` : ""}
       ${safeProductUrl(product.productUrl) ? `<a class="offer-link" href="${escapeHTML(product.productUrl)}" target="_blank" rel="${product.linkType === "affiliate" ? "sponsored nofollow noopener noreferrer" : "nofollow noopener noreferrer"}"><span>${product.linkType === "search" ? "Szukaj w Ceneo ↗" : product.linkType === "comparison" ? "Sprawdź Ceneo ↗" : "Sprawdź produkt ↗"}</span></a>` : `<div class="offer-link"><span>${product.linkType === "paused" ? "Oferta chwilowo niedostępna" : "Brak aktywnego linku"}</span><span aria-hidden="true">ⓘ</span></div>`}
       ${product.ceneoUrl && product.ceneoUrl !== product.productUrl && safeProductUrl(product.ceneoUrl) && new URL(product.ceneoUrl).hostname === "www.ceneo.pl" ? `<a class="offer-link" href="${escapeHTML(product.ceneoUrl)}" target="_blank" rel="nofollow noopener"><span>Porównaj ceny na Ceneo ↗</span></a>` : ""}
-      ${product.amazonSearchUrl && safeProductUrl(product.amazonSearchUrl) && new URL(product.amazonSearchUrl).hostname === "www.amazon.pl" ? `<a class="offer-link" href="${escapeHTML(product.amazonSearchUrl)}" target="_blank" rel="sponsored nofollow noopener"><span>Szukaj na Amazon ↗</span></a>` : ""}
+      ${product.amazonSearchUrl && safeProductUrl(product.amazonSearchUrl) && new URL(product.amazonSearchUrl).hostname === "www.amazon.pl" ? `<a class="offer-link" href="${escapeHTML(product.amazonSearchUrl)}" target="_blank" rel="sponsored nofollow noopener noreferrer"><span>Szukaj na Amazon ↗</span></a>` : ""}
     </article>`;
   }).join("");
 
