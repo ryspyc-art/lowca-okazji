@@ -54,21 +54,15 @@ products.forEach(product => {
   product.category = normalizeCategory(product.category);
 });
 
-// Ceneo potwierdziło możliwość używania wspólnych parametrów afiliacyjnych
-// PID/CRID/CID dla różnych produktów, jeśli nie wymagamy statystyk per produkt.
-// AirPods 5 zachowuje dokładny link wygenerowany w panelu; pozostałe produkty
-// kierują do wyszukiwania swojej nazwy w Ceneo z tymi samymi parametrami.
-const ceneoTracking = "cid=52090&crid=818403&pid=31443";
+// Zwykłe wyszukiwania w Ceneo nie są linkami afiliacyjnymi.
+// Parametry partnerskie pozostają wyłącznie w linkach wygenerowanych
+// bezpośrednio w panelach programów partnerskich.
 for (const product of products) {
-  if (!product.productUrl) {
+  if (!product.productUrl && product.linkType !== "paused") {
     product.productUrl = "https://www.ceneo.pl/;szukaj-" + encodeURIComponent(product.name);
     product.linkType = "search";
   }
-  if (product.id !== "tanievo-001" && product.linkType === "search") {
-    const baseUrl = product.productUrl.split("#")[0];
-    product.productUrl = baseUrl + "#" + ceneoTracking;
-    product.linkType = "affiliate";
-  } else if (!product.linkType) {
+  if (!product.linkType && product.productUrl) {
     product.linkType = "affiliate";
   }
   if (!product.store) product.store = "Ceneo";
