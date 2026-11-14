@@ -1,6 +1,6 @@
 # Tanievo.pl
 
-Responsywna, statyczna strona publikowana przez GitHub Pages.
+Responsywna, statyczna strona publikowana przez GitHub Pages z repozytorium `ryspyc-art/tanievo` (gałąź `main`).
 
 ## Co działa
 - wyszukiwanie nazw produktów i kategorii,
@@ -61,4 +61,6 @@ Nie należy przedstawiać danych demonstracyjnych jako rzeczywistych promocji.
 
 
 ## Domena Tanievo.pl
+
+Źródłem publikacji jest repozytorium `ryspyc-art/tanievo`, gałąź `main`. Workflow `Kontrola jakości projektu` uruchamia testy po każdym pushu, a GitHub Pages buduje i publikuje zawartość repozytorium. Błąd kontroli jakości nie oznacza automatycznie, że wdrożenie Pages zostało zatrzymane; oba statusy należy sprawdzać oddzielnie.
 Repozytorium zawiera plik `CNAME` z domeną `tanievo.pl`, a canonical, Open Graph, robots.txt i sitemap.xml wskazują adres `https://tanievo.pl/`. Ostatni build i deploy GitHub Pages zakończyły się sukcesem. Sam status wdrożenia nie potwierdza jednak propagacji DNS ani gotowości certyfikatu HTTPS — te elementy należy sprawdzić w panelu OVH i w Settings → Pages na GitHubie.
