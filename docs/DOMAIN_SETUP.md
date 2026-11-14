@@ -1,6 +1,6 @@
 # Podłączenie Tanievo.pl do GitHub Pages
 
-## Aktualny stan repozytorium — 10.11.2026
+## Aktualny stan repozytorium — 14.11.2026
 
 - Plik `CNAME` zawiera domenę `tanievo.pl`.
 - Canonical, Open Graph, `robots.txt` i `sitemap.xml` wskazują adres `https://tanievo.pl/`.
@@ -9,7 +9,7 @@
 
 ## Docelowa konfiguracja
 
-Repozytorium: `ryspyc-art/lowca-okazji`  
+Repozytorium: `ryspyc-art/tanievo`  
 Domena główna: `tanievo.pl`  
 Wariant WWW: `www.tanievo.pl`
 
